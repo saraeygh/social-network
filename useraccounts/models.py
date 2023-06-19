@@ -7,7 +7,7 @@ from django.utils.translation import gettext as _
 class UserAccount(BaseModel, User, CreateTimeMixin, UpdateTimeMixin):
     image = models.FileField(
         verbose_name = _("User profile picture"),
-        upload_to = 'profile_pic/',
+        upload_to = 'profilepic/',
         )
     bio = models.CharField(
         verbose_name = _("User short biography"),

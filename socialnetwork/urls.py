@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+admin.site.site_header = 'Social network admin panel'
+admin.site.index_title = 'Admin panel'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
