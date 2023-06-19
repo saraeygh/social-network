@@ -4,11 +4,7 @@ from django.utils.translation import gettext as _
 
 
 class BaseModel(models.Model):
-    unique_id = models.CharField(
-        max_length = 32,
-        primary_key = True,
-        default = uuid4().hex
-        )
+    
     class Meta:
         abstract = True
 
