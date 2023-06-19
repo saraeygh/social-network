@@ -27,3 +27,6 @@ class ReactionInLine(GenericTabularInline):
 class PostAdmin(admin.ModelAdmin):
     inlines = [ImageInLine, ReplyInLine, TagInLine, ReactionInLine]
     list_display = ['title', 'created_at', 'updated_at']
+    search_fields = ['title', 'content']
+    ordering = ['title', 'created_at', 'updated_at']
+    list_per_page = 10

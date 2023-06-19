@@ -1,11 +1,11 @@
 from django.db import models
-from core.models import BaseModel
+from core.models import BaseModel, CreateTimeMixin, UpdateTimeMixin
 from django.utils.translation import gettext as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
 
-class Reaction(BaseModel):
+class Reaction(BaseModel, CreateTimeMixin, UpdateTimeMixin):
     LIKE = 'LIKE'
     DISLIKE = 'DISLIKE'
 
@@ -18,3 +18,7 @@ class Reaction(BaseModel):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey()
+    
+    
+    def __str__(self) -> str:
+        return f"Reaction: {self.status}"

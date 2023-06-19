@@ -19,6 +19,7 @@ from django.urls import path, include
 
 admin.site.site_header = 'Social network admin panel'
 admin.site.index_title = 'Admin panel'
+admin.site.site_title = 'Social network'
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -7,6 +7,12 @@ from .models import Tag, TaggedItem
 class TagAdmin(admin.ModelAdmin):
     search_fields = ['label']
     list_display = ['label']
+    ordering = ['label']
+    list_per_page = 10
+
+    #def used_count(self, tag):
+    #    tag.objects.filter(count=Count('tag_id'))
+    #    pass
 
 
 @admin.register(TaggedItem)
