@@ -1,24 +1,33 @@
 from django.db import models
-from core.models import BaseModel
-from django.contrib.auth.models import AbstractUser
+from core.models import BaseModel, CreateTimeMixin, UpdateTimeMixin
+from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
 
-from uuid import uuid4
 
-class User(BaseModel, AbstractUser):
-    id = models.CharField(
-        _("User unique ID"),
-        max_length=32,
-        primary_key=True,
-        default=uuid4().hex
-        )
+class UserAccount(BaseModel, User, CreateTimeMixin, UpdateTimeMixin):
     image = models.FileField(
-        _("User profile picture"),
-        upload_to='profile_pic/',
+        verbose_name = _("User profile picture"),
+        upload_to = 'profile_pic/',
         )
     bio = models.CharField(
-        _("A short biography of user"),
-        max_length=160,
-        blank=True,
-        null=True,
+        verbose_name = _("User short biography"),
+        max_length = 160,
+        blank = True,
+        null = True,
         )
+    
+
+class Relation(BaseModel, CreateTimeMixin):
+    from_user = models.ForeignKey(
+        UserAccount,
+        verbose_name = _("Following"),
+        on_delete=models.CASCADE,
+        related_name='following'
+        )
+    to_user = models.ForeignKey(
+        UserAccount,
+        verbose_name = _("Follower"),
+        on_delete=models.CASCADE,
+        related_name='follower'
+        )
+    
