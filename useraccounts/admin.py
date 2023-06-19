@@ -1,9 +1,15 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from .models import UserAccount, Relation
 from datetime import datetime, timezone
 
 @admin.register(UserAccount)
-class UserAdmin(admin.ModelAdmin):
+class UserAccountAdmin(UserAdmin):
+    fieldsets = UserAdmin.fieldsets
+    fieldsets[0][1]['fields'] = fieldsets[0][1]['fields'] + (
+        'image',
+        'bio',
+    )
     search_fields = ['username', 'first_name', 'last_name', ]
     list_display = ['username', 'email', 'first_name', 'last_name', 'since_created', 'updated_at']
     list_editable = []
