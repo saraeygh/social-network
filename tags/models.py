@@ -16,7 +16,7 @@ class Tag(BaseModel, CreateTimeMixin, UpdateTimeMixin):
         )
 
     def __str__(self) -> str:
-        return f"Tag Label: {self.label}"
+        return f"Tag Used: {self.label}"
     
     class Meta:
         ordering = ['-created_at', '-updated_at']
