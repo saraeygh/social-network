@@ -20,5 +20,19 @@ class Image(BaseModel):
     post_id = models.ForeignKey(
         Post,
         verbose_name=_("Image for post"),
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        )
+    
+
+class Reply(BaseModel):
+    content = models.TextField(verbose_name = _("Reply text"))
+    post_id = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        )
+    reply_id = models.ForeignKey(
+        "self",
+        blank = True,
+        null = True,
+        on_delete=models.CASCADE,
         )
