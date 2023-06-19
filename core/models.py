@@ -4,9 +4,17 @@ from django.utils.translation import gettext as _
 
 
 class BaseModel(models.Model):
-    
     class Meta:
         abstract = True
+
+    soft_delete = models.BooleanField(default = False)
+    
+    def delete(self):
+        """
+        Mark record as soft deleted
+        """
+        self.soft_delete = True
+        self.save()
 
 
 class CreateTimeMixin(models.Model):

@@ -19,7 +19,7 @@ class Tag(BaseModel):
         return self.label
 
 
-class TaggedItem(models.Model):
+class TaggedItem(BaseModel):
     objects = TaggedItemManager()
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
