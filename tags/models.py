@@ -25,7 +25,7 @@ class Tag(models.Model):
         )
 
     def __str__(self) -> str:
-        return f"Tag Used: {self.label}"
+        return f"{self.label}"
     
     class Meta:
         ordering = ['-created_at', '-updated_at']
@@ -58,7 +58,7 @@ class TaggedItem(models.Model):
         )
 
     def __str__(self) -> str:
-        return f"With tag {self.tag}"
+        return f"{self.tag}"
     
     class Meta:
         ordering = ['-created_at', '-updated_at']

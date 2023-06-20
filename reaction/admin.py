@@ -3,6 +3,6 @@ from .models import Reaction
 
 @admin.register(Reaction)
 class ReactionAdmin(admin.ModelAdmin):
-    list_display = ['content_object', 'status']
+    list_display = ['content_object', 'status', 'user']
     list_editable = ['status']
     list_per_page = 10

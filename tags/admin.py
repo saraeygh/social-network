@@ -6,13 +6,13 @@ from .models import Tag, TaggedItem
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     search_fields = ['label']
-    list_display = ['label', 'used_count']
+    list_display = ['label', 'used_count', 'created_at']
     ordering = ['label']
     list_per_page = 10
 
     def used_count(self, tag):
         return Tag.objects.filter(label = tag.label).count()      
-
+    
 
 @admin.register(TaggedItem)
 class TaggedItemAdmin(admin.ModelAdmin):
