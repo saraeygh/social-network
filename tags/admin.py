@@ -11,7 +11,7 @@ class TagAdmin(admin.ModelAdmin):
     list_per_page = 10
 
     def used_count(self, tag):
-        return Tag.objects.filter(label = tag.label).count()      
+        return TaggedItem.objects.filter(tag=tag).count()
     
 
 @admin.register(TaggedItem)
