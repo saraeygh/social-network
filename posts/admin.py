@@ -20,6 +20,7 @@ class TagInLine(GenericTabularInline):
 
 class ReactionInLine(GenericTabularInline):
     model = Reaction
+    ct_field = "reaction_for"
     extra = 0
 
 
