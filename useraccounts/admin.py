@@ -14,7 +14,7 @@ class UserAccountAdmin(UserAdmin):
     )
     search_fields = ['username', 'first_name', 'last_name', ]
     list_display = ['username', 'email', 'since', 'posts', 'replies', 'reactions', 'tags_used',  'following', 'follower']
-    ordering = ['username', 'email', 'created_at', 'updated_at']
+    ordering = ['username', 'email']
     list_per_page = 10
 
     def since(self, user):
@@ -47,7 +47,11 @@ class UserAccountAdmin(UserAdmin):
 @admin.register(Relation)
 class RelationAdmin(admin.ModelAdmin):
     autocomplete_fields = ['from_user', 'to_user']
-    list_display = ['from_user', 'to_user']
+    list_display = ['from_user', 'to_user', 'since']
     search_fields = ['from_user', 'to_user']
     ordering = ['from_user', 'to_user']
     list_per_page = 10
+
+    def since(self, relation):
+        relation_age = datetime.now(timezone.utc) - relation.created_at
+        return relation_age
