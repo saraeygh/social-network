@@ -1,5 +1,4 @@
 from django.db import models
-from core.models import BaseModel, CreateTimeMixin, UpdateTimeMixin
 from django.utils.translation import gettext as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -9,10 +8,20 @@ class TaggedItemManager(models.Manager):
         content_type = ContentType.objects.get_for_model(obj_type)
         return TaggedItem.objects.select_related('tag').filter(content_type=content_type, object_id = obj_id)
 
-class Tag(BaseModel, CreateTimeMixin, UpdateTimeMixin):
+class Tag(models.Model):
     label = models.CharField(
         verbose_name=_("Tag label"),
         max_length=20,
+        )
+    
+    created_at = models.DateTimeField(
+        verbose_name=_("Created at:"),
+        auto_now_add=True
+        )
+    
+    updated_at = models.DateTimeField(
+        verbose_name=_("Updated at:"),
+        auto_now=True
         )
 
     def __str__(self) -> str:
@@ -22,7 +31,7 @@ class Tag(BaseModel, CreateTimeMixin, UpdateTimeMixin):
         ordering = ['-created_at', '-updated_at']
 
 
-class TaggedItem(BaseModel, CreateTimeMixin, UpdateTimeMixin):
+class TaggedItem(models.Model):
     objects = TaggedItemManager()
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
@@ -36,6 +45,17 @@ class TaggedItem(BaseModel, CreateTimeMixin, UpdateTimeMixin):
         )
     user = models.PositiveIntegerField()
     get_user_object = GenericForeignKey()
+
+
+    created_at = models.DateTimeField(
+        verbose_name=_("Created at:"),
+        auto_now_add=True
+        )
+    
+    updated_at = models.DateTimeField(
+        verbose_name=_("Updated at:"),
+        auto_now=True
+        )
 
     def __str__(self) -> str:
         return f"With tag {self.tag}"
