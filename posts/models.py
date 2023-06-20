@@ -45,6 +45,13 @@ class Image(BaseModel, CreateTimeMixin, UpdateTimeMixin):
 
 class Reply(BaseModel, CreateTimeMixin, UpdateTimeMixin):
     content = models.TextField(verbose_name = _("Reply text"))
+    
+    user = models.ForeignKey(
+        UserAccount,
+        verbose_name=_("User"),
+        on_delete=models.CASCADE
+        )
+    
     post_id = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,

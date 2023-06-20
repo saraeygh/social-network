@@ -30,3 +30,12 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ['title', 'content']
     ordering = ['title', 'created_at', 'updated_at']
     list_per_page = 10
+
+
+@admin.register(Reply)
+class ReplyAdmin(admin.ModelAdmin):
+    inlines = [ReplyInLine, ReactionInLine]
+    list_display = ['user', 'created_at', 'updated_at']
+    search_fields = ['user', 'content']
+    ordering = ['user', 'created_at', 'updated_at']
+    list_per_page = 10

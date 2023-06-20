@@ -18,6 +18,15 @@ class Reaction(BaseModel, CreateTimeMixin, UpdateTimeMixin):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey()
+
+    reaction_from = models.ForeignKey(
+        ContentType,
+        related_name="reaction_from",
+        on_delete=models.CASCADE
+        )
+    user = models.PositiveIntegerField()
+    get_user_object = GenericForeignKey()
+    
     
     def __str__(self) -> str:
         return f"Reaction: {self.status}"

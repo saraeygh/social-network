@@ -2,9 +2,11 @@
 twitter.pdf
 lib64
 pyvenv.cfg
+
 # Directories
 bin/
 socialnetwork/__pycache__
+media/
 
 # Copied
 # Byte-compiled / optimized / DLL files

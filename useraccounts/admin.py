@@ -11,12 +11,9 @@ class UserAccountAdmin(UserAdmin):
         'bio',
     )
     search_fields = ['username', 'first_name', 'last_name', ]
-    list_display = ['username', 'email', 'full_name', 'since', 'following', 'follower']
+    list_display = ['username', 'email', 'since', 'following', 'follower']
     ordering = ['username', 'email', 'created_at', 'updated_at']
     list_per_page = 10
-
-    def full_name(self, useraccount):
-        return f'{useraccount.first_name} {useraccount.last_name}'
 
     def since(self, user):
         user_account_age = datetime.now(timezone.utc) - user.created_at
