@@ -16,6 +16,11 @@ class Post(BaseModel, CreateTimeMixin, UpdateTimeMixin):
         verbose_name=_("User"),
         on_delete=models.CASCADE
         )
+    
+    post_slug = models.SlugField(
+        verbose_name=_("post slug"),
+        unique=True,
+        )
 
     def __str__(self) -> str:
         return f"Post title: {self.title}"
@@ -36,6 +41,7 @@ class Image(BaseModel, CreateTimeMixin, UpdateTimeMixin):
         on_delete=models.CASCADE,
         )
     
+    
     def __str__(self) -> str:
         return f"ALT: {self.alt_text}"
     
@@ -45,6 +51,13 @@ class Image(BaseModel, CreateTimeMixin, UpdateTimeMixin):
 
 class Reply(BaseModel, CreateTimeMixin, UpdateTimeMixin):
     content = models.TextField(verbose_name = _("Reply text"))
+    
+    user = models.ForeignKey(
+        UserAccount,
+        verbose_name=_("User"),
+        on_delete=models.CASCADE
+        )
+    
     post_id = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,

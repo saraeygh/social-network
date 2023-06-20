@@ -20,13 +20,32 @@ class TagInLine(GenericTabularInline):
 
 class ReactionInLine(GenericTabularInline):
     model = Reaction
+    ct_field = "reaction_for"
     extra = 0
 
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     inlines = [ImageInLine, ReplyInLine, TagInLine, ReactionInLine]
-    list_display = ['title', 'created_at', 'updated_at']
+    list_display = ['title', 'user', 'replies_count', 'created_at', 'updated_at', 'soft_delete']
     search_fields = ['title', 'content']
     ordering = ['title', 'created_at', 'updated_at']
     list_per_page = 10
+    prepopulated_fields = {
+        "post_slug": ("title",)
+        }
+
+    def replies_count(self, post):
+        return Reply.objects.filter(post_id=post.id).count()
+
+
+@admin.register(Reply)
+class ReplyAdmin(admin.ModelAdmin):
+    inlines = [ReplyInLine, ReactionInLine]
+    list_display = ['user', 'reply_to', 'created_at', 'updated_at', 'soft_delete']
+    search_fields = ['user', 'content']
+    ordering = ['user', 'created_at', 'updated_at']
+    list_per_page = 10
+
+    def reply_to(self, reply):
+        return reply.post_id
