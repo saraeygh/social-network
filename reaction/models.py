@@ -19,6 +19,5 @@ class Reaction(BaseModel, CreateTimeMixin, UpdateTimeMixin):
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey()
     
-    
     def __str__(self) -> str:
         return f"Reaction: {self.status}"
