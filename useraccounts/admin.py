@@ -11,12 +11,14 @@ class UserAccountAdmin(UserAdmin):
     fieldsets[0][1]['fields'] = fieldsets[0][1]['fields'] + (
         'image',
         'bio',
-    )
+        'user_slug',
+        )
     search_fields = ['username', 'first_name', 'last_name', ]
     list_display = ['username', 'email', 'since', 'posts', 'replies', 'reactions', 'tags_used',  'following', 'follower', 'soft_delete']
     ordering = ['username', 'email']
     list_per_page = 10
 
+    
     def since(self, user):
         user_account_age = datetime.now(timezone.utc) - user.created_at
         return user_account_age

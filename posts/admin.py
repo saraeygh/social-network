@@ -31,6 +31,9 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ['title', 'content']
     ordering = ['title', 'created_at', 'updated_at']
     list_per_page = 10
+    prepopulated_fields = {
+        "post_slug": ("title",)
+        }
 
     def replies_count(self, post):
         return Reply.objects.filter(post_id=post.id).count()

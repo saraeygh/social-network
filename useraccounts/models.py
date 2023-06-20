@@ -3,6 +3,7 @@ from core.models import BaseModel, CreateTimeMixin, UpdateTimeMixin
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.password_validation import validate_password
 from django.utils.translation import gettext as _
+from uuid import uuid4
 
 
 class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
@@ -19,9 +20,20 @@ class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
         null = True,
         )
     
+
+    def generate_slug():
+        return uuid4().hex
+
+    user_slug = models.SlugField(
+        verbose_name=_("User slug"),
+        unique=True,
+        default=generate_slug(),
+        )
+    
     
     def __str__(self) -> str:
         return f"{self.username}"
+
     
     class Meta:
         ordering = ['-created_at', '-updated_at']
