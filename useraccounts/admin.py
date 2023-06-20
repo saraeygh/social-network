@@ -11,7 +11,7 @@ class UserAccountAdmin(UserAdmin):
         'bio',
     )
     search_fields = ['username', 'first_name', 'last_name', ]
-    list_display = ['username', 'email', 'first_name', 'last_name', 'since_created', 'updated_at']
+    list_display = ['username', 'email', 'first_name', 'last_name', 'since_created', 'following', 'follower']
     list_editable = []
     ordering = ['username', 'email', 'created_at', 'updated_at']
     list_per_page = 10
@@ -19,6 +19,12 @@ class UserAccountAdmin(UserAdmin):
     def since_created(self, user):
         user_account_age = datetime.now(timezone.utc) - user.created_at
         return user_account_age
+    
+    def following(self, useraccount):
+        return useraccount.from_user.all().count()
+    
+    def follower(self, useraccount):
+        return useraccount.to_user.all().count()
 
 
 @admin.register(Relation)
