@@ -17,7 +17,10 @@ class TagAdmin(admin.ModelAdmin):
 @admin.register(TaggedItem)
 class TaggedItemAdmin(admin.ModelAdmin):
     autocomplete_fields = ['tag']
-    list_display = ['tagged_item', 'tag']
+    list_display = ['tagged_item', 'tag', 'by_user', 'updated_at']
     
     def tagged_item(self, taggeditem):
         return taggeditem.content_object
+    
+    def by_user(self, taggeditem):
+        return taggeditem.get_user_object

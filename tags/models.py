@@ -36,7 +36,7 @@ class TaggedItem(models.Model):
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey()
+    content_object = GenericForeignKey('content_type', 'object_id')
 
     tag_from = models.ForeignKey(
         ContentType,
@@ -44,16 +44,16 @@ class TaggedItem(models.Model):
         on_delete=models.CASCADE
         )
     user = models.PositiveIntegerField()
-    get_user_object = GenericForeignKey()
+    get_user_object = GenericForeignKey('tag_from', 'user')
 
 
     created_at = models.DateTimeField(
-        verbose_name=_("Created at:"),
+        verbose_name=_("Created at"),
         auto_now_add=True
         )
     
     updated_at = models.DateTimeField(
-        verbose_name=_("Updated at:"),
+        verbose_name=_("Updated at"),
         auto_now=True
         )
 

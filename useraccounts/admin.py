@@ -13,7 +13,7 @@ class UserAccountAdmin(UserAdmin):
         'bio',
     )
     search_fields = ['username', 'first_name', 'last_name', ]
-    list_display = ['username', 'email', 'since', 'posts', 'replies', 'reactions', 'tags_used',  'following', 'follower']
+    list_display = ['username', 'email', 'since', 'posts', 'replies', 'reactions', 'tags_used',  'following', 'follower', 'soft_delete']
     ordering = ['username', 'email']
     list_per_page = 10
 
@@ -47,7 +47,7 @@ class UserAccountAdmin(UserAdmin):
 @admin.register(Relation)
 class RelationAdmin(admin.ModelAdmin):
     autocomplete_fields = ['from_user', 'to_user']
-    list_display = ['from_user', 'to_user', 'since']
+    list_display = ['from_user', 'to_user', 'since', 'soft_delete']
     search_fields = ['from_user', 'to_user']
     ordering = ['from_user', 'to_user']
     list_per_page = 10

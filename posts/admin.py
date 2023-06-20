@@ -27,7 +27,7 @@ class ReactionInLine(GenericTabularInline):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     inlines = [ImageInLine, ReplyInLine, TagInLine, ReactionInLine]
-    list_display = ['title', 'user', 'replies_count', 'created_at', 'updated_at']
+    list_display = ['title', 'user', 'replies_count', 'created_at', 'updated_at', 'soft_delete']
     search_fields = ['title', 'content']
     ordering = ['title', 'created_at', 'updated_at']
     list_per_page = 10
@@ -39,7 +39,7 @@ class PostAdmin(admin.ModelAdmin):
 @admin.register(Reply)
 class ReplyAdmin(admin.ModelAdmin):
     inlines = [ReplyInLine, ReactionInLine]
-    list_display = ['user', 'reply_to', 'created_at', 'updated_at']
+    list_display = ['user', 'reply_to', 'created_at', 'updated_at', 'soft_delete']
     search_fields = ['user', 'content']
     ordering = ['user', 'created_at', 'updated_at']
     list_per_page = 10
