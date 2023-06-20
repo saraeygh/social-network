@@ -29,6 +29,14 @@ class TaggedItem(BaseModel, CreateTimeMixin, UpdateTimeMixin):
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey()
 
+    tag_from = models.ForeignKey(
+        ContentType,
+        related_name="tag_from",
+        on_delete=models.CASCADE
+        )
+    user = models.PositiveIntegerField()
+    get_user_object = GenericForeignKey()
+
     def __str__(self) -> str:
         return f"With tag {self.tag}"
     
