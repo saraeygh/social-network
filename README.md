@@ -23,3 +23,6 @@ In this social network:
 `pip install -r requirements.txt`
 5. Now you can use social network on your localhost:
 `python3 manage.py runserver`
+
+## Models designed based on below ERD
+![social-network-erd](erd.jpg)
