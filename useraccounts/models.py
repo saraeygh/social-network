@@ -2,7 +2,7 @@ from django.db import models
 from core.models import BaseModel, CreateTimeMixin, UpdateTimeMixin
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.password_validation import validate_password
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from uuid import uuid4
 
 

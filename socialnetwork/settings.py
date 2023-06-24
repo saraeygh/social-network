@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "debug_toolbar",
-    "core",
-    "useraccounts",
-    "posts",
-    "tags",
-    "reaction",
+    "core.apps.CoreConfig",
+    "posts.apps.PostsConfig",
+    "reaction.apps.ReactionConfig",
+    "tags.apps.TagsConfig",
+    "useraccounts.apps.UseraccountsConfig",
 ]
 
 MIDDLEWARE = [
