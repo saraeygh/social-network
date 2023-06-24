@@ -14,19 +14,19 @@ In this social network:
 - Before signing in, each user can only view posts and search usernames.
 ***
 **How to use?**
-1. First make a directory:
+1. First make a directory:  
 ```mkdir socialnetwork```
-2. Open created directory:
+2. Open created directory:  
 ```cd socialnetwork```
-3. Create virtual environment in created directory:
+3. Create virtual environment in created directory:  
 ```python3 -m venv venv```
-4. Use venv python intrepeter:
+4. Use venv python intrepeter:  
 ```source ./venv/bin/activate```
-5. Install prerequities:
+5. Install prerequities:  
 ```pip install -r requirements.txt```
-6. Clone project in `socialnetwork` directory:
+6. Clone project in `socialnetwork` directory:  
 ```git clone git@github.com:saraeygh/social-network.git```
-6. Use `makemigrations` and `migrate` commands to create database schema and `createsuperuser` command to create admin user. Now you can access social network admin panel with admin user on your localhost:
+6. Use `makemigrations` and `migrate` commands to create database schema and `createsuperuser` command to create admin user. Now you can access social network admin panel with admin user on your localhost:  
 ```python3 manage.py runserver```
 
 ## Models designed based on below ERD
