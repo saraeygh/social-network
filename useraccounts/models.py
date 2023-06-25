@@ -1,12 +1,15 @@
 from django.db import models
 from core.models import BaseModel, CreateTimeMixin, UpdateTimeMixin
-from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.utils.translation import gettext_lazy as _
 from uuid import uuid4
 
 
+
 class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
+
+    objects = UserManager()
+    
     image = models.FileField(
         verbose_name = _("User profile picture"),
         upload_to = 'profilepic/',
@@ -29,8 +32,7 @@ class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
         unique=True,
         default=generate_slug(),
         )
-    
-    
+
     def __str__(self) -> str:
         return f"{self.username}"
 

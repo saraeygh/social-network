@@ -1,18 +1,19 @@
 from django.db import models
-from django.db.models import Manager, QuerySet
-from uuid import uuid4
+from django.db.models import QuerySet
+from django.db.models.query import QuerySet
+from django.contrib.auth.models import BaseUserManager
+
 from django.utils.translation import gettext_lazy as _
 
 
-# class AppManager(Manager):
-#     """
-#     To exclude all soft deleted records
-#     """
-#     def get_queryset(self):
-#         return QuerySet(self.model, using=self._db).exclude(soft_delete=True)
+class AppManager(BaseUserManager):
+    def get_queryset(self) -> QuerySet:
+        return super().get_queryset().filter(soft_delete=False)
 
+class BaseModel(models.Model, models.Manager):
 
-class BaseModel(models.Model):
+    objects = AppManager()
+
     class Meta:
         abstract = True
 
