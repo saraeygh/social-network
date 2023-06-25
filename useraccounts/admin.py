@@ -7,6 +7,9 @@ from datetime import datetime, timezone
 
 @admin.register(UserAccount)
 class UserAccountAdmin(UserAdmin):
+    def get_queryset(self, request):
+        return super().get_queryset(request).filter(soft_delete=False)
+        
     fieldsets = (
         ('Change username', {
             "fields": (

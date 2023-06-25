@@ -116,6 +116,7 @@ AUTH_USER_MODEL = 'useraccounts.UserAccount'
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'fa'
 
 TIME_ZONE = 'UTC'
 
@@ -135,3 +136,5 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'useraccounts.UserAccount'

@@ -22,6 +22,7 @@ class Post(BaseModel, CreateTimeMixin, UpdateTimeMixin):
         unique=True,
         )
 
+
     def __str__(self) -> str:
         return f"Post title: {self.title}"
     
