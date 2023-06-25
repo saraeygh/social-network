@@ -9,6 +9,9 @@ from django.utils.translation import gettext_lazy as _
 class AppManager(BaseUserManager):
     def get_queryset(self) -> QuerySet:
         return super().get_queryset().filter(soft_delete=False)
+    
+    def archived(self) -> QuerySet:
+        return super().get_queryset().filter(soft_delete=True)
 
 class BaseModel(models.Model, models.Manager):
 
