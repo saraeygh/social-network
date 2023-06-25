@@ -26,26 +26,49 @@ class ReactionInLine(GenericTabularInline):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    inlines = [ImageInLine, ReplyInLine, TagInLine, ReactionInLine]
-    list_display = ['title', 'user', 'replies_count', 'created_at', 'updated_at', 'soft_delete']
-    search_fields = ['title', 'content']
-    ordering = ['title', 'created_at', 'updated_at']
-    list_per_page = 10
-    prepopulated_fields = {
+   inlines = [ImageInLine, ReplyInLine, TagInLine, ReactionInLine]
+   list_display = ['title', 'user', 'replies_count', 'created_at', 'updated_at']
+   search_fields = ['title', 'content']
+   ordering = ['title', 'created_at', 'updated_at']
+   list_per_page = 10
+   prepopulated_fields = {
         "post_slug": ("title",)
         }
+   fieldsets = (
+        ('New post', {
+            "fields": (
+                'user',
+                'title',
+                'content',
+                'post_slug',
+            ),
+        }),
+    )
+   exclude = ['soft_delete']
 
-    def replies_count(self, post):
+   def replies_count(self, post):
         return Reply.objects.filter(post_id=post.id).count()
 
 
 @admin.register(Reply)
 class ReplyAdmin(admin.ModelAdmin):
     inlines = [ReplyInLine, ReactionInLine]
-    list_display = ['user', 'reply_to', 'created_at', 'updated_at', 'soft_delete']
+    list_display = ['user', 'reply_to', 'created_at', 'updated_at']
     search_fields = ['user', 'content']
     ordering = ['user', 'created_at', 'updated_at']
     list_per_page = 10
+    exclude = ['soft_delete']
+
+    fieldsets = (
+        ('New reply', {
+            "fields": (
+                'user',
+                'content',
+                'post_id',
+                'reply_id',
+            ),
+        }),
+    )
 
     def reply_to(self, reply):
         return reply.post_id

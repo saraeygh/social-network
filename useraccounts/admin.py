@@ -7,14 +7,29 @@ from datetime import datetime, timezone
 
 @admin.register(UserAccount)
 class UserAccountAdmin(UserAdmin):
-    fieldsets = UserAdmin.fieldsets
-    fieldsets[0][1]['fields'] = fieldsets[0][1]['fields'] + (
-        'image',
-        'bio',
-        'user_slug',
-        )
+    fieldsets = (
+        ('Change username', {
+            "fields": (
+                'username',
+            ),
+        }),
+        ('Change user info', {
+            "fields": (
+                'first_name',
+                'last_name',
+                'email',
+                'bio',
+            ),
+        }),
+        ('Profile picture', {
+            "fields": (
+                'image',
+            ),
+        }),
+    )
+    
     search_fields = ['username', 'first_name', 'last_name', ]
-    list_display = ['username', 'email', 'since', 'posts', 'replies', 'reactions', 'tags_used',  'following', 'follower', 'soft_delete']
+    list_display = ['username', 'email', 'since', 'posts', 'replies', 'reactions', 'tags_used',  'following', 'follower']
     ordering = ['username', 'email']
     list_per_page = 10
 
@@ -49,10 +64,11 @@ class UserAccountAdmin(UserAdmin):
 @admin.register(Relation)
 class RelationAdmin(admin.ModelAdmin):
     autocomplete_fields = ['from_user', 'to_user']
-    list_display = ['from_user', 'to_user', 'since', 'soft_delete']
+    list_display = ['from_user', 'to_user', 'since']
     search_fields = ['from_user', 'to_user']
     ordering = ['from_user', 'to_user']
     list_per_page = 10
+    exclude = ['soft_delete']
 
     def since(self, relation):
         relation_age = datetime.now(timezone.utc) - relation.created_at

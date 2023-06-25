@@ -37,7 +37,7 @@ class Image(BaseModel, CreateTimeMixin, UpdateTimeMixin):
     alt_text = models.TextField(verbose_name = _("Image alt"))
     post_id = models.ForeignKey(
         Post,
-        verbose_name=_("Image for post"),
+        verbose_name=_("Post"),
         on_delete=models.CASCADE,
         )
     
