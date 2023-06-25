@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from .settings import MEDIA_ROOT, MEDIA_URL
 
 admin.site.site_header = 'Social network admin panel'
 admin.site.index_title = 'Admin panel'
@@ -24,4 +26,4 @@ admin.site.site_title = 'Social network'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("__debug__/", include("debug_toolbar.urls")),
-]
+] + static(MEDIA_URL, document_root=MEDIA_ROOT)
