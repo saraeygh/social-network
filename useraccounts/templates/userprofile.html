@@ -4,9 +4,34 @@
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 <body>
-    <div>
-        <p><img src="{{ MEDIA_URL }}/{{ user.image }}" class="profilepic"/></p>
-        <p> {{ user.username }} </p>
+    <div class="profilepage">
+        <div class="userprofile">
+            <img src="{{ MEDIA_URL }}/{{ user.image }}" class="profilepic"/>
+            <p class=name> {{ user.first_name }} {{ user.last_name }}</p>
+            <p class=username> @{{ user.username }}</p>
+            <p class=name> Bio:</p>
+            <p class=content> {{ user.bio }}</p>
+            <span class=name>Email:</span><span class=content>{{ user.email }}</span>
+        </div>
+        <div class="useractivity">
+            <ul>
+                {% for user_post in user_posts %}
+                <div class='post'>
+                    <h2>
+                        <h2 class="post_title">
+                            Title: {{ user_post.title }}
+                        </h2>
+                    </h2>
+                    <span class='username'>
+                        Posted by: @{{ user_post.user }}
+                    </span>
+                    <p class='content'>
+                        {{ user_post.content }}
+                    </p>
+                </div>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </body>
 {% include 'footer.html' %}

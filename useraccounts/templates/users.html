@@ -4,9 +4,9 @@
 
 <body>
     <div>
-        <h1 class="post_title">Registered users:</h1>
+        <h1 class="name">Registered users:</h1>
         {% for user in users %}
-        <li class='user'>
+        <li class='name'>
             <a href='{{ user.username }}'>{{ user }}</a>
         </li>
         {% endfor %}

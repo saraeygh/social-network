@@ -40,20 +40,38 @@
 .username{
     margin-left: 5%;
     margin-right: 5%;
-    color: black;
+    color: gray;
+    margin-top: 1px;
+}
+
+.name{
+    margin-left: 5%;
+    margin-right: 5%;
+    font-weight: bold;
+    margin-top: 1px;
 }
 
 
 /*Profiles Style*/
-.user{
+.profilepic{
+    height: 200px;
+    width: 200px;
     margin-left: 5%;
     margin-right: 5%;
-    color: black;
 }
 
-.profilepic{
-    height: 100px;
-    width: 100px;
+.profilepage {
+    display: flex;
     margin-left: 5%;
     margin-right: 5%;
-}
+  }
+  
+.userprofile {
+    flex: 0 0 250px;  /* grow */
+    padding: 0.5%;
+    word-wrap: break-word;
+  }
+  
+  .useractivity {
+    flex: 1 0 250px; /* do not grow, do not shrink, start at 250px */
+  }
