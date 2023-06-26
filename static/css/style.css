@@ -1,0 +1,59 @@
+/*Header style*/
+.site_header{
+    margin-left: 5%;
+    margin-right: 5%;
+    color: black;
+    background-color: burlywood;
+}
+
+
+/*Footer style*/
+.site_footer{
+    margin-left: 5%;
+    margin-right: 5%;
+    color: black;
+    background-color: burlywood;
+}
+
+
+/*Posts style*/
+.post{
+    margin-left: 5%;
+    margin-right: 5%;
+    color: black;
+    border: solid;
+    border-radius: 5%;
+}
+
+.post_title{
+    margin-left: 5%;
+    margin-right: 5%;
+    color: black;
+}
+
+.content{
+    margin-left: 5%;
+    margin-right: 5%;
+    color: black;
+}
+
+.username{
+    margin-left: 5%;
+    margin-right: 5%;
+    color: black;
+}
+
+
+/*Profiles Style*/
+.user{
+    margin-left: 5%;
+    margin-right: 5%;
+    color: black;
+}
+
+.profilepic{
+    height: 100px;
+    width: 100px;
+    margin-left: 5%;
+    margin-right: 5%;
+}

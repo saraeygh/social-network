@@ -12,7 +12,7 @@ class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
     
     image = models.FileField(
         verbose_name = _("User profile picture"),
-        upload_to = 'profilepic/',
+        upload_to = 'profilepics/',
         blank=True,
         null=True,
         )

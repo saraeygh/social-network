@@ -1,32 +1,20 @@
 {% include 'header.html' %}
-<body>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-    <h1 ></h1>
+<body>
     <ul>
         {% for post in posts_list %}
-        <div style="
-        margin-left: 5%;
-        margin-right: 5%;
-        border-style: solid;
-        border-radius: 5%;
-        ">
+        <div class='post'>
             <h2>
-                <h2 style="
-                color: black;
-                align-items: center;
-                margin-left: 1%;
-                margin-right: 1%;
-                ">
-                    {{ post.title }}
-                    {{ post.user }}
+                <h2 class="post_title">
+                    Title: {{ post.title }}
                 </h2>
             </h2>
-            <p style="
-            color: black;
-            align-items: center;
-            margin-left: 1%;
-            margin-right: 1%;
-            ">
+            <span class='username'>
+                Posted by: @{{ post.user }}
+            </span>
+            <p class='content'>
                 {{ post.content }}
             </p>
         </div>
