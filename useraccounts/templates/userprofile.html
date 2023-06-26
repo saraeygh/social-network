@@ -1,0 +1,12 @@
+{% include 'header.html' %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<body>
+    <div>
+        <p><img src="{{ MEDIA_URL }}/{{ user.image }}" class="profilepic"/></p>
+        <p> {{ user.username }} </p>
+    </div>
+</body>
+{% include 'footer.html' %}

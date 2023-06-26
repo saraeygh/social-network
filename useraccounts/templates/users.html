@@ -1,0 +1,15 @@
+{% include 'header.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<body>
+    <div>
+        <h1 class="post_title">Registered users:</h1>
+        {% for user in users %}
+        <li class='user'>
+            <a href='{{ user.username }}'>{{ user }}</a>
+        </li>
+        {% endfor %}
+    </div>
+</body>
+{% include 'footer.html' %}
