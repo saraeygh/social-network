@@ -26,4 +26,5 @@ admin.site.site_title = 'Social network'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("__debug__/", include("debug_toolbar.urls")),
+    path("posts/", include('posts.urls'), name='posts'),
 ] + static(MEDIA_URL, document_root=MEDIA_ROOT)
