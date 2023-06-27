@@ -71,3 +71,9 @@ class TagTest(TestCase):
     def test_tagged_item(self):
         get_new_tagged_item = list(TaggedItem.objects.all())
         self.assertTrue(get_new_tagged_item)
+
+    def test_tag_used_count(self):
+        get_new_tag = list(Tag.objects.filter(label='testtag1'))[0]
+        self.assertEqual(Tag.used_count(get_new_tag), 1)
+
+    

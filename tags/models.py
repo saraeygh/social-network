@@ -23,6 +23,9 @@ class Tag(models.Model):
         verbose_name=_("Updated at:"),
         auto_now=True
         )
+    
+    def used_count(self):
+        return TaggedItem.objects.filter(tag=self).count()
 
     def __str__(self) -> str:
         return f"{self.label}"
@@ -33,7 +36,10 @@ class Tag(models.Model):
 
 class TaggedItem(models.Model):
     objects = TaggedItemManager()
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
+    tag = models.ForeignKey(
+        Tag,
+        related_name="used_tag",
+        on_delete=models.CASCADE)
     content_type = models.ForeignKey(
         ContentType,
         verbose_name=_('Post'),
