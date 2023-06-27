@@ -4,6 +4,8 @@ from core.models import BaseModel, CreateTimeMixin, UpdateTimeMixin
 from useraccounts.models import UserAccount
 
 class Post(BaseModel, CreateTimeMixin, UpdateTimeMixin):
+    
+    # Model Fields
     title = models.CharField(
         verbose_name = _("Post title"),
         max_length=255
@@ -21,11 +23,18 @@ class Post(BaseModel, CreateTimeMixin, UpdateTimeMixin):
         verbose_name=_("post slug"),
         unique=True,
         )
+    
 
+
+    # Model methods
+    def replies_count(self):
+        return Reply.objects.filter(post_id=self.id).count()
+    
 
     def __str__(self) -> str:
-        return f"Post title: {self.title}"
+        return f"{self.title}"
     
+
     class Meta:
         ordering = ['-created_at', '-updated_at']
 
