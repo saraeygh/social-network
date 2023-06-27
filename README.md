@@ -29,6 +29,9 @@ In this social network:
 ```git clone git@github.com:saraeygh/social-network.git```
 6. Use `makemigrations` and `migrate` commands to create database schema and `createsuperuser` command to create admin user. Now you can access social network admin panel with admin user on your localhost:  
 ```python3 manage.py runserver```
+
+#### *On windows*:
+**Add it here soon ...**
 ***
 ## Models designed based on below ERD
 ![social-network-erd](erd.jpg)
