@@ -34,16 +34,25 @@ class Tag(models.Model):
 class TaggedItem(models.Model):
     objects = TaggedItemManager()
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
+    content_type = models.ForeignKey(
+        ContentType,
+        verbose_name=_('Post'),
+        on_delete=models.CASCADE,
+        )
+    object_id = models.PositiveIntegerField(
+        verbose_name=_('Post ID')
+    )
     content_object = GenericForeignKey('content_type', 'object_id')
 
     tag_from = models.ForeignKey(
         ContentType,
+        verbose_name=_('User'),
         related_name="tag_from",
         on_delete=models.CASCADE
         )
-    user = models.PositiveIntegerField()
+    user = models.PositiveIntegerField(
+        verbose_name=_('User ID')
+    )
     get_user_object = GenericForeignKey('tag_from', 'user')
 
 
