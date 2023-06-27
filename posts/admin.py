@@ -27,7 +27,7 @@ class ReactionInLine(GenericTabularInline):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
    inlines = [ImageInLine, ReplyInLine, TagInLine, ReactionInLine]
-   list_display = ['title', 'user', 'replies_count', 'created_at', 'updated_at']
+   list_display = ['title', 'user', 'replies_count', 'likes', 'dislike', 'created_at', 'updated_at']
    search_fields = ['title', 'content']
    ordering = ['title', 'created_at', 'updated_at']
    list_per_page = 10
@@ -48,6 +48,12 @@ class PostAdmin(admin.ModelAdmin):
 
    def replies_count(self, post):
         return Reply.objects.filter(post_id=post.id).count()
+   
+   def likes(self, post):
+       return Reaction.objects.filter(id=post.id).filter(reaction_status='LIKE').count()
+   
+   def dislike(self, post):
+       return Reaction.objects.filter(id=post.id).filter(reaction_status='DISLIKE').count()
 
 
 @admin.register(Reply)
