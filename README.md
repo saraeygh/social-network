@@ -14,6 +14,7 @@ In this social network:
 - Before signing in, each user can only view posts and search usernames.
 ***
 **How to use?**
+#### *On linux*:
 1. First make a directory:  
 ```mkdir socialnetwork```
 2. Open created directory:  
