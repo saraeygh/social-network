@@ -5,9 +5,9 @@ from django.utils.translation import gettext_lazy as _
 from uuid import uuid4
 
 
-
 class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
 
+    # Model fields
     objects = UserManager()
     
     image = models.FileField(
@@ -23,20 +23,27 @@ class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
         null = True,
         )
     
-
-    def generate_slug():
-        return uuid4().hex
-
     user_slug = models.SlugField(
         verbose_name=_("User slug"),
         unique=True,
-        default=generate_slug(),
+        default = uuid4().hex,
         )
+
+
+    # Model methods
+    def save(self, *args, **kwargs):
+        self.user_slug = self.username
+        super(UserAccount, self).save(*args, **kwargs)
+
+    def following(self):
+        return self.from_user.all().count()
+    
+    def follower(self):
+        return self.to_user.all().count()
 
     def __str__(self) -> str:
         return f"{self.username}"
 
-    
     class Meta:
         ordering = ['-created_at', '-updated_at']
     
