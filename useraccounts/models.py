@@ -26,14 +26,15 @@ class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
     user_slug = models.SlugField(
         verbose_name=_("User slug"),
         unique=True,
-        default = 'username',
+        default = uuid4().hex,
         )
-    
+
+
+    # Model methods
     def save(self, *args, **kwargs):
         self.user_slug = self.username
         super(UserAccount, self).save(*args, **kwargs)
 
-    # Model methods
     def following(self):
         return self.from_user.all().count()
     
