@@ -3,7 +3,7 @@
     margin-left: 5%;
     margin-right: 5%;
     color: black;
-    background-color: burlywood;
+    background-color: red;
 }
 
 
@@ -72,6 +72,10 @@
     word-wrap: break-word;
   }
   
-  .useractivity {
+.useractivity {
     flex: 1 0 250px; /* do not grow, do not shrink, start at 250px */
   }
+
+.signinbutton {
+    background-color: red;
+}
