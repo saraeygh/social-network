@@ -1,5 +1,4 @@
-# Files
-twitter.pdf
+# File
 lib64
 pyvenv.cfg
 
@@ -7,6 +6,7 @@ pyvenv.cfg
 bin/
 socialnetwork/__pycache__
 media/
+.vscode/
 
 # Copied
 # Byte-compiled / optimized / DLL files
