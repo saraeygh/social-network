@@ -3,7 +3,7 @@ from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from .models import UserAccount
 from posts.models import Post
-from .forms import SignUpForm, SignInForm
+from .forms import SignUpForm, SignInForm, EditProfileForm
 
 
 class SignUp(View):
@@ -76,3 +76,38 @@ class UserProfile(View):
                 'host': request.get_host(),
                 }
             )
+    
+
+class EditUserProfile(View):
+    def get(self, request, username):
+        user = UserAccount.objects.get(username=username)
+        form = EditProfileForm(
+            initial={
+                'username': user.username,
+                'email': user.email,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'bio': user.bio,
+                'image': user.image,
+            }
+            )
+
+        return render(
+            request,
+            'editprofile.html',
+            {
+                'form': form,
+                'user': user,
+                'host': request.get_host(),
+                }
+            )
+    
+    def post(self, request, username):
+        user = UserAccount.objects.get(username=username)
+        changes = EditProfileForm(request.POST)
+
+        if changes.is_valid():
+            print(changes.cleaned_data)
+            return redirect('useraccounts:userprofile', {'user': user})
+        else:
+            print('<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')

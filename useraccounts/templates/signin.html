@@ -1,15 +1,5 @@
 {% extends 'base.html' %}
 
-{% block headerbuttons %}
-{% if user.is_anonymous %}
-<a class="headerbuttons" href="//{{ host }}">Home</a>
-{% else %}
-<a class="headerbuttons" href="//{{ host }}">Home</a>
-<a class="headerbuttons" href="//{{ host }}/useraccounts/username/{{ user.username }}">Profile</a>
-<a class="headerbuttons">Sign out</a>
-{% endif %}
-{% endblock headerbuttons %}
-
 {% block content %}
 <div class="signup">
     <form action="" method="post">
