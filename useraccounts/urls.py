@@ -1,5 +1,11 @@
 from django.urls import path
-from .views import UserProfile, SignUp, SignIn, EditUserProfile
+from .views import (
+    UserProfile,
+    SignUp,
+    SignIn,
+    EditUserProfile,
+    DeleteAccount
+    )
 
 app_name = "useraccounts"
 urlpatterns = [
@@ -8,6 +14,11 @@ urlpatterns = [
     path(
         'username/<str:username>/edit',
         EditUserProfile.as_view(),
+        name='edituserprofile'),
+    
+    path(
+        'username/<str:username>/delete-account',
+        DeleteAccount.as_view(),
         name='edituserprofile'),
     
     path('signup/', SignUp.as_view(), name='signup'),

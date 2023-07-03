@@ -1,13 +1,18 @@
 from django.db import models
+from django.db.models.query import QuerySet
 from core.models import BaseModel, CreateTimeMixin, UpdateTimeMixin
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.utils.translation import gettext_lazy as _
 from uuid import uuid4
 
 
+class UserAccountManager(UserManager):
+    def get_queryset(self) -> QuerySet:
+        return super().get_queryset().filter(soft_delete=False)
+    
 class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
 
-    objects = UserManager()
+    objects = UserAccountManager()
     
     image = models.FileField(
         verbose_name=_("User profile picture"),

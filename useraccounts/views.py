@@ -107,7 +107,22 @@ class EditUserProfile(View):
         changes = EditProfileForm(request.POST)
 
         if changes.is_valid():
-            print(changes.cleaned_data)
-            return redirect('useraccounts:userprofile', {'user': user})
-        else:
-            print('<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+            changes = changes.cleaned_data
+            print(changes)
+            user.username = changes['username']
+            new_username = changes['username']
+            print(new_username, type(new_username))
+            user.save()
+
+            new_user_info = UserAccount.objects.get(username=new_username)
+            return redirect('useraccounts:userprofile', {'user': new_user_info})
+        
+
+class DeleteAccount(View):
+    def get(self, request, username):
+        print(username, type(username))
+        user = UserAccount.objects.get(username=username)
+        user.soft_delete = True
+        user.save()
+
+        return redirect('core:landing')
