@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "debug_toolbar",
-    "core.apps.CoreConfig",
-    "posts.apps.PostsConfig",
-    "reaction.apps.ReactionConfig",
-    "tags.apps.TagsConfig",
-    "useraccounts.apps.UseraccountsConfig",
+    "core",
+    "posts",
+    "reaction",
+    "tags",
+    "useraccounts",
 ]
 
 MIDDLEWARE = [
@@ -131,8 +131,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static/'
-    ]
+    BASE_DIR / 'static/css',
+]
 
 MEDIA_ROOT = BASE_DIR / 'media/'
 MEDIA_URL = '/media/'
