@@ -57,6 +57,7 @@ class Relation(BaseModel, CreateTimeMixin):
         on_delete=models.CASCADE,
         related_name='from_user'
         )
+    
     to_user = models.ForeignKey(
         UserAccount,
         verbose_name=_("to_user"),

@@ -1,0 +1,7 @@
+<ul>
+    {% for user in users_list %}
+    <div class='post'>
+        {{ user.first_name }} {{ user.last_name }}: @{{ user.username }}
+    </div>
+    {% endfor %}
+</ul>

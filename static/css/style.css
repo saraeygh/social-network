@@ -102,3 +102,21 @@
     font-size: 16px;
     padding: 1%;
 }
+
+
+/*Home*/
+.homepage {
+    display: flex;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.allusers {
+    flex: 0 0 250px;  /* grow */
+    padding: 0.5%;
+    word-wrap: break-word;
+}
+
+.posts {
+    flex: 1 0 250px; /* do not grow, do not shrink, start at 250px */
+}

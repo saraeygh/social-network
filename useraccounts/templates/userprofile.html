@@ -13,6 +13,15 @@
         <p class=name> Bio:</p>
         <p class=content> {{ user.bio }}</p>
         <span class=name>Email:</span><span class=content>{{ user.email }}</span>
+        <p class=name> Following: {{ user.following }} </p>
+        <p class=name> Follower: {{ user.follower }} </p>
+        <div>
+            <a href="/posts/"><button type="button">Follow</button></a>
+            <a href="/posts/"><button type="button">Unfollow</button></a>
+        </div>
+
+
+
     </div>
     <div class="useractivity">
         <ul>
