@@ -1,41 +1,37 @@
-{% include 'header.html' %}
-{% load static %}
+{% extends 'base.html' %}
 
-<link rel="stylesheet" href="{% static 'style.css' %}">
-
-<body>
-    <div class="profilepage">
-        <div class="userprofile">
-            {% if user.image %}
-            <img src="{{ MEDIA_URL }}/{{ user.image }}" class="profilepic"/>
-            {% else %}
-            <img src="{{ MEDIA_URL }}/profilepics/default.jpg" class="profilepic"/>
-            {% endif %}
-            <p class=name> {{ user.first_name }} {{ user.last_name }}</p>
-            <p class=username> @{{ user.username }}</p>
-            <p class=name> Bio:</p>
-            <p class=content> {{ user.bio }}</p>
-            <span class=name>Email:</span><span class=content>{{ user.email }}</span>
-        </div>
-        <div class="useractivity">
-            <ul>
-                {% for user_post in user_posts %}
-                <div class='post'>
-                    <h2>
-                        <h2 class="post_title">
-                            Title: {{ user_post.title }}
-                        </h2>
-                    </h2>
-                    <span class='username'>
-                        Posted by: @{{ user_post.user }}
-                    </span>
-                    <p class='content'>
-                        {{ user_post.content }}
-                    </p>
-                </div>
-                {% endfor %}
-            </ul>
-        </div>
+{% block content %}
+<div class="profilepage">
+    <div class="userprofile">
+        {% if user.image %}
+        <img src="{{ MEDIA_URL }}/{{ user.image }}" class="profilepic"/>
+        {% else %}
+        <img src="{{ MEDIA_URL }}/profilepics/default.jpg" class="profilepic"/>
+        {% endif %}
+        <p class=name> {{ user.first_name }} {{ user.last_name }}</p>
+        <p class=username> @{{ user.username }}</p>
+        <p class=name> Bio:</p>
+        <p class=content> {{ user.bio }}</p>
+        <span class=name>Email:</span><span class=content>{{ user.email }}</span>
     </div>
-</body>
-{% include 'footer.html' %}
+    <div class="useractivity">
+        <ul>
+            {% for user_post in user_posts %}
+            <div class='post'>
+                <h2>
+                    <h2 class="post_title">
+                        Title: {{ user_post.title }}
+                    </h2>
+                </h2>
+                <span class='username'>
+                    Posted by: @{{ user_post.user }}
+                </span>
+                <p class='content'>
+                    {{ user_post.content }}
+                </p>
+            </div>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock content %}

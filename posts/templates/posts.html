@@ -1,24 +1,21 @@
-{% include 'header.html' %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'style.css' %}">
+{% extends 'base.html' %}
 
-<body>
-    <ul>
-        {% for post in posts_list %}
-        <div class='post'>
-            <h2>
-                <h2 class="post_title">
-                    Title: {{ post.title }}
-                </h2>
+{% block content %}
+<ul>
+    {% for post in posts_list %}
+    <div class='post'>
+        <h2>
+            <h2 class="post_title">
+                Title: {{ post.title }}
             </h2>
-            <span class='username'>
-                Posted by: @{{ post.user }}
-            </span>
-            <p class='content'>
-                {{ post.content }}
-            </p>
-        </div>
-        {% endfor %}
-    </ul>
-</body>
-{% include 'footer.html' %}
+        </h2>
+        <span class='username'>
+            Posted by: @{{ post.user }}
+        </span>
+        <p class='content'>
+            {{ post.content }}
+        </p>
+    </div>
+    {% endfor %}
+</ul>
+{% endblock content %}

@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %} Social network{% endblock title %} Social network
+    </title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header class="site_header">
+        <div>
+            <h1>
+                {% block headertitle %}My social network: A place to share your thoughts{% endblock headertitle %} 
+            </h1>
+            {% block headerbuttons %}{% endblock headerbuttons %}
+        </div>
+    </header>
+
+    {% block content %}
+    {% endblock content %}
+    
+    <footer>
+        <div class="site_footer">
+            <p>
+                {% block footertitle %}Created by: Reza Saraey{% endblock footertitle %} 
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

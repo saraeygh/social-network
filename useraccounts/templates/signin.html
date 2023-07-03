@@ -1,15 +1,11 @@
-{% include 'header.html' %}
-{% load static %}
+{% extends 'base.html' %}
 
-<link rel="stylesheet" href="{% static 'style.css' %}">
-
-<body>
-    <div class="signup">
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Sign in">
-        </form>
-    </div>
-</body>
-{% include 'footer.html' %}
+{% block content %}
+<div class="signup">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Sign in">
+    </form>
+</div>
+{% endblock content %}

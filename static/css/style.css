@@ -96,3 +96,9 @@
     justify-content: left;
     padding: 10px;
 }
+
+.headerbuttons{
+    background-color: white;
+    font-size: 16px;
+    padding: 1%;
+}
