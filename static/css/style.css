@@ -1,9 +1,11 @@
 /*Header style*/
 .site_header{
+    padding: 2px;
     margin-left: 5%;
     margin-right: 5%;
     color: black;
     background-color: burlywood;
+    align-items: center;
 }
 
 
@@ -11,6 +13,8 @@
 .site_footer{
     margin-left: 5%;
     margin-right: 5%;
+    padding: 2px;
+    position: static;
     color: black;
     background-color: burlywood;
 }
@@ -72,6 +76,23 @@
     word-wrap: break-word;
   }
   
-  .useractivity {
+.useractivity {
     flex: 1 0 250px; /* do not grow, do not shrink, start at 250px */
   }
+
+.center {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+.button {
+    font-size: 32px;
+}
+
+.signup {
+    margin-left: 5%;
+    margin-right: 5%;
+    display: flex;
+    justify-content: left;
+    padding: 10px;
+}
