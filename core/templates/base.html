@@ -14,7 +14,17 @@
             <h1>
                 {% block headertitle %}My social network: A place to share your thoughts{% endblock headertitle %} 
             </h1>
-            {% block headerbuttons %}{% endblock headerbuttons %}
+
+            {% block headerbuttons %}
+            {% if user.is_anonymous %}
+            <a class="headerbuttons" href="//{{ host }}">Home</a>
+            {% else %}
+            <a class="headerbuttons" href="//{{ host }}">Home</a>
+            <a class="headerbuttons" href="//{{ host }}/useraccounts/username/{{ user.username }}">Profile</a>
+            <a class="headerbuttons">Sign out</a>
+            {% endif %}
+            {% endblock headerbuttons %}
+
         </div>
     </header>
 

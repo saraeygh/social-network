@@ -8,7 +8,7 @@ from .forms import SignUpForm, SignInForm
 
 class SignUp(View):
     def get(self, request):
-        return render(request, 'signup.html', {'form': SignUpForm})
+        return render(request, 'signup.html', {'form': SignUpForm, 'host': request.get_host()})
     
     def post(self, request):
         form = SignUpForm(request.POST)
@@ -37,7 +37,7 @@ class SignUp(View):
 
 class SignIn(View):
     def get(self, request):
-        return render(request, 'signin.html', {'form': SignInForm})
+        return render(request, 'signin.html', {'form': SignInForm, 'host': request.get_host()})
     
     def post(self, request):
         form = SignInForm(request.POST)
@@ -63,9 +63,16 @@ class SignIn(View):
         return redirect('useraccounts:userprofile', username)
 
 
-
 class UserProfile(View):
     def get(self, request, username):
         user = UserAccount.objects.get(username=username)
         user_posts = Post.objects.filter(user=user.id)
-        return render(request, 'userprofile.html', {'user': user, 'user_posts': user_posts})
+        return render(
+            request,
+            'userprofile.html',
+            {
+                'user': user,
+                'user_posts': user_posts,
+                'host': request.get_host(),
+                }
+            )
