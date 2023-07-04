@@ -1,48 +1,32 @@
+from typing import Any, Dict
 from django import forms
+from django.contrib.auth.forms import UserCreationForm  
 from .models import UserAccount
 
 
-class SignUpForm(forms.ModelForm):
+class SignUpForm(UserCreationForm):
+    email = forms.CharField(max_length=150, required=False, help_text="Optional")
+    first_name = forms.CharField(max_length=150, required=False, help_text="Optional")
+    last_name = forms.CharField(max_length=150, required=False, help_text="Optional")
+    bio = forms.CharField(max_length=255, required=False, help_text="Optional")
+    profile_image = forms.FileField(required=False, help_text="Optional")
 
-    confirm_password = forms.CharField(
-        widget=forms.PasswordInput(),
-        max_length=128,
-        required=True,
-        help_text='* - Repeat password',
-        )
+    
+    def check_username(self, username: str):
+        all_users = UserAccount.objects_all.values_list(flat=True)
+        if not username in all_users:
+            return username
+        else:
+            # Error if username already exists
+            pass
 
     class Meta:
         model = UserAccount
         fields = [
             'username',
-            'password',
-            'confirm_password',
-            'email',
-            'first_name',
-            'last_name',
-            'bio',
-            'image',
+            'password1',
+            'password2',
         ]
-
-        widgets = {
-            'password': forms.PasswordInput,
-            'confirm_password': forms.PasswordInput,
-        }
-
-        labels = {
-            'bio': 'Bio',
-            'image': 'Profile picture',
-        }
-
-        help_texts = {
-            'username': '* - Unique, 150 characters max (including Letters, digits and @/./+/-/_ only).',
-            'password': '* - At least 8, numbers & letters, not common passwords.',
-            'email': 'Optional',
-            'first_name': 'Optional',
-            'last_name': 'Optional',
-            'bio': 'Optional',
-        }
-
 
 class SignInForm(forms.Form):
 

@@ -13,6 +13,7 @@ class UserAccountManager(UserManager):
 class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
 
     objects = UserAccountManager()
+    objects_all = UserManager()
     
     image = models.FileField(
         verbose_name=_("User profile picture"),
@@ -21,7 +22,7 @@ class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
         null=True,
         )
     bio = models.CharField(
-        verbose_name=_("User short biography"),
+        verbose_name=_("Bio"),
         max_length=160,
         blank=True,
         null=True,

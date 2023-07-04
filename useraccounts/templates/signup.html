@@ -2,9 +2,11 @@
 
 {% block content %}
 <div class="signup">
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
+        {{ form.errors }}
+        {{ form.non_field_errors }}
         <input type="submit" value="Sign up">
     </form>
 </div>

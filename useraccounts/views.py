@@ -8,31 +8,43 @@ from .forms import SignUpForm, SignInForm, EditProfileForm
 
 class SignUp(View):
     def get(self, request):
-        return render(request, 'signup.html', {'form': SignUpForm, 'host': request.get_host()})
+        context = {'form': SignUpForm, 'host': request.get_host()}
+        return render(request, 'signup.html', context)
     
     def post(self, request):
-        form = SignUpForm(request.POST)
+        form = SignUpForm(request.POST, request.FILES)
 
         if form.is_valid():
             new_user = form.cleaned_data
+            UploadedFile.read()
+            print(new_user['profile_image'])
+            print(request.FILES['profile_image'])
+
             username = new_user['username']
-            password = new_user['confirm_password']
+            username = SignUpForm.check_username(form, username)
+            password = new_user['password2']
             email = new_user['email']
             first_name = new_user['first_name']
             last_name = new_user['last_name']
             bio = new_user['bio']
+            profile_image = request.FILES['profile_image']
 
-            new_user = UserAccount.objects.create(
-                username=username,
-                password=password,
-                email=email,
-                first_name=first_name,
-                last_name=last_name,
-                bio=bio,
-                )
+            new_user = UserAccount.objects.create_user(username=username, password=password)
+            new_user.email = email
+            new_user.first_name = first_name
+            new_user.last_name = last_name
+            new_user.bio = bio
+            new_user.profile_image = profile_image
             new_user.save()
 
-        return redirect('useraccounts:userprofile', username)
+
+            return redirect('useraccounts:userprofile', username)
+        else:
+            print(form.errors)
+            form = SignUpForm()
+            context = {'form': form, 'host': request.get_host()}
+            return render(request, 'signup.html', context)
+        
     
 
 class SignIn(View):
