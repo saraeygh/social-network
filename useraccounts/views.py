@@ -9,7 +9,7 @@ from .forms import SignUpForm, SignInForm, EditProfileForm
 class SignUp(View):
     def get(self, request):
         form = SignUpForm()
-        context = {'form': form, 'host': request.get_host()}
+        context = {'form': form}
         return render(request, 'signup.html', context)
     
     def post(self, request):
@@ -20,6 +20,10 @@ class SignUp(View):
 
             new_user = form.cleaned_data
             username = new_user['username']
+            password = new_user['password1']
+
+            new_user = authenticate(request=request, username=username, password=password)
+            login(request, new_user)
             return redirect('useraccounts:userprofile', username)
         
         else:
@@ -27,7 +31,6 @@ class SignUp(View):
             form = SignUpForm()
             context = {
                 'form': form,
-                'host': request.get_host(),
                 'errors': errors,
                 }
             return render(request, 'signup.html', context)
@@ -36,8 +39,8 @@ class SignUp(View):
 class SignIn(View):
     def get(self, request):
         form = SignInForm
-        context = {'form': form, 'host': request.get_host()}
-        return render(request, 'signin.html', context=context)
+        context = {'form': form}
+        return render(request, 'signin.html', context)
     
     def post(self, request):
         form = SignInForm(request.POST)
@@ -53,9 +56,7 @@ class SignIn(View):
                 username=username,
                 password=password,
                 )
-            
-            print(user)
-            
+                        
             if user:
                 login(request=request, user=user)
                 return redirect('useraccounts:userprofile', username)
@@ -64,20 +65,18 @@ class SignIn(View):
             form = SignInForm()
             context = {
                 'form': form,
-                'host': request.get_host(),
                 'errors': errors
                 }
-            return render(request, 'signin.html', context=context)
+            return render(request, 'signin.html', context)
         
         else:
             errors = form.errors
             form = SignInForm()
             context = {
                 'form': form,
-                'host': request.get_host(),
                 'errors': errors
                 }
-        return render(request, 'signin.html', context=context)
+        return render(request, 'signin.html', context)
 
 
 class UserProfile(View):
@@ -90,7 +89,6 @@ class UserProfile(View):
             {
                 'user': user,
                 'user_posts': user_posts,
-                'host': request.get_host(),
                 }
             )
     

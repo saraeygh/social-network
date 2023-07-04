@@ -17,6 +17,5 @@ class LandingPageView(View):
                 'users_list': users_list,
                 'posts_list': posts_list,
                 'user': request.user,
-                'host': request.get_host()
             }
             )

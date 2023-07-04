@@ -17,14 +17,14 @@
             
             {% block headerbuttons %}
             {% if user.is_anonymous %}
-            <a class="headerbuttons" href="//{{ host }}">Home</a>
-            <a class="headerbuttons" href="//{{ host }}/useraccounts/signup/">Sign up</a>
-            <a class="headerbuttons" href="//{{ host }}/useraccounts/signin/">Sign in</a>
+            <a class="headerbuttons" href="//{{ request.get_host }}">Home</a>
+            <a class="headerbuttons" href="//{{ request.get_host }}/useraccounts/signup/">Sign up</a>
+            <a class="headerbuttons" href="//{{ request.get_host }}/useraccounts/signin/">Sign in</a>
             {% else %}
-            <a class="headerbuttons" href="//{{ host }}">Home</a>
-            <a class="headerbuttons" href="//{{ host }}/useraccounts/username/{{ user.username }}">Profile</a>
-            <a class="headerbuttons" href="//{{ host }}/useraccounts/username/{{ user.username }}/edit">Edit profile</a>
-            <a class="headerbuttons" href="//{{ host }}/useraccounts/signout">Sign out</a>
+            <a class="headerbuttons" href="//{{ request.get_host }}">Home</a>
+            <a class="headerbuttons" href="//{{ request.get_host }}/useraccounts/username/{{ request.user.username }}">Profile</a>
+            <a class="headerbuttons" href="//{{ request.get_host }}/useraccounts/username/{{ request.user.username }}/edit">Edit profile</a>
+            <a class="headerbuttons" href="//{{ request.get_host }}/useraccounts/signout">Sign out</a>
             {% endif %}
             {% endblock headerbuttons %}
 
