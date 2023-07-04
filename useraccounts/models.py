@@ -10,13 +10,17 @@ class UserAccountManager(UserManager):
     def get_queryset(self) -> QuerySet:
         return super().get_queryset().filter(soft_delete=False)
     
+class DeletedUserAccountManager(UserManager):
+    def get_queryset(self) -> QuerySet:
+        return super().get_queryset().filter(soft_delete=True)
+    
 class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
 
     objects = UserAccountManager()
     objects_all = UserManager()
     
     image = models.FileField(
-        verbose_name=_("User profile picture"),
+        verbose_name=_("Profile picture"),
         upload_to='profilepics/',
         blank=True,
         null=True,
@@ -50,6 +54,12 @@ class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
     class Meta:
         ordering = ['-created_at', '-updated_at']
     
+
+class DeletedUserAccount(UserAccount):
+    objects = DeletedUserAccountManager()
+    
+    class Meta:
+        proxy = True
 
 class Relation(BaseModel, CreateTimeMixin):
     from_user = models.ForeignKey(
