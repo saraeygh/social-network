@@ -141,6 +141,9 @@ class Follow(View):
         from_user = request.user
         to_user = UserAccount.objects.get(username=username)
 
+        if from_user == to_user:
+            return redirect('useraccounts:userprofile', to_user.username)
+
         is_following = Relation.objects.filter(from_user=from_user, to_user=to_user).exists()
         if is_following:
             return redirect('useraccounts:userprofile', to_user.username)
@@ -154,6 +157,9 @@ class Unfollow(View):
 
         from_user = request.user
         to_user = UserAccount.objects.get(username=username)
+
+        if from_user == to_user:
+            return redirect('useraccounts:userprofile', to_user.username)
 
         is_following = Relation.objects.filter(from_user=from_user, to_user=to_user).exists()
         if is_following:
