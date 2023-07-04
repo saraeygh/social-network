@@ -16,8 +16,8 @@
         <p class=name> Following: {{ user.following }} </p>
         <p class=name> Follower: {{ user.follower }} </p>
         <div>
-            <a href="/posts/"><button type="button">Follow</button></a>
-            <a href="/posts/"><button type="button">Unfollow</button></a>
+            <a href="//{{ request.get_host }}/useraccounts/follow/{{ user.username }}"><button type="button">Follow</button></a>
+            <a href="//{{ request.get_host }}/useraccounts/unfollow/{{ user.username }}"><button type="button">Unfollow</button></a>
         </div>
 
 
