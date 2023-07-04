@@ -5,14 +5,18 @@ from .views import (
     SignIn,
     EditUserProfile,
     DeleteAccount,
-    SignOut
+    SignOut,
+    Follow,
+    Unfollow,
     )
 
 app_name = "useraccounts"
 urlpatterns = [
     path('signup/', SignUp.as_view(), name='signup'),
     path('signin/', SignIn.as_view(), name='signin'),
-    path('signout', SignOut.as_view(), name='signout'),
+    path('signout/', SignOut.as_view(), name='signout'),
+    path('follow/<str:username>', Follow.as_view(), name='follow'),
+    path('unfollow/<str:username>', Unfollow.as_view(), name='unfollow'),
 
     path(
         'username/<str:username>/',

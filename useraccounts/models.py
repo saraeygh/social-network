@@ -61,6 +61,7 @@ class DeletedUserAccount(UserAccount):
     class Meta:
         proxy = True
 
+
 class Relation(BaseModel, CreateTimeMixin):
     from_user = models.ForeignKey(
         UserAccount,

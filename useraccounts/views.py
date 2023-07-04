@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
-from .models import UserAccount
+from .models import UserAccount, Relation
 from posts.models import Post
 from .forms import SignUpForm, SignInForm, EditProfileForm
 
@@ -133,3 +133,31 @@ class SignOut(View):
     def get(self, request):
         logout(request)
         return redirect('core:landing')
+
+
+class Follow(View):
+    def get(self, request, username):
+
+        from_user = request.user
+        to_user = UserAccount.objects.get(username=username)
+
+        is_following = Relation.objects.filter(from_user=from_user, to_user=to_user).exists()
+        if is_following:
+            return redirect('useraccounts:userprofile', to_user.username)
+        
+        Relation(from_user=from_user, to_user=to_user).save()
+        return redirect('useraccounts:userprofile', to_user.username)
+
+
+class Unfollow(View):
+    def get(self, request, username):
+
+        from_user = request.user
+        to_user = UserAccount.objects.get(username=username)
+
+        is_following = Relation.objects.filter(from_user=from_user, to_user=to_user).exists()
+        if is_following:
+            Relation.objects.filter(from_user=from_user, to_user=to_user).delete()
+            return redirect('useraccounts:userprofile', to_user.username)
+        
+        return redirect('useraccounts:userprofile', to_user.username)
