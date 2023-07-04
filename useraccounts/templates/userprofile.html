@@ -15,10 +15,12 @@
         <span class=name>Email:</span><span class=content>{{ user.email }}</span>
         <p class=name> Following: {{ user.following }} </p>
         <p class=name> Follower: {{ user.follower }} </p>
+        {% if request.user != user %}
         <div>
             <a href="//{{ request.get_host }}/useraccounts/follow/{{ user.username }}"><button type="button">Follow</button></a>
             <a href="//{{ request.get_host }}/useraccounts/unfollow/{{ user.username }}"><button type="button">Unfollow</button></a>
         </div>
+        {% endif %}
 
 
 
