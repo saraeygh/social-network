@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="signup">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Save">
+    </form>
+</div>
+<div class="signup">
+    <a href="//{{ host }}/useraccounts/username/{{ user.username }}/delete-account">
+        <button type="button">Delete account</button>
+    </a>
+</div>
+<div class="signup">
+    <a href="//{{ host }}/useraccounts/username/{{ user.username }}">
+        <button type="button">Cancel</button>
+    </a>
+</div>
+{% endblock content %}

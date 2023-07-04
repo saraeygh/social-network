@@ -1,13 +1,19 @@
 from django.db import models
+from django.db.models.query import QuerySet
 from core.models import BaseModel, CreateTimeMixin, UpdateTimeMixin
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.utils.translation import gettext_lazy as _
 from uuid import uuid4
 
 
+class UserAccountManager(UserManager):
+    def get_queryset(self) -> QuerySet:
+        return super().get_queryset().filter(soft_delete=False)
+    
 class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
 
-    objects = UserManager()
+    objects = UserAccountManager()
+    objects_all = UserManager()
     
     image = models.FileField(
         verbose_name=_("User profile picture"),
@@ -16,7 +22,7 @@ class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
         null=True,
         )
     bio = models.CharField(
-        verbose_name=_("User short biography"),
+        verbose_name=_("Bio"),
         max_length=160,
         blank=True,
         null=True,
@@ -52,6 +58,7 @@ class Relation(BaseModel, CreateTimeMixin):
         on_delete=models.CASCADE,
         related_name='from_user'
         )
+    
     to_user = models.ForeignKey(
         UserAccount,
         verbose_name=_("to_user"),

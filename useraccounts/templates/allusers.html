@@ -1,0 +1,8 @@
+<ul>
+    <h3>Registered users:</h3>
+    {% for user in users_list %}
+    <div>
+        *  <a href="useraccounts/username/{{ user.username }}">@{{ user.username }}</a>
+    </div>
+    {% endfor %}
+</ul>
