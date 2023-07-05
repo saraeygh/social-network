@@ -1,6 +1,7 @@
 <ul>
     {% for post in posts_list %}
     <div class='post'>
+        <p class='content'>Last update: {{ post.updated_at }}</p>
         <h2>
             <h2 class="post_title">
                 {{ post.title }}
@@ -32,7 +33,8 @@
             </a>
         </p>
         {% endif %}
-        <p class='content'>Last update: {{ post.updated_at }}</p>
+        <p class='content'>Replies:</p>
+        <p class='content'> No reply yet, replies will be implemented here. </p>
     </div>
     {% endfor %}
 </ul>
