@@ -4,7 +4,15 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
 
+class ReactionManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().all()
+
+
 class Reaction(models.Model):
+    
+    objects = ReactionManager()
+
     LIKE = 'LIKE'
     DISLIKE = 'DISLIKE'
 
@@ -30,12 +38,11 @@ class Reaction(models.Model):
         verbose_name=_("Created at:"),
         auto_now_add=True
         )
-    
+
     updated_at = models.DateTimeField(
         verbose_name=_("Updated at:"),
         auto_now=True
         )
-    
-    
+
     def __str__(self) -> str:
         return f"{self.reaction_status}"

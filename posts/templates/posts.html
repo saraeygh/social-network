@@ -3,15 +3,36 @@
     <div class='post'>
         <h2>
             <h2 class="post_title">
-                Title: {{ post.title }}
+                {{ post.title }}
             </h2>
         </h2>
         <span class='username'>
-            Posted by: @{{ post.user }}
+            By: @{{ post.user }}
         </span>
         <p class='content'>
             {{ post.content }}
         </p>
+        
+        {% if request.user.is_anonymous %}
+        <p class='content'>
+            <a href="//{{ request.get_host }}/posts/{{post.id}}/like">
+                Likes: {{ post.likes }}
+            </a> | 
+            <a href="//{{ request.get_host }}/posts/{{post.id}}/dislike">
+                Disikes: {{ post.dislikes }}
+            </a>
+        </p>
+        {% else %}
+        <p class='content'>
+            <a href="//{{ request.get_host }}/posts/{{post.id}}/like">
+                Likes: {{ post.likes }}
+            </a> | 
+            <a href="//{{ request.get_host }}/posts/{{post.id}}/dislike">
+                Disikes: {{ post.dislikes }}
+            </a>
+        </p>
+        {% endif %}
+        <p class='content'>Last update: {{ post.updated_at }}</p>
     </div>
     {% endfor %}
 </ul>
