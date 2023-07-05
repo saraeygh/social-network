@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import UserAccount, Relation
 from posts.models import Post
 from .forms import SignUpForm, SignInForm, EditProfileForm
@@ -79,7 +80,7 @@ class SignIn(View):
         return render(request, 'signin.html', context)
 
 
-class UserProfile(View):
+class UserProfile(LoginRequiredMixin, View):
     def get(self, request, username):
         user = UserAccount.objects.get(username=username)
         user_posts = Post.objects.filter(user=user.id)
@@ -93,7 +94,7 @@ class UserProfile(View):
             )
     
 
-class EditUserProfile(View):
+class EditUserProfile(LoginRequiredMixin, View):
     def get(self, request, username):
         user = UserAccount.objects.get(username=username)
         form = EditProfileForm(
@@ -120,7 +121,7 @@ class EditUserProfile(View):
             return redirect('useraccounts:userprofile', user)
 
 
-class DeleteAccount(View):
+class DeleteAccount(LoginRequiredMixin, View):
     def get(self, request, username):
         user = UserAccount.objects.get(username=username)
         user.soft_delete = True
@@ -129,13 +130,13 @@ class DeleteAccount(View):
         return redirect('core:landing')
 
 
-class SignOut(View):
+class SignOut(LoginRequiredMixin, View):
     def get(self, request):
         logout(request)
         return redirect('core:landing')
 
 
-class Follow(View):
+class Follow(LoginRequiredMixin, View):
     def get(self, request, username):
 
         from_user = request.user
@@ -152,7 +153,7 @@ class Follow(View):
         return redirect('useraccounts:userprofile', to_user.username)
 
 
-class Unfollow(View):
+class Unfollow(LoginRequiredMixin, View):
     def get(self, request, username):
 
         from_user = request.user
