@@ -29,17 +29,56 @@
         <ul>
             {% for user_post in user_posts %}
             <div class='post'>
+                <p class='content'>Last update: {{ user_post.updated_at }}</p>
                 <h2>
                     <h2 class="post_title">
                         Title: {{ user_post.title }}
                     </h2>
                 </h2>
                 <span class='username'>
-                    Posted by: @{{ user_post.user }}
+                    By: @{{ user_post.user }}
                 </span>
                 <p class='content'>
                     {{ user_post.content }}
                 </p>
+
+                {% if request.user == user_post.user %}
+                <p class='content'>
+                    <a>
+                        Likes: {{ user_post.likes }}
+                    </a> | 
+                    <a>
+                        Dislikes: {{ user_post.dislikes }}
+                    </a>
+                </p>
+                {% else %}
+                <p class='content'>
+                    <a href="//{{ request.get_host }}/posts/{{user_post.id}}/like">
+                        Likes: {{ user_post.likes }}
+                    </a> | 
+                    <a href="//{{ request.get_host }}/posts/{{user_post.id}}/dislike">
+                        Dislikes: {{ user_post.dislikes }}
+                    </a>
+                </p>
+
+                {% endif %}
+                
+                {% if request.user == user_post.user %}
+                <div class='content'>
+                    <button>
+                        <a href="//{{ request.get_host }}/posts/editpost/{{user_post.id}}">
+                            Edit
+                        </a>
+                    </button>
+
+                    <button>
+                        <a href="//{{ request.get_host }}/posts/editpost/{{ user_post.id }}/delete">Delete</a>
+                    </button>
+                </div>
+                {% endif %}
+                <div class="signup">
+                    
+                </div>
             </div>
             {% endfor %}
         </ul>

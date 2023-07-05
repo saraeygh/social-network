@@ -2,11 +2,12 @@ from django.shortcuts import render
 from django.views import View
 from posts.models import Post
 from useraccounts.models import UserAccount
+from reaction.models import Reaction
 
 
 class LandingPageView(View):
-    
-    def get(self, request):      
+
+    def get(self, request):
         posts_list = Post.objects.all()
         users_list = UserAccount.objects.all()
 

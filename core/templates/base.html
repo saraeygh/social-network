@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>
-        {% block title %} Social network{% endblock title %} Social network
+        {% block title %} Social network{% endblock title %}
     </title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
@@ -25,6 +25,7 @@
             <a class="headerbuttons" href="//{{ request.get_host }}/useraccounts/username/{{ request.user.username }}">Profile</a>
             <a class="headerbuttons" href="//{{ request.get_host }}/useraccounts/username/{{ request.user.username }}/edit">Edit profile</a>
             <a class="headerbuttons" href="//{{ request.get_host }}/useraccounts/signout">Sign out</a>
+            <a class="headerbuttons" href="//{{ request.get_host }}/posts/newpost">New post</a>
             {% endif %}
             {% endblock headerbuttons %}
 
