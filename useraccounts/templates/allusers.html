@@ -1,8 +1,8 @@
-<ul>
+<div class="grid text-left">
     <h3>Registered users:</h3>
     {% for user in users_list %}
-    <div>
-        *  <a href="useraccounts/username/{{ user.username }}">- {{ user.username }}</a>
-    </div>
+    <li>
+        <a class="btn btn-light" href="useraccounts/username/{{ user.username }}">{{ user.username }}</a>
+    </li>
     {% endfor %}
-</ul>
+</div>

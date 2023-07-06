@@ -2,13 +2,15 @@
 
 {% block content %}
 
-<div class="homepage">
-    <div class="allusers">
+<div class="container text-left">
+    <div class="row">
+      <div class="col-3">
         {% include 'allusers.html' %}
-    </div>
-    <div class="posts">
+      </div>
+      <div class="col-9">
         {% include 'posts.html' %}
-    </div>    
-</div>
+      </div>
+    </div>
+  </div>
 
 {% endblock content %}

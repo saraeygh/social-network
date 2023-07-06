@@ -1,40 +1,46 @@
-<ul>
+<div>
     {% for post in posts_list %}
-    <div class='post'>
-        <p class='content'>Last update: {{ post.updated_at }}</p>
-        <h2>
-            <h2 class="post_title">
-                {{ post.title }}
-            </h2>
-        </h2>
-        <span class='username'>
-            By: @{{ post.user }}
-        </span>
-        <p class='content'>
-            {{ post.content }}
-        </p>
-        
-        {% if request.user.is_anonymous %}
-        <p class='content'>
-            <a href="//{{ request.get_host }}/posts/{{post.id}}/like">
-                Likes: {{ post.likes }}
-            </a> | 
-            <a href="//{{ request.get_host }}/posts/{{post.id}}/dislike">
-                Disikes: {{ post.dislikes }}
-            </a>
-        </p>
-        {% else %}
-        <p class='content'>
-            <a href="//{{ request.get_host }}/posts/{{post.id}}/like">
-                Likes: {{ post.likes }}
-            </a> | 
-            <a href="//{{ request.get_host }}/posts/{{post.id}}/dislike">
-                Disikes: {{ post.dislikes }}
-            </a>
-        </p>
-        {% endif %}
-        <p class='content'>Replies:</p>
-        <p class='content'> No reply yet, replies will be implemented here. </p>
-    </div>
+    <div class="container text-left">
+        <div class="row border border-primary rounded p-1">
+            <div class="col">
+                <div>
+                    <p class="fw-lighter">Last update: {{ post.updated_at }}</p>
+                    <h2 class="display-2">
+                        <h2 class="post_title">
+                            {{ post.title }}
+                        </h2>
+                    </h2>
+                    <span class='badge bg-primary text-wrap'>
+                        By: @{{ post.user }}
+                    </span>
+                    <p>
+                        {{ post.content }}
+                    </p>
+                    
+                    {% if request.user.is_anonymous %}
+                    <p class='content'>
+                        <a href="//{{ request.get_host }}/posts/{{post.id}}/like">
+                            {{ post.likes }} Like 👍  
+                        </a> | 
+                        <a href="//{{ request.get_host }}/posts/{{post.id}}/dislike">
+                            {{ post.dislikes }} Dislike 👎 
+                        </a>
+                    </p>
+                    {% else %}
+                    <p class='content'>
+                        <a href="//{{ request.get_host }}/posts/{{post.id}}/like">
+                            {{ post.likes }} Like 👍
+                        </a> | 
+                        <a href="//{{ request.get_host }}/posts/{{post.id}}/dislike">
+                            {{ post.dislikes }} Dislike 👎
+                        </a>
+                    </p>
+                    {% endif %}
+                    <p class='fs-5'> 🗣 Replies:</p>
+                    <p class='content'> No reply yet, replies will be implemented here. </p>
+                </div>
+            </div>
+        </div>
+    </div>    
     {% endfor %}
-</ul>
+</div>
