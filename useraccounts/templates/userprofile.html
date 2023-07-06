@@ -1,43 +1,43 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
-<div class="profilepage">
-    <div class="userprofile">
-        {% if user.image %}
-        <img src="{{ MEDIA_URL }}/{{ user.image }}" class="profilepic"/>
-        {% else %}
-        <img src="{{ MEDIA_URL }}/profilepics/default.jpg" class="profilepic"/>
-        {% endif %}
-        <p class=name> {{ user.first_name }} {{ user.last_name }}</p>
-        <p class=username> @{{ user.username }}</p>
-        <p class=name> Bio:</p>
-        <p class=content> {{ user.bio }}</p>
-        <span class=name>Email:</span><span class=content>{{ user.email }}</span>
-        <p class=name> Following: {{ user.following }} </p>
-        <p class=name> Follower: {{ user.follower }} </p>
-        {% if request.user != user %}
-        <div>
-            <a href="//{{ request.get_host }}/useraccounts/follow/{{ user.username }}"><button type="button">Follow</button></a>
-            <a href="//{{ request.get_host }}/useraccounts/unfollow/{{ user.username }}"><button type="button">Unfollow</button></a>
+<div class="container text-left">
+    <div class="row">
+        <div class="col-3">
+            {% if user.image %}
+            <img src="{{ MEDIA_URL }}/{{ user.image }}" class="img-thumbnail rounded float-start"/>
+            {% else %}
+            <img src="{{ MEDIA_URL }}/profilepics/default.jpg" class="img-thumbnail rounded float-start"/>
+            {% endif %}
+            <p class="fs-1"> {{ user.first_name }} {{ user.last_name }}</p>
+            <p class="badge bg-primary text-wrap"> @{{ user.username }}</p>
+            <p class="fs-3"> Bio:</p>
+            <p class=content> {{ user.bio }}</p>
+            <p class=name> Following: {{ user.following }} | Follower: {{ user.follower }} </p>
+            {% if request.user != user %}
+            <div>
+                <a href="//{{ request.get_host }}/useraccounts/follow/{{ user.username }}">
+                    <button type="button" class="btn btn-success">Follow</button>
+                </a>
+                <a href="//{{ request.get_host }}/useraccounts/unfollow/{{ user.username }}">
+                    <button type="button" class="btn btn-danger">Unfollow</button>
+                </a>
+                <p></p>
+            </div>
+            {% endif %}
         </div>
-        {% endif %}
-
-
-
-    </div>
-    <div class="useractivity">
-        <ul>
+        
+        <div class="col-9">
             {% for user_post in user_posts %}
-            <div class='post'>
-                <p class='content'>Last update: {{ user_post.updated_at }}</p>
-                <h2>
-                    <h2 class="post_title">
-                        Title: {{ user_post.title }}
-                    </h2>
+            <div class='row border border-primary rounded p-1'>
+                <p class='fw-lighter'>Last update: {{ user_post.updated_at }}</p>
+                <h2 class="post_title">
+                    {{ user_post.title }}
                 </h2>
-                <span class='username'>
-                    By: @{{ user_post.user }}
-                </span>
+                <div>
+                    <p class='badge bg-primary text-wrap'>By: @{{ user_post.user }}</p>
+                </div>
                 <p class='content'>
                     {{ user_post.content }}
                 </p>
@@ -45,19 +45,19 @@
                 {% if request.user == user_post.user %}
                 <p class='content'>
                     <a>
-                        Likes: {{ user_post.likes }}
+                        {{ post.likes }} Like 👍
                     </a> | 
                     <a>
-                        Dislikes: {{ user_post.dislikes }}
+                        {{ post.dislikes }} Dislike 👎
                     </a>
                 </p>
                 {% else %}
                 <p class='content'>
                     <a href="//{{ request.get_host }}/posts/{{user_post.id}}/like">
-                        Likes: {{ user_post.likes }}
+                        {{ post.likes }} Like 👍
                     </a> | 
                     <a href="//{{ request.get_host }}/posts/{{user_post.id}}/dislike">
-                        Dislikes: {{ user_post.dislikes }}
+                        {{ post.dislikes }} Dislike 👎
                     </a>
                 </p>
 
@@ -65,23 +65,20 @@
                 
                 {% if request.user == user_post.user %}
                 <div class='content'>
-                    <button>
+                    <button class="btn btn-outline-warning">
                         <a href="//{{ request.get_host }}/posts/editpost/{{user_post.id}}">
-                            Edit
+                            ✏️ Edit
                         </a>
                     </button>
-
-                    <button>
-                        <a href="//{{ request.get_host }}/posts/editpost/{{ user_post.id }}/delete">Delete</a>
+                    <button class="btn btn-outline-danger">
+                        <a href="//{{ request.get_host }}/posts/editpost/{{ user_post.id }}/delete"> 🗑️ Delete</a>
                     </button>
                 </div>
-                {% endif %}
-                <div class="signup">
-                    
-                </div>
+                    {% endif %}
             </div>
             {% endfor %}
-        </ul>
+        </div>
     </div>
 </div>
+
 {% endblock content %}
