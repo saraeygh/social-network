@@ -1,3 +1,3 @@
-core/templates/*
-posts/templates/*
-useraccounts/templates/*
+core/templates/* linguist-vendored
+posts/templates/* linguist-vendored
+useraccounts/templates/* linguist-vendored
