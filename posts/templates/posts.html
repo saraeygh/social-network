@@ -36,8 +36,13 @@
                         </a>
                     </p>
                     {% endif %}
-                    <p class='fs-5'> 🗣 Replies:</p>
-                    <p class='content'> No reply yet, replies will be implemented here. </p>
+                    <p class='content'>
+                        <a href="//{{ request.get_host }}/posts/post/{{ post.post_slug }}">
+                            <button class="btn btn-primary">
+                                View full post
+                            </button>
+                        </a>
+                    </p>
                 </div>
             </div>
         </div>

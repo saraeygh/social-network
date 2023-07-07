@@ -167,3 +167,14 @@ class DislikePost(LoginRequiredMixin, View):
         new_reaction.save()
         return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
+
+class SinglePost(View):
+
+    def get(self, request, post_slug):
+        single_post = Post.objects.filter(post_slug=post_slug)
+
+        context = {
+            "single_post": single_post,
+        }
+
+        return render(request, 'singlepost.html', context)

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    {% for post_detail in single_post %}
+    <div class="container text-left">
+        <div class="row border border-primary rounded p-1">
+            <div class="col">
+                <div>
+                    <p class="fw-lighter">Last update: {{ post_detail.updated_at }}</p>
+                    <h2 class="display-2">
+                        <h2 class="post_title">
+                            {{ post_detail.title }}
+                        </h2>
+                    </h2>
+                    <span class='badge bg-primary text-wrap'>
+                        By: @{{ post_detail.user }}
+                    </span>
+                    <p>
+                        {{ post_detail.content }}
+                    </p>
+                    
+                    {% if request.user.is_anonymous %}
+                    <p class='content'>
+                        <a href="//{{ request.get_host }}/posts/{{post_detail.id}}/like">
+                            {{ post_detail.likes }} Like 👍  
+                        </a> | 
+                        <a href="//{{ request.get_host }}/posts/{{post_detail.id}}/dislike">
+                            {{ post_detail.dislikes }} Dislike 👎 
+                        </a>
+                    </p>
+                    {% else %}
+                    <p class='content'>
+                        <a href="//{{ request.get_host }}/posts/{{post_detail.id}}/like">
+                            {{ post_detail.likes }} Like 👍
+                        </a> | 
+                        <a href="//{{ request.get_host }}/posts/{{post_detail.id}}/dislike">
+                            {{ post_detail.dislikes }} Dislike 👎
+                        </a>
+                    </p>
+                    {% endif %}
+                    <p class='fs-5'> 🗣 Replies:</p>
+                    
+                    {% for reply in post_detail.replies %}
+                    <div class='container p-3 border border-info'>
+                        <span class="badge bg-primary text-wrap">
+                            @{{ reply.user }}:
+                        </span> {{ reply.content }}
+                        
+                        {% for nested_reply in post_detail.nested_replies %}
+                            {% if nested_reply != None and nested_reply.reply_id_id == reply.id %}
+                                <div class='container p-3'>
+                                    <span class="badge bg-primary text-wrap">
+                                        @{{ nested_reply.user }}:
+                                    </span> {{ nested_reply.content }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>    
+    {% endfor %}
+</div>
+{% endblock content %}
