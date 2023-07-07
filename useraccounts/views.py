@@ -80,7 +80,7 @@ class SignIn(View):
         return render(request, 'signin.html', context)
 
 
-class UserProfile(LoginRequiredMixin, View):
+class UserProfile(View):
     def get(self, request, username):
         user = UserAccount.objects.get(username=username)
         user_posts = Post.objects.filter(user=user.id)

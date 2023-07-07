@@ -12,9 +12,11 @@
                             {{ post.title }}
                         </h2>
                     </h2>
-                    <span class='badge bg-primary text-wrap'>
-                        By: @{{ post.user }}
-                    </span>
+                    <a href="//{{ request.get_host }}/useraccounts/username/{{ post.user.username }}/">
+                        <span class='badge bg-primary text-wrap'>
+                            By: @{{ post.user }}
+                        </span>
+                    </a>
                     <p>
                         {{ post.content }}
                     </p>
