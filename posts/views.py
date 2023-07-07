@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from reaction.models import Reaction
-from .forms import PostForm, ImageFormSet
-from .models import Post, Image
+from .forms import PostForm, ImageFormSet, ReplyFrom
+from .models import Post, Reply, Image
 from django.utils.text import slugify
 
 
@@ -172,9 +172,42 @@ class SinglePost(View):
 
     def get(self, request, post_slug):
         single_post = Post.objects.filter(post_slug=post_slug)
+        
+        reply_form = ReplyFrom(
+            initial={
+                    'user': request.user,
+                    'post_id': list(single_post)[0],
+                }
+        )
 
         context = {
             "single_post": single_post,
+            'reply_form': reply_form,
         }
 
         return render(request, 'singlepost.html', context)
+    
+    def post(self, request, post_slug):
+        form = ReplyFrom(request.POST)
+
+        if form.is_valid():
+            form = form.cleaned_data
+
+            content = form['content']
+            user = form['user']
+            post_id = form['post_id']
+            reply_id = form['reply_id']
+            
+            new_reply = Reply.objects.create(
+                content=content,
+                user=user,
+                post_id=post_id,
+                reply_id=reply_id,
+            )
+
+            new_reply.save()
+
+            return redirect('posts:singlepost', post_slug)
+        
+        else:
+            return render(request, 'posts:singlepost', post_slug)

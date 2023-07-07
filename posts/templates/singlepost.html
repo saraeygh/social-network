@@ -55,9 +55,19 @@
                 </div>
             </div>
 
-
+            {% if request.user.is_anonymous %}
+            {% else %}
+            <div class="form-control">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p> Your Reply: </p>
+                    {{ reply_form.as_table }} 
+                    <input type="submit" value="Submit reply" class="btn btn-primary">
+                </form>
+            </div>
+            {% endif %}
+            
             <div class='fs-5'> 🗣 Replies:</div>
-                    
                     {% for reply in post_detail.replies %}
                     <div class='container p-3 border border-info'>
                         <span class="badge bg-primary text-wrap">

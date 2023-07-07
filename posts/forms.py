@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import inlineformset_factory
-from .models import Post, Image
+from .models import Post, Reply, Image
 
 
 class PostForm(forms.ModelForm):
@@ -14,6 +14,16 @@ class PostForm(forms.ModelForm):
             'post_slug': forms.HiddenInput(),
             'soft_delete': forms.HiddenInput(),
         }
+
+
+class ReplyFrom(forms.ModelForm):
+
+    class Meta:
+        model = Reply
+        fields = "__all__"
+        exclude = [
+            'soft_delete',
+        ]
 
 
 class ImageForm(forms.ModelForm):
