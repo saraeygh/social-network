@@ -68,7 +68,7 @@ class PostAdmin(admin.ModelAdmin):
 @admin.register(Reply)
 class ReplyAdmin(admin.ModelAdmin):
     inlines = [ReplyInLine, ReactionInLine]
-    list_display = ['user', 'reply_to', 'created_at', 'updated_at']
+    list_display = ['user','reply_to_post', 'reply_to_reply', 'content', 'updated_at']
     search_fields = ['user', 'content']
     ordering = ['user', 'created_at', 'updated_at']
     list_per_page = 10
@@ -85,5 +85,8 @@ class ReplyAdmin(admin.ModelAdmin):
         }),
     )
 
-    def reply_to(self, reply):
+    def reply_to_post(self, reply):
         return reply.post_id
+    
+    def reply_to_reply(self, reply):
+        return reply.reply_id

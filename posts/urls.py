@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import NewPost, EditPost, DeletePost, LikePost, DislikePost
+from .views import NewPost, EditPost, DeletePost, LikePost, DislikePost, SinglePost
 from django.urls import path
 
 
@@ -11,4 +11,5 @@ urlpatterns = [
     path('newpost/', NewPost.as_view(), name='newpost'),
     path('editpost/<int:id>/', EditPost.as_view(), name='editpost'),
     path('editpost/<int:id>/delete', DeletePost.as_view(), name='deletepost'),
+    path('post/<str:post_slug>/', SinglePost.as_view(), name='singlepost'),
 ]

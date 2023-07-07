@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from core.models import BaseModel, CreateTimeMixin, UpdateTimeMixin
 from useraccounts.models import UserAccount
 from reaction.models import Reaction
+from django.db.models import Q
 
 
 class Post(BaseModel, CreateTimeMixin, UpdateTimeMixin):
@@ -25,6 +26,12 @@ class Post(BaseModel, CreateTimeMixin, UpdateTimeMixin):
         verbose_name=_("post slug"),
         unique=True,
         )
+    
+    def replies(self):
+        return Reply.objects.filter(post_id=self.id).filter(reply_id_id=None)
+    
+    def nested_replies(self):
+        return Reply.objects.filter(post_id=self.id).filter(~Q(reply_id_id=None))
 
     def replies_count(self):
         return Reply.objects.filter(post_id=self.id).count()
@@ -84,7 +91,7 @@ class Reply(BaseModel, CreateTimeMixin, UpdateTimeMixin):
         )
     
     def __str__(self) -> str:
-        return f"Reply to: {self.post_id}"
+        return f"{self.content}"
     
     class Meta:
         ordering = ['-created_at', '-updated_at']
