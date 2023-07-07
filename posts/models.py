@@ -32,6 +32,9 @@ class Post(BaseModel, CreateTimeMixin, UpdateTimeMixin):
     
     def nested_replies(self):
         return Reply.objects.filter(post_id=self.id).filter(~Q(reply_id_id=None))
+    
+    def images(self):
+        return Image.objects.filter(post_id=self.id)
 
     def replies_count(self):
         return Reply.objects.filter(post_id=self.id).count()
