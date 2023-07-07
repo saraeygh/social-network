@@ -1,5 +1,7 @@
 <div>
     {% for post in posts_list %}
+    {% if post.user.soft_delete == True %}
+    {% else %}
     <div class="container text-left">
         <div class="row border border-primary rounded p-1">
             <div class="col">
@@ -47,5 +49,6 @@
             </div>
         </div>
     </div>    
+    {% endif %}
     {% endfor %}
 </div>
