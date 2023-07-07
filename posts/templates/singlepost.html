@@ -39,7 +39,24 @@
                         </a>
                     </p>
                     {% endif %}
-                    <p class='fs-5'> 🗣 Replies:</p>
+                    
+
+                    {% if post_detail.images != None %}
+                    <div>
+                        {% for image in post_detail.images  %}
+                        <div>
+                            <a href="{{ MEDIA_URL }}/{{ image.image }}">
+                                <img src="{{ MEDIA_URL }}/{{ image.image }}" class="img-thumbnail rounded float-start" width="300" height="300"/>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+
+            <div class='fs-5'> 🗣 Replies:</div>
                     
                     {% for reply in post_detail.replies %}
                     <div class='container p-3 border border-info'>
@@ -59,9 +76,6 @@
                     
                     </div>
                     {% endfor %}
-
-                </div>
-            </div>
         </div>
     </div>    
     {% endfor %}
