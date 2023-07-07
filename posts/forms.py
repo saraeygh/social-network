@@ -25,6 +25,12 @@ class ReplyFrom(forms.ModelForm):
             'soft_delete',
         ]
 
+        widgets = {
+            'user': forms.HiddenInput(),
+            'post_id': forms.HiddenInput(),
+            'reply_id': forms.HiddenInput(),
+        }
+
 
 class ImageForm(forms.ModelForm):
     
