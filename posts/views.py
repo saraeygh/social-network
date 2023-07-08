@@ -45,9 +45,7 @@ class NewPost(LoginRequiredMixin, View):
             new_post.save()
             
             formset = formset.cleaned_data
-            print(formset)
             for image in formset:
-                print(image)
                 if image:
                     uoloaded_image = image['image']
                     alt_text = image['alt_text']
