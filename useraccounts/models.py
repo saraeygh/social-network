@@ -34,7 +34,6 @@ class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
     
     user_slug = models.SlugField(
         verbose_name=_("User slug"),
-        unique=True,
         default=uuid4().hex,
         )
 

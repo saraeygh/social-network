@@ -36,10 +36,16 @@ class ImageForm(forms.ModelForm):
     
     class Meta:
         model = Image
-        fields = "__all__"
+        fields = [
+            'image',
+            'alt_text'
+        ]
 
 
 ImageFormSet = inlineformset_factory(
-    Post, Image, form=ImageForm,
-    extra=1, can_delete=True, can_delete_extra=True
+    Post,
+    Image,
+    form=ImageForm,
+    extra=3,
+    can_delete=True,
 )

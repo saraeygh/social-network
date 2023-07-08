@@ -15,6 +15,7 @@ class UserAccountAdmin(UserAdmin):
             "fields": (
                 'username',
                 'password',
+                'user_slug',
             ),
         }),
         ('Change user info', {
