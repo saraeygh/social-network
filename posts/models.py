@@ -24,7 +24,6 @@ class Post(BaseModel, CreateTimeMixin, UpdateTimeMixin):
 
     post_slug = models.SlugField(
         verbose_name=_("post slug"),
-        unique=True,
         )
     
     def replies(self):
@@ -55,7 +54,6 @@ class Post(BaseModel, CreateTimeMixin, UpdateTimeMixin):
 
 class Image(BaseModel, CreateTimeMixin, UpdateTimeMixin):
     image = models.FileField(
-        verbose_name=_("Post image(s)"),
         upload_to='postpic/',
         max_length=100)
     alt_text = models.TextField(verbose_name=_("Image alt"))
@@ -64,7 +62,6 @@ class Image(BaseModel, CreateTimeMixin, UpdateTimeMixin):
         verbose_name=_("Post"),
         on_delete=models.CASCADE,
         )
-    
     
     def __str__(self) -> str:
         return f"ALT: {self.alt_text}"

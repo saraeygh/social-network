@@ -16,13 +16,19 @@ class NewPost(LoginRequiredMixin, View):
                 'post_slug': 'slug',
             }
         )
-        context = {'form': form}
+        formset = ImageFormSet()
+        context = {
+            'form': form,
+            'formset': formset,
+            }
         return render(request, 'new_post.html', context)
     
     def post(self, request):
-        form = PostForm(request.POST, request.FILES)
+        form = PostForm(request.POST, instance=Post())
+        formset = ImageFormSet(request.POST, request.FILES)
 
-        if form.is_valid():
+        if form.is_valid() and formset.is_valid():
+
             form = form.cleaned_data
             title = form['title']
             content = form['content']
@@ -37,6 +43,22 @@ class NewPost(LoginRequiredMixin, View):
             )
 
             new_post.save()
+            
+            formset = formset.cleaned_data
+            print(formset)
+            for image in formset:
+                print(image)
+                if image:
+                    uoloaded_image = image['image']
+                    alt_text = image['alt_text']
+                    post_id = new_post
+
+                    new_iamge = Image.objects.create(
+                        image=uoloaded_image,
+                        alt_text=alt_text,
+                        post_id=post_id,
+                    )
+                    new_iamge.save()
 
             username = request.user
             return redirect('useraccounts:userprofile', username)
@@ -170,8 +192,8 @@ class DislikePost(LoginRequiredMixin, View):
 
 class SinglePost(View):
 
-    def get(self, request, post_slug):
-        single_post = Post.objects.filter(post_slug=post_slug)
+    def get(self, request, id, post_slug):
+        single_post = Post.objects.filter(id=id)
         
         reply_form = ReplyFrom(
             initial={

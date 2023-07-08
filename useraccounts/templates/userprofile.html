@@ -65,7 +65,7 @@
                 
                 {% if request.user == user_post.user %}
                 <div class='content'>
-                    <a href="//{{ request.get_host }}/posts/post/{{ user_post.post_slug }}">
+                    <a href="//{{ request.get_host }}/posts/post/{{ user_post.id }}/{{ user_post.post_slug }}">
                         <button class="btn btn-primary">
                             View full post
                         </button>
