@@ -5,9 +5,9 @@
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <div>
+        <div class="fs-4">
             Post Images:
-        </div>        
+        </div>           
         {{ formset.as_p }}
         <div>
             <input type="submit" value="Submit" class="btn btn-primary">

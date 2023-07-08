@@ -48,12 +48,10 @@ class NewPost(LoginRequiredMixin, View):
             for image in formset:
                 if image:
                     uoloaded_image = image['image']
-                    alt_text = image['alt_text']
                     post_id = new_post
 
                     new_iamge = Image.objects.create(
                         image=uoloaded_image,
-                        alt_text=alt_text,
                         post_id=post_id,
                     )
                     new_iamge.save()
