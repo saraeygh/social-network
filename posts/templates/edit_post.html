@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-control">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ image_form.as_p }}
+        
+
+        <div class="container text-left">
+            {% if edit_post.images != None %}
+            {% for image in edit_post.images  %}
+            <div class="row">
+              <div class="col">
+                    <div>
+                        <a href="{{ MEDIA_URL }}/{{ image.image }}">
+                            <img src="{{ MEDIA_URL }}/{{ image.image }}" class="img-thumbnail rounded float-start" width="100" height="100"/>
+                        </a>
+                        <a href="//{{ request.get_host }}/posts/editpost/{{ image.post_id_id}}/delete/{{ image.id }}">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %} 
+        </div>
+
+
+        <div class="fs-3">
+            Add new images:
+        </div>
+            {{ formset.as_p }}
+        <div>
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </div>
+    </form>
+
+</div>
+{% endblock content %}

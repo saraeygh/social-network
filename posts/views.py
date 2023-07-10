@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from reaction.models import Reaction
-from .forms import PostForm, ImageFormSet, ReplyFrom
+from .forms import PostForm, ImageFormSet, ReplyFrom, ImageForm
 from .models import Post, Reply, Image
 from django.utils.text import slugify
 
@@ -62,8 +62,10 @@ class NewPost(LoginRequiredMixin, View):
         else:
             errors = form.errors
             form = PostForm()
+            formset = ImageFormSet()
             context = {
                 'form': form,
+                'formset': formset,
                 'errors': errors,
                 }
             return render(request, 'new_post.html', context)
@@ -74,7 +76,7 @@ class EditPost(LoginRequiredMixin, View):
     def get(self, request, id):
         edit_post = Post.objects.get(id=id)
         
-        if request.user == edit_post.user:
+        if request.user.id == edit_post.user.id:
 
             form = PostForm(
                 initial={
@@ -84,19 +86,38 @@ class EditPost(LoginRequiredMixin, View):
                     'post_slug': edit_post.post_slug,
                 }
             )
-            context = {'form': form}
-            return render(request, 'new_post.html', context)
-        else:
-            return redirect(
-                request.META.get('HTTP_REFERER', 'core:landing')
-                )
+                        
+            formset = ImageFormSet()
+
+            context = {
+                'form': form,
+                'formset': formset,
+                'edit_post': edit_post,
+                }
+            
+            return render(request, 'edit_post.html', context)
+        
+        return redirect('useraccounts:signin')
         
     def post(self, request, id):
         edited_post = Post.objects.get(id=id)
-        form = PostForm(request.POST, request.FILES, instance=edited_post)
+        form = PostForm(request.POST, instance=edited_post)
+        formset = ImageFormSet(request.POST, request.FILES)
 
-        if form.is_valid():
+        if form.is_valid() and formset.is_valid():
             form.save()
+
+            formset = formset.cleaned_data
+            for image in formset:
+                if image:
+                    uoloaded_image = image['image']
+                    post_id = edited_post
+
+                    new_iamge = Image.objects.create(
+                        image=uoloaded_image,
+                        post_id=post_id,
+                    )
+                    new_iamge.save()
 
             username = request.user
             return redirect('useraccounts:userprofile', username)
@@ -116,8 +137,24 @@ class DeletePost(LoginRequiredMixin, View):
     def get(self, request, id):
         delete_post = Post.objects.get(id=id)
         
-        delete_post.delete()
-        return redirect('useraccounts:userprofile', request.user.username)
+        if request.user.id == delete_post.user.id:
+            delete_post.delete()
+            return redirect('useraccounts:userprofile', request.user.username)
+        
+        return redirect('useraccounts:signin')
+    
+
+class DeletePostImage(LoginRequiredMixin, View):
+    
+    def get(self, request, id, image_id):
+        post = Post.objects.get(id=id)
+        image = Image.objects.get(id=image_id)
+        
+        if request.user.id == post.user.id:
+            image.delete()
+            return redirect('posts:editpost', post.id)
+        
+        return redirect('useraccounts:signin')
 
 
 class LikePost(LoginRequiredMixin, View):

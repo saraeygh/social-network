@@ -57,6 +57,7 @@ class Image(BaseModel, CreateTimeMixin, UpdateTimeMixin):
         upload_to='postpic/',
         max_length=100)
     alt_text = models.TextField(verbose_name=_("Image alt"))
+    
     post_id = models.ForeignKey(
         Post,
         verbose_name=_("Post"),
