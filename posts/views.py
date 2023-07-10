@@ -114,15 +114,10 @@ class EditPost(LoginRequiredMixin, View):
 class DeletePost(LoginRequiredMixin, View):
     
     def get(self, request, id):
-        edit_post = Post.objects.get(id=id)
+        delete_post = Post.objects.get(id=id)
         
-        if request.user == edit_post.user:
-            edit_post.delete()
-            return redirect(request, 'useraccounts:userprofile', request.user.username)
-        else:
-            return redirect(
-                request.META.get('HTTP_REFERER', 'core:landing')
-                )
+        delete_post.delete()
+        return redirect('useraccounts:userprofile', request.user.username)
 
 
 class LikePost(LoginRequiredMixin, View):

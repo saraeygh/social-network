@@ -21,7 +21,8 @@
             </div>    
             
             {% block headerbuttons %}
-            {% if user.is_anonymous %}
+            
+            {% if request.user.is_anonymous %}
             <a class="btn btn-primary" href="//{{ request.get_host }}"> 🏠 Home</a>
             <a class="btn btn-success" href="//{{ request.get_host }}/useraccounts/signup/">Sign up</a>
             <a class="btn btn-success" href="//{{ request.get_host }}/useraccounts/signin/">Sign in</a>
@@ -32,6 +33,7 @@
             <a class="btn btn-danger" href="//{{ request.get_host }}/useraccounts/signout">Sign out</a>
             <a class="btn btn-info" href="//{{ request.get_host }}/posts/newpost">New post</a>
             {% endif %}
+            
             {% endblock headerbuttons %}
         </div>
        

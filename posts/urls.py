@@ -1,7 +1,12 @@
 from django.urls import path
-from .views import NewPost, EditPost, DeletePost, LikePost, DislikePost, SinglePost
-from django.urls import path
-
+from .views import (
+    NewPost,
+    EditPost,
+    DeletePost,
+    LikePost,
+    DislikePost,
+    SinglePost
+)
 
 app_name = 'posts'
 urlpatterns = [

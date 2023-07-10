@@ -81,9 +81,11 @@ class SignIn(View):
 
 
 class UserProfile(View):
+
     def get(self, request, username):
         user = UserAccount.objects.get(username=username)
         user_posts = Post.objects.filter(user=user.id)
+        
         return render(
             request,
             'userprofile.html',
