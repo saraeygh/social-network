@@ -205,7 +205,7 @@ class SinglePost(View):
 
         return render(request, 'singlepost.html', context)
     
-    def post(self, request, post_slug):
+    def post(self, request, id, post_slug):
         form = ReplyFrom(request.POST)
 
         if form.is_valid():
@@ -225,7 +225,7 @@ class SinglePost(View):
 
             new_reply.save()
 
-            return redirect('posts:singlepost', post_slug)
+            return redirect('posts:singlepost', id, post_slug)
         
         else:
-            return render(request, 'posts:singlepost', post_slug)
+            return render(request, 'posts:singlepost', id, post_slug)

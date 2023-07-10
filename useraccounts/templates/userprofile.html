@@ -79,7 +79,15 @@
                         <a href="//{{ request.get_host }}/posts/editpost/{{ user_post.id }}/delete"> 🗑️ Delete</a>
                     </button>
                 </div>
-                    {% endif %}
+                {% else %}
+                <div class='content'>
+                    <a href="//{{ request.get_host }}/posts/post/{{ user_post.id }}/{{ user_post.post_slug }}">
+                        <button class="btn btn-primary">
+                            View full post
+                        </button>
+                    </a>
+                </div>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
