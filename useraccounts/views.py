@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -166,5 +166,23 @@ class Unfollow(LoginRequiredMixin, View):
         if is_following:
             Relation.objects.filter(from_user=from_user, to_user=to_user).delete()
             return redirect('useraccounts:userprofile', to_user.username)
-        
+
         return redirect('useraccounts:userprofile', to_user.username)
+
+
+class Search(View):
+
+    def get(self, request):
+        
+        username = request.GET.get('username')
+        
+        exact_user = UserAccount.objects.filter(username=username)
+        similar_users = UserAccount.objects.filter(username__icontains=username)
+
+        context = {
+            'username': username,
+            'exact_user': exact_user,
+            'similar_users': similar_users,
+        }
+
+        return render(request, 'search_user.html', context)

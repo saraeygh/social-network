@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from urllib.parse import urlencode
 from django.views import View
 from posts.models import Post
 from useraccounts.models import UserAccount
-from reaction.models import Reaction
 
 
 class LandingPageView(View):
@@ -11,12 +11,16 @@ class LandingPageView(View):
         posts_list = Post.objects.all()
         users_list = UserAccount.objects.all()
 
-        return render(
-            request,
-            'landing.html', 
-            {
-                'users_list': users_list,
-                'posts_list': posts_list,
-                'user': request.user,
-            }
-            )
+        search_username = request.GET.get('username')
+
+        context = {
+                    'users_list': users_list,
+                    'posts_list': posts_list,
+                    'user': request.user,
+                }
+
+        if search_username is None or search_username == '':
+            return render(request, 'landing.html', context)
+        
+        return redirect(f"useraccounts/search/?username={search_username}")
+        

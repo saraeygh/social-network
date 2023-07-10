@@ -1,5 +1,12 @@
 <div class="grid text-left">
-    <h3>Registered users:</h3>
+    <h4>Registered users:</h4>
+    
+    <form>
+        <label for="search"><label>
+           <input type="search" placeholder="Username" class="form-control" name="username">
+        <input method="POST" type="submit" value="🔍 Search" onclick="show()" class="btn btn-outline-secondary">
+    </form>
+
     {% for user in users_list %}
     <li>
         <a class="btn btn-light" href="useraccounts/username/{{ user.username }}">{{ user.username }}</a>

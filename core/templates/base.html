@@ -10,12 +10,15 @@
     rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" 
     crossorigin="anonymous">
 </head>
+
 <body>
     <header class="navbar bg-primary">
         <div>
-            <h1>
-                {% block headertitle %}♻️ My social network: A place to share your thoughts{% endblock headertitle %} 
-            </h1>
+            <div>
+                <h1>
+                    {% block headertitle %}♻️ My social network: A place to share your thoughts{% endblock headertitle %} 
+                </h1>
+            </div>    
             
             {% block headerbuttons %}
             {% if user.is_anonymous %}
@@ -30,8 +33,9 @@
             <a class="btn btn-info" href="//{{ request.get_host }}/posts/newpost">New post</a>
             {% endif %}
             {% endblock headerbuttons %}
-
         </div>
+       
+       
     </header>
 
     {% block content %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="fs-3">
+    Your search results for username: <span class="fs-1"> {{ username }} </span>
+</div>
+
+{% if exact_user %}
+
+<div class="fs-3">
+    <div> 
+        Found user:
+    </div>
+    <a href="{% url 'useraccounts:userprofile' user.username %}">
+        <li>
+            {% for user in exact_user %}
+            <img src="{{ MEDIA_URL }}/{{ user.image }}" style="height: 50px; width: 50px;"/>
+            <span class="fs-1"> {{ user }} </span>
+            {% endfor %}
+        </li>
+    </a>
+</div>
+
+{% else %}
+<div class="fs-5">
+    
+    {% if similar_users %}
+    
+    <span>
+        There is no such user! But, you may also know:
+    </span>
+     
+    <div class="fs-3">
+        {% for user in similar_users %}
+        <a href="{% url 'useraccounts:userprofile' user.username %}">
+
+            <li>
+                <img src="{{ MEDIA_URL }}/{{ user.image }}" style="height: 50px; width: 50px;"/>
+                <span class="fs-1"> {{ user }} </span>
+            </li>
+
+        </a>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="fs-5">
+        There is no user with such username!  
+    </div>
+    
+    {% endif %}
+{% endif %}
+
+</div>
+
+{% endblock content %}

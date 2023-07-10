@@ -3,14 +3,14 @@
 {% block content %}
 
 <div class="container text-left">
-    <div class="row">
-      <div class="col-3">
-        {% include 'allusers.html' %}
-      </div>
-      <div class="col-9">
-        {% include 'posts.html' %}
-      </div>
+  <div class="row">
+    <div class="col-9">
+      {% include 'posts.html' %}
+    </div>
+    <div class="col-3">
+      {% include 'allusers.html' %}
     </div>
   </div>
+</div>
 
 {% endblock content %}
