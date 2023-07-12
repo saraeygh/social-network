@@ -6,6 +6,11 @@
         {% csrf_token %}
         {{ form.as_p }}
         <div class="fs-4">
+            Add tags to your post:
+        </div>           
+        {{ tag_formset.as_p }}
+        <div>
+        <div class="fs-4">
             Post Images:
         </div>           
         {{ formset.as_p }}

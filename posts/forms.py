@@ -1,6 +1,7 @@
 from django import forms
-from django.forms import inlineformset_factory
+from django.forms import inlineformset_factory, formset_factory
 from .models import Post, Reply, Image
+from tags.models import Tag
 
 
 class PostForm(forms.ModelForm):
@@ -35,6 +36,27 @@ class ReplyFrom(forms.ModelForm):
             'post_id': forms.HiddenInput(),
             'reply_id': forms.HiddenInput(),
         }
+
+
+class TagForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+    class Meta:
+        model = Tag
+        fields = "__all__"
+        extras = {
+            'label': 3,
+        }
+
+
+TagFormset = formset_factory(
+    TagForm,
+    extra=3
+)
 
 
 class ImageForm(forms.ModelForm):

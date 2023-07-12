@@ -1,9 +1,21 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from core.models import BaseModel, CreateTimeMixin, UpdateTimeMixin
+from django.contrib.auth.models import UserManager
 from useraccounts.models import UserAccount
 from reaction.models import Reaction
+from tags.models import TaggedItem
 from django.db.models import Q
+
+
+class NotSoftDeleted(UserManager):
+    def get_queryset(self):
+        return super().get_queryset().filter(soft_delete=False)
+
+
+class SoftDeleted(UserManager):
+    def get_queryset(self):
+        return super().get_queryset().filter(soft_delete=True)
 
 
 class Post(BaseModel, CreateTimeMixin, UpdateTimeMixin):
@@ -26,6 +38,9 @@ class Post(BaseModel, CreateTimeMixin, UpdateTimeMixin):
         verbose_name=_("post slug"),
         )
     
+    def tags(self):
+        return TaggedItem.objects.filter(object_id=self.id)
+    
     def replies(self):
         return Reply.objects.filter(post_id=self.id).filter(reply_id_id=None)
     
@@ -43,6 +58,14 @@ class Post(BaseModel, CreateTimeMixin, UpdateTimeMixin):
 
     def dislikes(self):
         return Reaction.objects.filter(object_id=self.id).filter(reaction_status='DISLIKE').count()
+    
+    def delete_post(self):
+        self.delete()
+        post_taggeditem = TaggedItem.objects.filter(content_type_id=8).filter(object_id=self.id)
+        if post_taggeditem:
+            for item in post_taggeditem:
+                item.delete()
+        return None
 
     def __str__(self) -> str:
         return f"{self.title}"
@@ -50,6 +73,13 @@ class Post(BaseModel, CreateTimeMixin, UpdateTimeMixin):
 
     class Meta:
         ordering = ['-created_at', '-updated_at']
+
+
+class DeletedPost(Post):
+    objects = SoftDeleted()
+    
+    class Meta:
+        proxy = True
 
 
 class Image(BaseModel, CreateTimeMixin, UpdateTimeMixin):
@@ -69,6 +99,13 @@ class Image(BaseModel, CreateTimeMixin, UpdateTimeMixin):
     
     class Meta:
         ordering = ['-created_at', '-updated_at']
+
+
+class DeletedImage(Image):
+    objects = SoftDeleted()
+    
+    class Meta:
+        proxy = True
     
 
 class Reply(BaseModel, CreateTimeMixin, UpdateTimeMixin):
@@ -96,3 +133,10 @@ class Reply(BaseModel, CreateTimeMixin, UpdateTimeMixin):
     
     class Meta:
         ordering = ['-created_at', '-updated_at']
+
+
+class DeletedReply(Reply):
+    objects = SoftDeleted()
+    
+    class Meta:
+        proxy = True

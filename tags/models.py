@@ -36,6 +36,7 @@ class Tag(models.Model):
 
 class TaggedItem(models.Model):
     objects = TaggedItemManager()
+    
     tag = models.ForeignKey(
         Tag,
         related_name="used_tag",
@@ -71,6 +72,27 @@ class TaggedItem(models.Model):
         verbose_name=_("Updated at"),
         auto_now=True
         )
+
+    def add_tagged_item(self, tag, user_id, post_id):
+        new_tagged_item = TaggedItem.objects.create(
+            tag=tag,
+            object_id=post_id,
+            user=user_id,
+            content_type_id=8,
+            tag_from_id=1,
+        )
+        
+        new_tagged_item.save()
+
+    @staticmethod
+    def all_used_tags():
+        all_tags = []
+        all_tagged_items = TaggedItem.objects.all()
+        for tagged_item in all_tagged_items:
+            if tagged_item.tag in all_tags:
+                continue
+            all_tags.append(tagged_item.tag)
+        return all_tags
 
     def __str__(self) -> str:
         return f"{self.tag}"

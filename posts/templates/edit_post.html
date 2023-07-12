@@ -7,8 +7,24 @@
         {{ form.as_p }}
         {{ image_form.as_p }}
         
+        <div class="container text-left">
+            <span class="fs-5">Post tags (click on tag to delete it):</span>
+            {% if post_tags %}
+            {% for post_tag in post_tags  %}
+                    <span>
+                        <a href="//{{ request.get_host }}/posts/editpost/{{ edit_post.id }}/delete/{{ post_tag.id }}">
+                            #{{post_tag.tag.label}} 🗑️
+                        </a>
+                    </span>
+                     | 
+            {% endfor %}
+            {% else %}
+            <span class="fs-4"> No tags yet!</span>
+            {% endif %} 
+        </div>
 
         <div class="container text-left">
+            <p class="fs-4">Post Images</P>
             {% if edit_post.images != None %}
             {% for image in edit_post.images  %}
             <div class="row">
@@ -27,10 +43,10 @@
             {% endif %} 
         </div>
 
+        <p class="fs-3">Add new Tags:</p>
+        {{ tag_formset.as_p }}
 
-        <div class="fs-3">
-            Add new images:
-        </div>
+        <p class="fs-3">Add new images:</p>
             {{ formset.as_p }}
         <div>
             <input type="submit" value="Submit" class="btn btn-primary">

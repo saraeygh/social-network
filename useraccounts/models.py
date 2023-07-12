@@ -6,17 +6,17 @@ from django.utils.translation import gettext_lazy as _
 from uuid import uuid4
 
 
-class UserAccountManager(UserManager):
+class NotSoftDeleted(UserManager):
     def get_queryset(self) -> QuerySet:
         return super().get_queryset().filter(soft_delete=False)
     
-class DeletedUserAccountManager(UserManager):
+class SoftDeleted(UserManager):
     def get_queryset(self) -> QuerySet:
         return super().get_queryset().filter(soft_delete=True)
     
 class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
 
-    objects = UserAccountManager()
+    objects = NotSoftDeleted()
     objects_all = UserManager()
     
     image = models.FileField(
@@ -55,7 +55,7 @@ class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
     
 
 class DeletedUserAccount(UserAccount):
-    objects = DeletedUserAccountManager()
+    objects = SoftDeleted()
     
     class Meta:
         proxy = True
@@ -81,4 +81,10 @@ class Relation(BaseModel, CreateTimeMixin):
     
     class Meta:
         ordering = ['-created_at']
+
+
+class DeletedRelation(Relation):
+    objects = SoftDeleted()
     
+    class Meta:
+        proxy = True
