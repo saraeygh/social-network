@@ -20,22 +20,31 @@
                         {{ post_detail.content }}
                     </p>
                     
+                    <p>
+                        {% for tag in post_detail.tags %}
+                        <a href="//{{ request.get_host }}/posts/tag/{{ tag.tag.id }}/{{ tag.tag.label }}">
+                            #{{ tag }}
+                        </a>
+                        |
+                        {% endfor %}
+                    </p>
+
                     {% if request.user.is_anonymous %}
                     <p class='content'>
                         <a href="//{{ request.get_host }}/posts/{{post_detail.id}}/like">
-                            {{ post_detail.likes }} Like 👍  
+                            {{ post_detail.likes }} 👍  
                         </a> | 
                         <a href="//{{ request.get_host }}/posts/{{post_detail.id}}/dislike">
-                            {{ post_detail.dislikes }} Dislike 👎 
+                            {{ post_detail.dislikes }} 👎 
                         </a>
                     </p>
                     {% else %}
                     <p class='content'>
                         <a href="//{{ request.get_host }}/posts/{{post_detail.id}}/like">
-                            {{ post_detail.likes }} Like 👍
+                            {{ post_detail.likes }} 👍
                         </a> | 
                         <a href="//{{ request.get_host }}/posts/{{post_detail.id}}/dislike">
-                            {{ post_detail.dislikes }} Dislike 👎
+                            {{ post_detail.dislikes }} 👎
                         </a>
                     </p>
                     {% endif %}

@@ -21,22 +21,31 @@
                         {{ post.content }}
                     </p>
                     
+                    <p>
+                        {% for tag in post.tags %}
+                        <a href="//{{ request.get_host }}/posts/tag/{{ tag.tag.id }}/{{ tag.tag.label }}">
+                            #{{ tag }}
+                        </a>
+                        |
+                        {% endfor %}
+                    </p>
+                    
                     {% if request.user.is_anonymous %}
                     <p class='content'>
                         <a href="//{{ request.get_host }}/posts/{{post.id}}/like">
-                            {{ post.likes }} Like 👍  
+                            {{ post.likes }} 👍  
                         </a> | 
                         <a href="//{{ request.get_host }}/posts/{{post.id}}/dislike">
-                            {{ post.dislikes }} Dislike 👎 
+                            {{ post.dislikes }} 👎 
                         </a>
                     </p>
                     {% else %}
                     <p class='content'>
                         <a href="//{{ request.get_host }}/posts/{{post.id}}/like">
-                            {{ post.likes }} Like 👍
+                            {{ post.likes }} 👍
                         </a> | 
                         <a href="//{{ request.get_host }}/posts/{{post.id}}/dislike">
-                            {{ post.dislikes }} Dislike 👎
+                            {{ post.dislikes }} 👎
                         </a>
                     </p>
                     {% endif %}

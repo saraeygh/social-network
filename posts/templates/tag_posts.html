@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container text-left">
+  <div class="row">
+    <div class="col-9">
+        {% for post in posts_list %}
+        {% if post.content_object.user.soft_delete == True or post.content_object.soft_delete == True %}
+        {% else %}
+        <div class="container text-left">
+            <div class="row border border-primary rounded p-1">
+                <div class="col">
+                    <div>
+                        <p class="fw-lighter">Last update: {{ post.content_object.updated_at }}</p>
+                        <h2 class="display-2">
+                            <h2 class="post_title">
+                                {{ post.content_object.title }}
+                            </h2>
+                        </h2>
+                        <a href="//{{ request.get_host }}/useraccounts/username/{{ post.content_object.user.username }}/">
+                            <span class='badge bg-primary text-wrap'>
+                                By: @{{ post.content_object.user }}
+                            </span>
+                        </a>
+                        <p>
+                            {{ post.content_object.content }}
+                        </p>
+                        
+                        <p>
+                            {% for tag in post.content_object.tags %}
+                            <a href="//{{ request.get_host }}/posts/tag/{{ tag.tag.id }}/{{ tag.tag.label }}">
+                                #{{ tag }}
+                            </a>
+                            |
+                            {% endfor %}
+                        </p>
+                        
+                        {% if request.user.is_anonymous %}
+                        <p class='content'>
+                            <a href="//{{ request.get_host }}/posts/{{post.content_object.id}}/like">
+                                {{ post.content_object.likes }} 👍  
+                            </a> | 
+                            <a href="//{{ request.get_host }}/posts/{{post.content_object.id}}/dislike">
+                                {{ post.content_object.dislikes }} 👎 
+                            </a>
+                        </p>
+                        {% else %}
+                        <p class='content'>
+                            <a href="//{{ request.get_host }}/posts/{{post.content_object.id}}/like">
+                                {{ post.content_object.likes }} 👍
+                            </a> | 
+                            <a href="//{{ request.get_host }}/posts/{{post.content_object.id}}/dislike">
+                                {{ post.content_object.dislikes }} 👎
+                            </a>
+                        </p>
+                        {% endif %}
+                        <p class='content'>
+                            <a href="//{{ request.get_host }}/posts/post/{{ post.content_object.id }}/{{ post.content_object.post_slug }}">
+                                <button class="btn btn-primary">
+                                    View full post
+                                </button>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>    
+        {% endif %}
+        {% endfor %}
+
+    </div>
+    <div class="col-3">
+        <p class="fs-4">Other tags: </p>
+        {% for tag in all_used_tags %}
+        <a href="//{{ request.get_host }}/posts/tag/{{ tag.id }}/{{ tag.label }}">
+            #{{ tag }}
+        </a>
+        |
+        {% endfor %}
+    </div>
+
+  </div>
+</div>
+
+{% endblock content %}

@@ -6,7 +6,9 @@ from .views import (
     LikePost,
     DislikePost,
     SinglePost,
+    DeletePostTag,
     DeletePostImage,
+    TagPosts,
 )
 
 app_name = 'posts'
@@ -16,7 +18,9 @@ urlpatterns = [
     # **************************************************************
     path('newpost/', NewPost.as_view(), name='newpost'),
     path('editpost/<int:id>/', EditPost.as_view(), name='editpost'),
-    path('editpost/<int:id>/delete/<int:image_id>', DeletePostImage.as_view(), name='deletepostimage'),
     path('editpost/<int:id>/delete', DeletePost.as_view(), name='deletepost'),
+    path('editpost/<int:id>/delete/<int:tag_id>', DeletePostTag.as_view(), name='deleteposttag'),
+    path('editpost/<int:id>/delete/<int:image_id>', DeletePostImage.as_view(), name='deletepostimage'),
     path('post/<int:id>/<str:post_slug>/', SinglePost.as_view(), name='singlepost'),
+    path('tag/<int:tag_id>/<str:tag_label>/', TagPosts.as_view(), name='tagposts'),
 ]

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import UserAccount, Relation, DeletedUserAccount
+from .models import UserAccount, DeletedUserAccount, Relation, DeletedRelation
 from reaction.models import Reaction
 from tags.models import TaggedItem
 from datetime import datetime, timezone
@@ -66,20 +66,6 @@ class UserAccountAdmin(UserAdmin):
         return useraccount.to_user.all().count()
 
 
-@admin.register(Relation)
-class RelationAdmin(admin.ModelAdmin):
-    autocomplete_fields = ['from_user', 'to_user']
-    list_display = ['from_user', 'to_user', 'since']
-    search_fields = ['from_user', 'to_user']
-    ordering = ['from_user', 'to_user']
-    list_per_page = 10
-    exclude = ['soft_delete']
-
-    def since(self, relation):
-        relation_age = datetime.now(timezone.utc) - relation.created_at
-        return relation_age
-    
-
 @admin.register(DeletedUserAccount)
 class DeletedUserAccountAdmin(UserAdmin):
     def get_queryset(self, request):
@@ -138,3 +124,31 @@ class DeletedUserAccountAdmin(UserAdmin):
     
     def follower(self, useraccount):
         return useraccount.to_user.all().count()
+    
+
+@admin.register(Relation)
+class RelationAdmin(admin.ModelAdmin):
+    autocomplete_fields = ['from_user', 'to_user']
+    list_display = ['from_user', 'to_user', 'since']
+    search_fields = ['from_user', 'to_user']
+    ordering = ['from_user', 'to_user']
+    list_per_page = 10
+    exclude = ['soft_delete']
+
+    def since(self, relation):
+        relation_age = datetime.now(timezone.utc) - relation.created_at
+        return relation_age
+    
+
+@admin.register(DeletedRelation)
+class DeletedRelationAdmin(admin.ModelAdmin):
+    autocomplete_fields = ['from_user', 'to_user']
+    list_display = ['from_user', 'to_user', 'since']
+    search_fields = ['from_user', 'to_user']
+    ordering = ['from_user', 'to_user']
+    list_per_page = 10
+    exclude = ['soft_delete']
+
+    def since(self, relation):
+        relation_age = datetime.now(timezone.utc) - relation.created_at
+        return relation_age
