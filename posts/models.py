@@ -1,13 +1,15 @@
 from django.db import models
-from django.utils.translation import gettext_lazy as _
-from core.models import BaseModel, CreateTimeMixin, UpdateTimeMixin
 from django.contrib.auth.models import UserManager
+from core.models import BaseModel, CreateTimeMixin, UpdateTimeMixin
+from django.db.models import Q
+from django.utils.translation import gettext_lazy as _
+
 from useraccounts.models import UserAccount
 from reaction.models import Reaction
 from tags.models import TaggedItem
-from django.db.models import Q
 
 
+# Custome managers
 class NotSoftDeleted(UserManager):
     def get_queryset(self):
         return super().get_queryset().filter(soft_delete=False)
@@ -19,13 +21,12 @@ class SoftDeleted(UserManager):
 
 
 class Post(BaseModel, CreateTimeMixin, UpdateTimeMixin):
-    
-    # Model Fields
+
     title = models.CharField(
         verbose_name=_("Post title"),
         max_length=255
         )
-    
+
     content = models.TextField(verbose_name=_("Post content"))
 
     user = models.ForeignKey(
@@ -70,14 +71,13 @@ class Post(BaseModel, CreateTimeMixin, UpdateTimeMixin):
     def __str__(self) -> str:
         return f"{self.title}"
 
-
     class Meta:
         ordering = ['-created_at', '-updated_at']
 
 
 class DeletedPost(Post):
     objects = SoftDeleted()
-    
+
     class Meta:
         proxy = True
 
@@ -86,37 +86,38 @@ class Image(BaseModel, CreateTimeMixin, UpdateTimeMixin):
     image = models.FileField(
         upload_to='postpic/',
         max_length=100)
+
     alt_text = models.TextField(verbose_name=_("Image alt"))
-    
+
     post_id = models.ForeignKey(
         Post,
         verbose_name=_("Post"),
         on_delete=models.CASCADE,
         )
-    
+
     def __str__(self) -> str:
         return f"ALT: {self.alt_text}"
-    
+
     class Meta:
         ordering = ['-created_at', '-updated_at']
 
 
 class DeletedImage(Image):
     objects = SoftDeleted()
-    
+
     class Meta:
         proxy = True
-    
+
 
 class Reply(BaseModel, CreateTimeMixin, UpdateTimeMixin):
     content = models.TextField(verbose_name=_("Reply text"))
-    
+
     user = models.ForeignKey(
         UserAccount,
         verbose_name=_("User"),
         on_delete=models.CASCADE
         )
-    
+
     post_id = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,
@@ -127,16 +128,16 @@ class Reply(BaseModel, CreateTimeMixin, UpdateTimeMixin):
         null=True,
         on_delete=models.CASCADE,
         )
-    
+
     def __str__(self) -> str:
         return f"{self.content}"
-    
+
     class Meta:
         ordering = ['-created_at', '-updated_at']
 
 
 class DeletedReply(Reply):
     objects = SoftDeleted()
-    
+
     class Meta:
         proxy = True

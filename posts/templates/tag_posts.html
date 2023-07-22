@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
@@ -12,7 +13,7 @@
             <div class="row border border-primary rounded p-1">
                 <div class="col">
                     <div>
-                        <p class="fw-lighter">Last update: {{ post.content_object.updated_at }}</p>
+                        <p class="fw-lighter">{% trans "Last update:" %}{{ post.content_object.updated_at }}</p>
                         <h2 class="display-2">
                             <h2 class="post_title">
                                 {{ post.content_object.title }}
@@ -58,7 +59,7 @@
                         <p class='content'>
                             <a href="//{{ request.get_host }}/posts/post/{{ post.content_object.id }}/{{ post.content_object.post_slug }}">
                                 <button class="btn btn-primary">
-                                    View full post
+                                    {% trans "View full post" %}
                                 </button>
                             </a>
                         </p>
@@ -71,7 +72,7 @@
 
     </div>
     <div class="col-3">
-        <p class="fs-4">Other tags: </p>
+        <p class="fs-4">{% trans "Other tags:" %}</p>
         {% for tag in all_used_tags %}
         <a href="//{{ request.get_host }}/posts/tag/{{ tag.id }}/{{ tag.label }}">
             #{{ tag }}

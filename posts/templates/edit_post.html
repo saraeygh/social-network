@@ -1,30 +1,33 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 <div class="form-control">
+    
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
+        {{ errors }}
         {{ form.as_p }}
         {{ image_form.as_p }}
         
         <div class="container text-left">
-            <span class="fs-5">Post tags (click on tag to delete it):</span>
+            <span class="fs-5">{% trans "Post tags (click on tag to delete it):" %}</span>
             {% if post_tags %}
             {% for post_tag in post_tags  %}
                     <span>
-                        <a href="//{{ request.get_host }}/posts/editpost/{{ edit_post.id }}/delete/{{ post_tag.id }}">
+                        <a href="//{{ request.get_host }}/posts/editpost/{{ edit_post.id }}/delete-tag/{{ post_tag.id }}">
                             #{{post_tag.tag.label}} 🗑️
                         </a>
                     </span>
                      | 
             {% endfor %}
             {% else %}
-            <span class="fs-4"> No tags yet!</span>
-            {% endif %} 
+            <span class="fs-4">{% trans "No tags yet!" %}</span>
+            {% endif %}
         </div>
 
         <div class="container text-left">
-            <p class="fs-4">Post Images</P>
+            <p class="fs-4">{% trans "Post Images" %}</P>
             {% if edit_post.images != None %}
             {% for image in edit_post.images  %}
             <div class="row">
@@ -33,8 +36,8 @@
                         <a href="{{ MEDIA_URL }}/{{ image.image }}">
                             <img src="{{ MEDIA_URL }}/{{ image.image }}" class="img-thumbnail rounded float-start" width="100" height="100"/>
                         </a>
-                        <a href="//{{ request.get_host }}/posts/editpost/{{ image.post_id_id}}/delete/{{ image.id }}">
-                            <button type="button" class="btn btn-danger">Delete</button>
+                        <a href="//{{ request.get_host }}/posts/editpost/{{ image.post_id_id}}/delete-image/{{ image.id }}">
+                            <button type="button" class="btn btn-danger">{% trans "Delete" %}</button>
                         </a>
                     </div>
                 </div>
@@ -43,13 +46,13 @@
             {% endif %} 
         </div>
 
-        <p class="fs-3">Add new Tags:</p>
+        <p class="fs-3">{% trans "Add new Tags:" %}</p>
         {{ tag_formset.as_p }}
 
-        <p class="fs-3">Add new images:</p>
+        <p class="fs-3">{% trans "Add new images:" %}</p>
             {{ formset.as_p }}
         <div>
-            <input type="submit" value="Submit" class="btn btn-primary">
+            <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary">
         </div>
     </form>
 

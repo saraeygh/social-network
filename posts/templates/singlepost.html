@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 <div>
@@ -7,7 +8,7 @@
         <div class="row border border-primary rounded p-1">
             <div class="col">
                 <div>
-                    <p class="fw-lighter">Last update: {{ post_detail.updated_at }}</p>
+                    <p class="fw-lighter">{% trans "Last update:" %}{{ post_detail.updated_at }}</p>
                     <h2 class="display-2">
                         <h2 class="post_title">
                             {{ post_detail.title }}
@@ -69,16 +70,17 @@
             <div class="form-control">
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <p> Your Reply: </p>
+                    <p> {% trans "Your Reply:" %}</p>
                     {{ reply_form.as_table }} 
-                    <input type="submit" value="Submit reply" class="btn btn-primary">
+                    <input type="submit" value="{% trans "Submit reply" %}" class="btn btn-primary">
                 </form>
             </div>
             {% endif %}
             
-            <div class='fs-5'> 🗣 Replies:</div>
+            <div class='fs-5'> 🗣 {% trans "Replies:" %}</div>
                     {% for reply in post_detail.replies %}
                     <div class='container p-3 border border-info'>
+                        {{ reply.id }}
                         <span class="badge bg-primary text-wrap">
                             @{{ reply.user }}:
                         </span> {{ reply.content }}

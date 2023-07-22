@@ -1,7 +1,8 @@
 from django import forms
 from django.forms import inlineformset_factory, formset_factory
-from .models import Post, Reply, Image
+
 from tags.models import Tag
+from .models import Post, Reply, Image
 
 
 class PostForm(forms.ModelForm):

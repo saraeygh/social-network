@@ -11,8 +11,9 @@ class SignUp(View):
     def get(self, request):
         form = SignUpForm()
         context = {'form': form}
+
         return render(request, 'signup.html', context)
-    
+
     def post(self, request):
         form = SignUpForm(request.POST)
 
@@ -26,9 +27,10 @@ class SignUp(View):
             new_user = authenticate(request=request, username=username, password=password)
             login(request, new_user)
             return redirect('useraccounts:userprofile', username)
-        
+
         else:
             errors = form.errors
+
             form = SignUpForm()
             context = {
                 'form': form,

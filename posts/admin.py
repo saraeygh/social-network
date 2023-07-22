@@ -1,11 +1,9 @@
 from django.contrib import admin
-from django.db import models
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.admin import GenericTabularInline
-from useraccounts.models import UserAccount
-from .models import Post, Image, Reply, DeletedPost, DeletedReply, DeletedImage
-from tags.models import TaggedItem, Tag
+
+from tags.models import TaggedItem
 from reaction.models import Reaction
+from .models import Post, Image, Reply, DeletedPost, DeletedReply, DeletedImage
 
 
 class ImageInLine(admin.TabularInline):
@@ -36,13 +34,22 @@ class ReactionInLine(GenericTabularInline):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     inlines = [ImageInLine, ReplyInLine, TagInLine, ReactionInLine]
-    list_display = ['title', 'user', 'replies_count', 'likes', 'dislikes', 'created_at', 'updated_at']
     search_fields = ['title', 'content']
     ordering = ['title', 'created_at', 'updated_at']
     list_per_page = 10
-    prepopulated_fields = {
-        "post_slug": ("title",)
-        }
+    prepopulated_fields = {"post_slug": ("title",)}
+    exclude = ['soft_delete']
+
+    list_display = [
+        'title',
+        'user',
+        'replies_count',
+        'likes',
+        'dislikes',
+        'created_at',
+        'updated_at'
+        ]
+
     fieldsets = (
         ('New post', {
             "fields": (
@@ -53,7 +60,6 @@ class PostAdmin(admin.ModelAdmin):
             ),
         }),
     )
-    exclude = ['soft_delete']
 
     def replies_count(self, post):
         return Reply.objects.filter(post_id=post.id).count()
@@ -68,13 +74,22 @@ class PostAdmin(admin.ModelAdmin):
 @admin.register(DeletedPost)
 class DeletedPostAdmin(admin.ModelAdmin):
     inlines = [ImageInLine, ReplyInLine, TagInLine, ReactionInLine]
-    list_display = ['title', 'user', 'replies_count', 'likes', 'dislikes', 'created_at', 'updated_at']
     search_fields = ['title', 'content']
     ordering = ['title', 'created_at', 'updated_at']
     list_per_page = 10
-    prepopulated_fields = {
-        "post_slug": ("title",)
-        }
+    prepopulated_fields = {"post_slug": ("title",)}
+    exclude = ['soft_delete']
+
+    list_display = [
+        'title',
+        'user',
+        'replies_count',
+        'likes',
+        'dislikes',
+        'created_at',
+        'updated_at'
+        ]
+
     fieldsets = (
         ('New post', {
             "fields": (
@@ -85,7 +100,6 @@ class DeletedPostAdmin(admin.ModelAdmin):
             ),
         }),
     )
-    exclude = ['soft_delete']
 
     def replies_count(self, post):
         return Reply.objects.filter(post_id=post.id).count()
@@ -100,12 +114,18 @@ class DeletedPostAdmin(admin.ModelAdmin):
 @admin.register(Reply)
 class ReplyAdmin(admin.ModelAdmin):
     inlines = [ReplyInLine, ReactionInLine]
-    list_display = ['user','reply_to_post', 'reply_to_reply', 'content', 'updated_at']
     search_fields = ['user', 'content']
     ordering = ['user', 'created_at', 'updated_at']
     list_per_page = 10
     exclude = ['soft_delete']
 
+    list_display = [
+        'user',
+        'reply_to_post',
+        'reply_to_reply',
+        'content',
+        'updated_at']
+    
     fieldsets = (
         ('New reply', {
             "fields": (
@@ -127,11 +147,18 @@ class ReplyAdmin(admin.ModelAdmin):
 @admin.register(DeletedReply)
 class DeletedReplyAdmin(admin.ModelAdmin):
     inlines = [ReplyInLine, ReactionInLine]
-    list_display = ['user','reply_to_post', 'reply_to_reply', 'content', 'updated_at']
     search_fields = ['user', 'content']
     ordering = ['user', 'created_at', 'updated_at']
     list_per_page = 10
     exclude = ['soft_delete']
+
+    list_display = [
+        'user',
+        'reply_to_post',
+        'reply_to_reply',
+        'content',
+        'updated_at'
+        ]
 
     fieldsets = (
         ('New reply', {

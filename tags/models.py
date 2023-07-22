@@ -41,6 +41,7 @@ class TaggedItem(models.Model):
         Tag,
         related_name="used_tag",
         on_delete=models.CASCADE)
+    
     content_type = models.ForeignKey(
         ContentType,
         verbose_name=_('Post'),
@@ -50,6 +51,7 @@ class TaggedItem(models.Model):
         verbose_name=_('Post ID')
     )
     content_object = GenericForeignKey('content_type', 'object_id')
+
 
     tag_from = models.ForeignKey(
         ContentType,
