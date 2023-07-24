@@ -20,23 +20,25 @@ class SignUp(View):
 
         return render(request, 'signup.html', context)
 
-    def post(self, request):
+    def post(self, request, **args):
         form = SignUpForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            new_user = form.save(commit=False)
 
-            new_user = form.cleaned_data
-            username = new_user['username']
-            password = new_user['password1']
+            if UserAccount.objects_all.filter(username=new_user.username).exists():
+                errors = Exception("A user with that username already exists")
+                form = SignUpForm()
+                context = {
+                    'form': form,
+                    'errors': errors,
+                    }
+                return render(request, 'signup.html', context)
 
-            new_user = authenticate(
-                request=request,
-                username=username,
-                password=password)
-
+            new_user.save()
             login(request, new_user)
-            return redirect('useraccounts:userprofile', username)
+
+            return redirect('useraccounts:userprofile', new_user.username)
 
         else:
             errors = form.errors

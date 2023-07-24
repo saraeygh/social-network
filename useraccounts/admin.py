@@ -92,13 +92,12 @@ class DeletedUserAccountAdmin(UserAdmin):
             ),
         }),
     )
-    
+
     search_fields = ['username', 'first_name', 'last_name', ]
     list_display = ['username', 'email', 'since', 'posts', 'replies', 'reactions', 'tags_used',  'following', 'follower']
     ordering = ['username', 'email']
     list_per_page = 10
 
-    
     def since(self, user):
         user_account_age = datetime.now(timezone.utc) - user.created_at
         return user_account_age
