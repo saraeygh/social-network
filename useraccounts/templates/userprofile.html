@@ -8,7 +8,7 @@
             {% if user.image %}
             <img src="{{ MEDIA_URL }}/{{ user.image }}" class="img-thumbnail rounded float-start"/>
             {% else %}
-            <img src="{{ MEDIA_URL }}/profilepics/default.jpg" class="img-thumbnail rounded float-start"/>
+            <img src="{{ MEDIA_URL }}/others/default.jpg" class="img-thumbnail rounded float-start"/>
             {% endif %}
             <p class="fs-1"> {{ user.first_name }} {{ user.last_name }}</p>
             <p class="badge bg-primary text-wrap"> @{{ user.username }}</p>

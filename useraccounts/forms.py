@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+
 from .models import UserAccount
 
 
@@ -18,8 +19,8 @@ class SignInForm(forms.Form):
         widget=forms.PasswordInput,
         required=True
         )
-    
-    
+
+
 class EditProfileForm(forms.ModelForm):
 
     class Meta:

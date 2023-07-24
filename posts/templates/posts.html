@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <div>
     {% for post in posts_list %}
     {% if post.user.soft_delete == True %}
@@ -6,7 +8,7 @@
         <div class="row border border-primary rounded p-1">
             <div class="col">
                 <div>
-                    <p class="fw-lighter">Last update: {{ post.updated_at }}</p>
+                    <p class="fw-lighter">{% trans "Last update:" %}{{ post.updated_at }}</p>
                     <h2 class="display-2">
                         <h2 class="post_title">
                             {{ post.title }}
@@ -52,7 +54,7 @@
                     <p class='content'>
                         <a href="//{{ request.get_host }}/posts/post/{{ post.id }}/{{ post.post_slug }}">
                             <button class="btn btn-primary">
-                                View full post
+                                {% trans "View full post" %}
                             </button>
                         </a>
                     </p>

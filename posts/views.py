@@ -1,35 +1,37 @@
+from typing import Any
+from django import http
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from reaction.models import Reaction
-from .forms import PostForm, ReplyFrom, TagFormset, ImageFormSet
-from .models import Post, Reply, Image
-from tags.models import Tag, TaggedItem
-from django.contrib.contenttypes.models import ContentType
 from django.utils.text import slugify
 
-import inspect 
+from reaction.models import Reaction
+from tags.models import Tag, TaggedItem
+from .forms import PostForm, ReplyFrom, TagFormset, ImageFormSet
+from .models import Post, Reply, Image
 
 
 class NewPost(LoginRequiredMixin, View):
 
     def get(self, request):
+        tag_formset = TagFormset()
+        formset = ImageFormSet()
+
         form = PostForm(
             initial={
                 'user': request.user,
                 'post_slug': 'slug',
             }
         )
-        tag_formset = TagFormset()
-        formset = ImageFormSet()
-        
+
         context = {
             'form': form,
             'formset': formset,
             'tag_formset': tag_formset,
             }
+
         return render(request, 'new_post.html', context)
-    
+
     def post(self, request):
         form = PostForm(request.POST, instance=Post())
         tag_formset = TagFormset(request.POST)
@@ -37,21 +39,11 @@ class NewPost(LoginRequiredMixin, View):
 
         if form.is_valid() and formset.is_valid() and tag_formset.is_valid():
 
+            new_post = form.save(commit=False)
             form = form.cleaned_data
-            title = form['title']
-            content = form['content']
-            post_slug = slugify(form['title'])
-            user = form['user']
-            
-            new_post = Post.objects.create(
-                title=title,
-                content=content,
-                post_slug=post_slug,
-                user=user,
-            )
-
+            new_post.post_slug = slugify(form['title'])
             new_post.save()
-            
+
             tag_formset = tag_formset.cleaned_data
             for tag in tag_formset:
                 if tag:
@@ -64,71 +56,84 @@ class NewPost(LoginRequiredMixin, View):
                     TaggedItem.add_tagged_item(
                         self=self,
                         tag=new_tag[0],
-                        user_id=user.id,
+                        user_id=request.user.id,
                         post_id=new_post.id,
                         )
 
             formset = formset.cleaned_data
             for image in formset:
                 if image:
-                    uoloaded_image = image['image']
+                    uploaded_image = image['image']
                     post_id = new_post
 
-                    new_iamge = Image.objects.create(
-                        image=uoloaded_image,
+                    new_image = Image.objects.create(
+                        image=uploaded_image,
                         post_id=post_id,
                     )
-                    new_iamge.save()
+                    new_image.save()
 
             username = request.user
             return redirect('useraccounts:userprofile', username)
-        
+
         else:
             errors = form.errors
-            form = PostForm()
-            formset = ImageFormSet()
-            context = {
-                'form': form,
-                'formset': formset,
-                'errors': errors,
-                }
-            return render(request, 'new_post.html', context)
 
-
-class EditPost(LoginRequiredMixin, View):
-    
-    def get(self, request, id):
-        edit_post = Post.objects.get(id=id)
-        post_tags = TaggedItem.objects.filter(object_id=id)
-        
-        if request.user.id == edit_post.user.id:
-
-            form = PostForm(
-                initial={
-                    'title': edit_post.title,
-                    'content': edit_post.content,
-                    'user': edit_post.user,
-                    'post_slug': edit_post.post_slug,
-                }
-            )
             tag_formset = TagFormset()
             formset = ImageFormSet()
+            form = PostForm(
+                initial={
+                    'user': request.user,
+                    'post_slug': 'slug',
+                    }
+            )
 
             context = {
-                'edit_post': edit_post,
-                'post_tags': post_tags,
+                'errors': errors,
                 'tag_formset': tag_formset,
                 'formset': formset,
                 'form': form,
                 }
-            
+
+            return render(request, 'new_post.html', context)
+
+
+class EditPost(LoginRequiredMixin, View):
+
+    def setup(self, request, *args, **kwargs):
+        self.edit_post = Post.objects.get(id=kwargs['id'])
+        self.post_tags = TaggedItem.objects.filter(object_id=kwargs['id'])
+        return super().setup(request, *args, **kwargs)
+
+    def get(self, request, id):
+
+        if request.user.id == self.edit_post.user.id:
+
+            form = PostForm(
+                initial={
+                    'title': self.edit_post.title,
+                    'content': self.edit_post.content,
+                    'user': self.edit_post.user,
+                    'post_slug': self.edit_post.post_slug,
+                }
+            )
+
+            tag_formset = TagFormset()
+            formset = ImageFormSet()
+
+            context = {
+                'edit_post': self.edit_post,
+                'post_tags': self.post_tags,
+                'tag_formset': tag_formset,
+                'formset': formset,
+                'form': form,
+                }
+
             return render(request, 'edit_post.html', context)
-        
+
         return redirect('useraccounts:signin')
-        
+
     def post(self, request, id):
-        edited_post = Post.objects.get(id=id)
-        form = PostForm(request.POST, instance=edited_post)
+        form = PostForm(request.POST, instance=self.edit_post)
         formset = ImageFormSet(request.POST, request.FILES)
         tag_formset = TagFormset(request.POST)
 
@@ -139,7 +144,7 @@ class EditPost(LoginRequiredMixin, View):
             for image in formset:
                 if image:
                     uoloaded_image = image['image']
-                    post_id = edited_post
+                    post_id = self.edit_post
 
                     new_iamge = Image.objects.create(
                         image=uoloaded_image,
@@ -161,33 +166,38 @@ class EditPost(LoginRequiredMixin, View):
                         self=self,
                         tag=new_tag[0],
                         user_id=request.user.id,
-                        post_id=edited_post.id,
+                        post_id=self.edit_post.id,
                         )
 
-            username = request.user
-            return redirect('useraccounts:userprofile', username)
+            return redirect('useraccounts:userprofile', request.user.username)
         
         else:
             errors = form.errors
             form = PostForm()
+            tag_formset = TagFormset()
+            formset = ImageFormSet()
+
             context = {
                 'form': form,
                 'errors': errors,
+                'tag_formset': tag_formset,
+                'formset': formset
                 }
-            return render(request, 'new_post.html', context)
+
+            return render(request, 'edit_post.html', context)
 
 
 class DeletePost(LoginRequiredMixin, View):
-    
+
     def get(self, request, id):
         post = Post.objects.get(id=id)
-        
+
         if request.user.id == post.user.id:
             post.delete_post()
             return redirect('useraccounts:userprofile', request.user.username)
-        
+
         return redirect('useraccounts:signin')
-    
+
 
 class DeletePostTag(LoginRequiredMixin, View):
     
@@ -217,16 +227,20 @@ class DeletePostImage(LoginRequiredMixin, View):
 
 class LikePost(LoginRequiredMixin, View):
 
+    def setup(self, request, *args, **kwargs):
+        self.REACTION_FOR_ID = 8
+        self.REACTION_FROM_ID = 1
+        self.reaction_status = "LIKE"
+        self.user = request.user.id
+        self.object_id = kwargs['id']
+        return super().setup(request, *args, **kwargs)
+
     def get(self, request, id):
 
-        REACTION_FOR_ID = 8
-        REACTION_FROM_ID = 1
-        
-        reaction_status = "LIKE"
-        object_id = id
-        user = request.user.id
-
-        is_liked = Reaction.objects.filter(object_id=id).filter(reaction_status=reaction_status).filter(user=user)
+        is_liked = Reaction.objects\
+            .filter(object_id=id)\
+            .filter(reaction_status=self.reaction_status)\
+            .filter(user=self.user)
 
         if is_liked.exists():
             is_liked.delete()
@@ -235,13 +249,14 @@ class LikePost(LoginRequiredMixin, View):
                 )
 
         new_reaction = Reaction(
-            reaction_status=reaction_status,
-            object_id=object_id,
-            user=user,
-            reaction_for_id=REACTION_FOR_ID,
-            reaction_from_id=REACTION_FROM_ID,
+            reaction_status=self.reaction_status,
+            object_id=self.object_id,
+            user=self.user,
+            reaction_for_id=self.REACTION_FOR_ID,
+            reaction_from_id=self.REACTION_FROM_ID,
         )
         new_reaction.save()
+
         return redirect(
             request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found')
             )
@@ -249,47 +264,57 @@ class LikePost(LoginRequiredMixin, View):
 
 class DislikePost(LoginRequiredMixin, View):
 
+    def setup(self, request, *args, **kwargs):
+        self.REACTION_FOR_ID = 8
+        self.REACTION_FROM_ID = 1
+        self.reaction_status = "DISLIKE"
+        self.user = request.user.id
+        self.object_id = kwargs['id']
+        return super().setup(request, *args, **kwargs)
+
     def get(self, request, id):
 
-        REACTION_FOR_ID = 8
-        REACTION_FROM_ID = 1
-        
-        reaction_status = "DISLIKE"
-        object_id = id
-        user = request.user.id
+        is_disliked = Reaction.objects\
+            .filter(object_id=id)\
+            .filter(reaction_status=self.reaction_status)\
+            .filter(user=self.user)
 
-        is_liked = Reaction.objects.filter(object_id=id).filter(reaction_status=reaction_status).filter(user=user)
+        if is_disliked.exists():
+            is_disliked.delete()
+            return redirect(
+                request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found')
+                )
 
-        if is_liked.exists():
-            is_liked.delete()
-            return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
-
-        
         new_reaction = Reaction(
-            reaction_status=reaction_status,
-            object_id=object_id,
-            user=user,
-            reaction_for_id=REACTION_FOR_ID,
-            reaction_from_id=REACTION_FROM_ID,
+            reaction_status=self.reaction_status,
+            object_id=self.object_id,
+            user=self.user,
+            reaction_for_id=self.REACTION_FOR_ID,
+            reaction_from_id=self.REACTION_FROM_ID,
         )
         new_reaction.save()
-        return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+
+        return redirect(
+            request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found')
+            )
 
 
 class SinglePost(View):
 
-    def get(self, request, id, post_slug):
-        single_post = Post.objects.filter(id=id)
-        
+    def setup(self, request, *args, **kwargs):
+        self.single_post = Post.objects.filter(id=kwargs['id'])
+        return super().setup(request, *args, **kwargs)
+
+    def get(self, request, id, post_slug):        
         reply_form = ReplyFrom(
             initial={
                     'user': request.user,
-                    'post_id': list(single_post)[0],
+                    'post_id': list(self.single_post)[0],
                 }
         )
 
         context = {
-            "single_post": single_post,
+            "single_post": self.single_post,
             'reply_form': reply_form,
         }
 
@@ -299,20 +324,8 @@ class SinglePost(View):
         form = ReplyFrom(request.POST)
 
         if form.is_valid():
-            form = form.cleaned_data
-
-            content = form['content']
-            user = form['user']
-            post_id = form['post_id']
-            reply_id = form['reply_id']
-            
-            new_reply = Reply.objects.create(
-                content=content,
-                user=user,
-                post_id=post_id,
-                reply_id=reply_id,
-            )
-
+            new_reply = form.save(commit=False)
+            new_reply.reply_id = None
             new_reply.save()
 
             return redirect('posts:singlepost', id, post_slug)
@@ -325,7 +338,10 @@ class TagPosts(View):
 
     def get(self, request, tag_id, tag_label):
         
-        posts_list = list(TaggedItem.objects.select_related('content_type').filter(tag_id=tag_id).filter(content_type_id=8))
+        posts_list = list(TaggedItem.objects.select_related('content_type')
+                          .filter(tag_id=tag_id)
+                          .filter(content_type_id=8))
+        
         all_used_tags = TaggedItem.all_used_tags()
 
         context = {

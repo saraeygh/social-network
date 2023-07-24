@@ -13,12 +13,12 @@ from .views import (
 
 app_name = "useraccounts"
 urlpatterns = [
-    path('search/', Search.as_view(), name='search'),
     path('signup/', SignUp.as_view(), name='signup'),
     path('signin/', SignIn.as_view(), name='signin'),
     path('signout/', SignOut.as_view(), name='signout'),
     path('follow/<str:username>', Follow.as_view(), name='follow'),
     path('unfollow/<str:username>', Unfollow.as_view(), name='unfollow'),
+    path('search/', Search.as_view(), name='search'),
 
     path(
         'username/<str:username>/',
@@ -34,7 +34,7 @@ urlpatterns = [
 
     path(
         'username/<str:username>/delete-account',
-        DeleteAccount.as_view(), 
+        DeleteAccount.as_view(),
         name='deleteuser'
         ),
 ]

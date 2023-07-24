@@ -1,21 +1,23 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 <div class="form-control">
+    {{ errors }}
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <div class="fs-4">
-            Add tags to your post:
+            {% trans "Add tags to your post:" %}
         </div>           
         {{ tag_formset.as_p }}
         <div>
         <div class="fs-4">
-            Post Images:
+            {% trans "Post Images:" %}
         </div>           
         {{ formset.as_p }}
         <div>
-            <input type="submit" value="Submit" class="btn btn-primary">
+            <input type="submit" value="{% trans "Submit" %}" class="btn btn-primary">
         </div>
     </form>
 </div>
