@@ -10,28 +10,37 @@ class ReactionManager(models.Manager):
 
 
 class Reaction(models.Model):
-    
+
     objects = ReactionManager()
 
-    LIKE = 'LIKE'
-    DISLIKE = 'DISLIKE'
+    LIKE = _('LIKE')
+    DISLIKE = _('DISLIKE')
 
     REACTION_CHOICES = [
-        (LIKE, 'Like'),
-        (DISLIKE, 'Dislike'),
+        (LIKE, _('Like')),
+        (DISLIKE, _('Dislike')),
     ]
 
-    reaction_status = models.CharField(max_length=50, choices=REACTION_CHOICES)
-    reaction_for = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
+    reaction_status = models.CharField(
+        max_length=50,
+        choices=REACTION_CHOICES,
+        verbose_name=_("Reaction status")
+        )
+    reaction_for = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        verbose_name=_("Content type")
+        )
+    object_id = models.PositiveIntegerField(verbose_name=_("ID"))
     get_content_object = GenericForeignKey('reaction_for', 'object_id')
 
     reaction_from = models.ForeignKey(
         ContentType,
         related_name="reaction_from",
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        verbose_name=_("Content type")
         )
-    user = models.PositiveIntegerField()
+    user = models.PositiveIntegerField(verbose_name=_("ID"))
     get_user_object = GenericForeignKey('reaction_from', 'user')
 
     created_at = models.DateTimeField(

@@ -1,15 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import UserManager
-from core.models import BaseModel, CreateTimeMixin, UpdateTimeMixin
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
+from core.models import BaseModel, CreateTimeMixin, UpdateTimeMixin
 from useraccounts.models import UserAccount
 from reaction.models import Reaction
 from tags.models import TaggedItem
 
 
-# Custome managers
 class NotSoftDeleted(UserManager):
     def get_queryset(self):
         return super().get_queryset().filter(soft_delete=False)
@@ -38,16 +37,16 @@ class Post(BaseModel, CreateTimeMixin, UpdateTimeMixin):
     post_slug = models.SlugField(
         verbose_name=_("post slug"),
         )
-    
+
     def tags(self):
         return TaggedItem.objects.filter(object_id=self.id)
-    
+
     def replies(self):
         return Reply.objects.filter(post_id=self.id).filter(reply_id_id=None)
-    
+
     def nested_replies(self):
         return Reply.objects.filter(post_id=self.id).filter(~Q(reply_id_id=None))
-    
+
     def images(self):
         return Image.objects.filter(post_id=self.id)
 
@@ -59,7 +58,7 @@ class Post(BaseModel, CreateTimeMixin, UpdateTimeMixin):
 
     def dislikes(self):
         return Reaction.objects.filter(object_id=self.id).filter(reaction_status='DISLIKE').count()
-    
+
     def delete_post(self):
         self.delete()
         post_taggeditem = TaggedItem.objects.filter(content_type_id=8).filter(object_id=self.id)
@@ -73,6 +72,8 @@ class Post(BaseModel, CreateTimeMixin, UpdateTimeMixin):
 
     class Meta:
         ordering = ['-created_at', '-updated_at']
+        verbose_name = _("Post")
+        verbose_name_plural = _("Posts")
 
 
 class DeletedPost(Post):
@@ -80,12 +81,16 @@ class DeletedPost(Post):
 
     class Meta:
         proxy = True
+        verbose_name = _("Deleted post")
+        verbose_name_plural = _("Deleted posts")
 
 
 class Image(BaseModel, CreateTimeMixin, UpdateTimeMixin):
     image = models.FileField(
         upload_to='postpic/',
-        max_length=100)
+        max_length=100,
+        verbose_name=_("Image")
+        )
 
     alt_text = models.TextField(verbose_name=_("Image alt"))
 
@@ -100,6 +105,8 @@ class Image(BaseModel, CreateTimeMixin, UpdateTimeMixin):
 
     class Meta:
         ordering = ['-created_at', '-updated_at']
+        verbose_name = _("Image")
+        verbose_name_plural = _("Images")
 
 
 class DeletedImage(Image):
@@ -107,6 +114,8 @@ class DeletedImage(Image):
 
     class Meta:
         proxy = True
+        verbose_name = _("Deleted image")
+        verbose_name_plural = _("Deleted images")
 
 
 class Reply(BaseModel, CreateTimeMixin, UpdateTimeMixin):
@@ -121,12 +130,14 @@ class Reply(BaseModel, CreateTimeMixin, UpdateTimeMixin):
     post_id = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,
+        verbose_name=_("Post ID")
         )
     reply_id = models.ForeignKey(
         "self",
         blank=True,
         null=True,
         on_delete=models.CASCADE,
+        verbose_name=_("Reply ID")
         )
 
     def __str__(self) -> str:
@@ -134,6 +145,8 @@ class Reply(BaseModel, CreateTimeMixin, UpdateTimeMixin):
 
     class Meta:
         ordering = ['-created_at', '-updated_at']
+        verbose_name = _("Reply")
+        verbose_name_plural = _("Replies")
 
 
 class DeletedReply(Reply):
@@ -141,3 +154,5 @@ class DeletedReply(Reply):
 
     class Meta:
         proxy = True
+        verbose_name = _("Deleted reply")
+        verbose_name_plural = _("Deleted replies")

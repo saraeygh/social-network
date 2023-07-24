@@ -7,20 +7,21 @@ from .models import Post, Reply, Image
 
 class PostForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
     class Meta:
         model = Post
         fields = "__all__"
-            
+
         widgets = {
             'user': forms.HiddenInput(),
             'post_slug': forms.HiddenInput(),
             'soft_delete': forms.HiddenInput(),
         }
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
 
 
 class ReplyFrom(forms.ModelForm):
@@ -66,7 +67,7 @@ class ImageForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
-    
+
     class Meta:
         model = Image
         fields = [

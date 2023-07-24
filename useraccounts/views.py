@@ -1,8 +1,5 @@
-from typing import Any
-from django import http
-from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
-
+from django.utils.translation import gettext_lazy as _
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -27,7 +24,7 @@ class SignUp(View):
             new_user = form.save(commit=False)
 
             if UserAccount.objects_all.filter(username=new_user.username).exists():
-                errors = Exception("A user with that username already exists")
+                errors = Exception(_("A user with that username already exists"))
                 form = SignUpForm()
                 context = {
                     'form': form,
@@ -76,7 +73,7 @@ class SignIn(View):
                 login(request=request, user=user)
                 return redirect('useraccounts:userprofile', username)
             
-            errors = Exception('Incorrect username or password, try again.')
+            errors = Exception(_('Incorrect username or password, try again.'))
             form = SignInForm()
             context = {
                 'form': form,
