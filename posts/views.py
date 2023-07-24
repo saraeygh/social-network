@@ -1,5 +1,3 @@
-from typing import Any
-from django import http
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -8,7 +6,7 @@ from django.utils.text import slugify
 from reaction.models import Reaction
 from tags.models import Tag, TaggedItem
 from .forms import PostForm, ReplyFrom, TagFormset, ImageFormSet
-from .models import Post, Reply, Image
+from .models import Post, Image
 
 
 class NewPost(LoginRequiredMixin, View):
@@ -151,7 +149,7 @@ class EditPost(LoginRequiredMixin, View):
                         post_id=post_id,
                     )
                     new_iamge.save()
-            
+
             tag_formset = tag_formset.cleaned_data
             for tag in tag_formset:
                 if tag:
@@ -161,7 +159,7 @@ class EditPost(LoginRequiredMixin, View):
                         label=tag_label,
                     )
                     new_tag[0].save()
-                    
+
                     TaggedItem.add_tagged_item(
                         self=self,
                         tag=new_tag[0],
@@ -170,7 +168,7 @@ class EditPost(LoginRequiredMixin, View):
                         )
 
             return redirect('useraccounts:userprofile', request.user.username)
-        
+
         else:
             errors = form.errors
             form = PostForm()
@@ -200,28 +198,28 @@ class DeletePost(LoginRequiredMixin, View):
 
 
 class DeletePostTag(LoginRequiredMixin, View):
-    
+
     def get(self, request, id, tag_id):
         post = Post.objects.get(id=id)
         tag = TaggedItem.objects.get(id=tag_id)
-        
+
         if request.user.id == post.user.id:
             tag.delete()
             return redirect('posts:editpost', post.id)
-        
+
         return redirect('useraccounts:signin')
 
 
 class DeletePostImage(LoginRequiredMixin, View):
-    
+
     def get(self, request, id, image_id):
         post = Post.objects.get(id=id)
         image = Image.objects.get(id=image_id)
-        
+
         if request.user.id == post.user.id:
             image.delete()
             return redirect('posts:editpost', post.id)
-        
+
         return redirect('useraccounts:signin')
 
 
@@ -319,7 +317,7 @@ class SinglePost(View):
         }
 
         return render(request, 'singlepost.html', context)
-    
+
     def post(self, request, id, post_slug):
         form = ReplyFrom(request.POST)
 
@@ -329,7 +327,7 @@ class SinglePost(View):
             new_reply.save()
 
             return redirect('posts:singlepost', id, post_slug)
-        
+
         else:
             return render(request, 'posts:singlepost', id, post_slug)
 
@@ -337,11 +335,11 @@ class SinglePost(View):
 class TagPosts(View):
 
     def get(self, request, tag_id, tag_label):
-        
+
         posts_list = list(TaggedItem.objects.select_related('content_type')
                           .filter(tag_id=tag_id)
                           .filter(content_type_id=8))
-        
+
         all_used_tags = TaggedItem.all_used_tags()
 
         context = {

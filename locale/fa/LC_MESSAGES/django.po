@@ -1,0 +1,1626 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-24 18:38+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: core/apps.py:8
+msgid "Core"
+msgstr "مرکزی"
+
+#: core/models.py:21
+msgid "Soft delete"
+msgstr "حذف پنهان"
+
+#: core/models.py:34 tags/models.py:73
+msgid "Created at"
+msgstr "ایجاد"
+
+#: core/models.py:44 tags/models.py:78
+msgid "Updated at"
+msgstr "به‌روزرسانی"
+
+#: core/templates/base.html:8
+msgid "Social network"
+msgstr "شبکه اجتماعی"
+
+#: core/templates/base.html:21
+msgid "My social network: A place to share your thoughts"
+msgstr "شبکه اجتماعی: جایی برای اشتراک افکار"
+
+#: core/templates/base.html:28 core/templates/base.html:33
+msgid "Home"
+msgstr "خانه"
+
+#: core/templates/base.html:29
+msgid "Sign up"
+msgstr "ثبت‌نام"
+
+#: core/templates/base.html:30
+msgid "Sign in"
+msgstr "ورود"
+
+#: core/templates/base.html:35
+msgid "Profile"
+msgstr "پروفایل"
+
+#: core/templates/base.html:38
+msgid "Edit profile"
+msgstr "ویرایش پروفایل"
+
+#: core/templates/base.html:40
+msgid "Sign out"
+msgstr "خروج"
+
+#: core/templates/base.html:41 posts/admin.py:63 posts/admin.py:110
+msgid "New post"
+msgstr "پست جدید"
+
+#: core/templates/base.html:55
+msgid "Created by: Reza Saraey"
+msgstr "ساخته رضا سرایی"
+
+#: posts/admin.py:14 posts/models.py:92 posts/models.py:108
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/files.py:393
+msgid "Image"
+msgstr "تصویر"
+
+#: posts/admin.py:15 posts/models.py:109
+msgid "Images"
+msgstr "تصاویر"
+
+#: posts/admin.py:23 posts/admin.py:172 posts/models.py:148
+msgid "Reply"
+msgstr "پاسخ"
+
+#: posts/admin.py:24 posts/admin.py:173 posts/models.py:149
+#: useraccounts/admin.py:55 useraccounts/admin.py:126
+msgid "Replies"
+msgstr "پاسخ‌ها"
+
+#: posts/admin.py:31 tags/admin.py:18 tags/models.py:37 tags/models.py:48
+msgid "Tag"
+msgstr "تگ"
+
+#: posts/admin.py:32 tags/admin.py:19 tags/models.py:38
+msgid "Tags"
+msgstr "تگ‌ها"
+
+#: posts/admin.py:39 reaction/admin.py:16 reaction/apps.py:9
+msgid "Reaction"
+msgstr "واکنش"
+
+#: posts/admin.py:40 reaction/admin.py:17 useraccounts/admin.py:60
+#: useraccounts/admin.py:131
+msgid "Reactions"
+msgstr "واکنش‌ها"
+
+#: posts/admin.py:73 posts/admin.py:120
+msgid "Replies count"
+msgstr "تعداد پاسخ"
+
+#: posts/admin.py:77 posts/admin.py:124
+msgid "Likes"
+msgstr "لایک‌ها"
+
+#: posts/admin.py:81 posts/admin.py:128
+msgid "Dislikes"
+msgstr "دیسلایک‌ها"
+
+#: posts/admin.py:86 posts/models.py:75 posts/models.py:99
+msgid "Post"
+msgstr "پست"
+
+#: posts/admin.py:87 posts/apps.py:8 posts/models.py:76
+#: useraccounts/admin.py:50 useraccounts/admin.py:121
+msgid "Posts"
+msgstr "پست‌ها"
+
+#: posts/admin.py:133 posts/models.py:84
+msgid "Deleted post"
+msgstr "پست پاک شده"
+
+#: posts/admin.py:134 posts/models.py:85
+msgid "Deleted posts"
+msgstr "پست‌های پاک شده"
+
+#: posts/admin.py:153 posts/admin.py:193
+msgid "New reply"
+msgstr "پاسخ جدید"
+
+#: posts/admin.py:163 posts/admin.py:203
+msgid "Reply to post"
+msgstr "پاسخ به پست"
+
+#: posts/admin.py:167 posts/admin.py:207
+msgid "Reply to reply"
+msgstr "پاسخ به پاسخ"
+
+#: posts/admin.py:212 posts/models.py:157
+msgid "Deleted reply"
+msgstr "پاسخ پاک شده"
+
+#: posts/admin.py:213 posts/models.py:158
+msgid "Deleted replies"
+msgstr "پاسخ‌های پاک شده"
+
+#: posts/admin.py:225 posts/models.py:117
+msgid "Deleted image"
+msgstr "تصویر پاک شده"
+
+#: posts/admin.py:226 posts/models.py:118
+msgid "Deleted images"
+msgstr "تصاویر پاک شده"
+
+#: posts/models.py:25
+msgid "Post title"
+msgstr "عنوان پست"
+
+#: posts/models.py:29
+msgid "Post content"
+msgstr "محتوای پست"
+
+#: posts/models.py:33 posts/models.py:126
+msgid "User"
+msgstr "کاربر"
+
+#: posts/models.py:38
+msgid "post slug"
+msgstr "اسلاگ پست"
+
+#: posts/models.py:95
+msgid "Image alt"
+msgstr "آلت تصویر"
+
+#: posts/models.py:122
+msgid "Reply text"
+msgstr "متن پاسخ"
+
+#: posts/models.py:133
+msgid "Post ID"
+msgstr "شناسه پست"
+
+#: posts/models.py:140
+msgid "Reply ID"
+msgstr "شناسه پاسخ"
+
+#: posts/templates/edit_post.html:14
+msgid "Post tags (click on tag to delete it):"
+msgstr "تگ‌های پست (برای پاک کردن روی تگ کلیک کنید)"
+
+#: posts/templates/edit_post.html:25
+msgid "No tags yet!"
+msgstr "هنوز تگی وجود ندارد!"
+
+#: posts/templates/edit_post.html:30
+msgid "Post Images"
+msgstr "تصاویر پست"
+
+#: posts/templates/edit_post.html:40
+#: venv-social/lib/python3.11/site-packages/django/forms/formsets.py:499
+msgid "Delete"
+msgstr "حذف"
+
+#: posts/templates/edit_post.html:49
+msgid "Add new Tags:"
+msgstr "افزودن تگ‌های جدید"
+
+#: posts/templates/edit_post.html:52
+msgid "Add new images:"
+msgstr "افزودن تصاویر جدید"
+
+#: posts/templates/edit_post.html:55 posts/templates/new_post.html:20
+msgid "Submit"
+msgstr "ارسال"
+
+#: posts/templates/new_post.html:11
+msgid "Add tags to your post:"
+msgstr "افزودن تگ‌ به پست"
+
+#: posts/templates/new_post.html:16
+msgid "Post Images:"
+msgstr "تصاویر پست"
+
+#: posts/templates/posts.html:11 posts/templates/singlepost.html:11
+#: posts/templates/tag_posts.html:16
+msgid "Last update:"
+msgstr "آخرین به‌روزرسانی"
+
+#: posts/templates/posts.html:57 posts/templates/tag_posts.html:62
+msgid "View full post"
+msgstr "نمایش کامل پست"
+
+#: posts/templates/singlepost.html:73
+msgid "Your Reply:"
+msgstr "پاسخ شما"
+
+#: posts/templates/singlepost.html:75
+msgid "Submit reply"
+msgstr "ارسال پاسخ"
+
+#: posts/templates/singlepost.html:80
+msgid "Replies:"
+msgstr "پاسخ‌ها"
+
+#: posts/templates/tag_posts.html:75
+msgid "Other tags:"
+msgstr "دیگر تگ‌ها"
+
+#: reaction/admin.py:11 tags/admin.py:31
+msgid "By"
+msgstr "توسط"
+
+#: reaction/models.py:16
+msgid "LIKE"
+msgstr "لایک"
+
+#: reaction/models.py:17
+msgid "DISLIKE"
+msgstr "دیسلاک"
+
+#: reaction/models.py:20
+msgid "Like"
+msgstr "لایک"
+
+#: reaction/models.py:21
+msgid "Dislike"
+msgstr "دیسلایک"
+
+#: reaction/models.py:27
+msgid "Reaction status"
+msgstr "نوع واکنش"
+
+#: reaction/models.py:32 reaction/models.py:41 tags/admin.py:27
+#: tags/models.py:53 tags/models.py:63
+msgid "Content type"
+msgstr "نوع محتوا"
+
+#: reaction/models.py:34 reaction/models.py:43 tags/models.py:57
+#: tags/models.py:68
+msgid "ID"
+msgstr "شناسه"
+
+#: reaction/models.py:47 tags/models.py:20
+msgid "Created at:"
+msgstr "ایجاد"
+
+#: reaction/models.py:52 tags/models.py:25
+msgid "Updated at:"
+msgstr "به‌روزرسانی"
+
+#: tags/admin.py:13
+msgid "Used count"
+msgstr "تعداد استفاده"
+
+#: tags/admin.py:36 tags/admin.py:37 tags/models.py:107
+msgid "Tagged item"
+msgstr "آیتم تگ شده"
+
+#: tags/apps.py:9
+msgid "tags"
+msgstr "تگ‌ها"
+
+#: tags/models.py:15
+msgid "Tag label"
+msgstr "برچسب تگ"
+
+#: tags/models.py:108
+msgid "Tagged items"
+msgstr "آیتم‌های تگ شده"
+
+#: useraccounts/admin.py:18 useraccounts/admin.py:89
+msgid "Change username"
+msgstr "تغییر نام‌ کاربری"
+
+#: useraccounts/admin.py:25 useraccounts/admin.py:96
+msgid "Change user info"
+msgstr "تغییر اطلاعات کاربری"
+
+#: useraccounts/admin.py:33 useraccounts/admin.py:104 useraccounts/models.py:27
+msgid "Profile picture"
+msgstr "تصویر پروفایل"
+
+#: useraccounts/admin.py:45 useraccounts/admin.py:116
+msgid "Joined since"
+msgstr "پیوستن از"
+
+#: useraccounts/admin.py:65 useraccounts/admin.py:136
+msgid "Tags used"
+msgstr "تگ‌های استفاده شده"
+
+#: useraccounts/admin.py:70 useraccounts/admin.py:141
+msgid "Followings"
+msgstr "دنبال شده‌ها"
+
+#: useraccounts/admin.py:74 useraccounts/admin.py:145
+msgid "Followers"
+msgstr "دنبال کننده‌ها"
+
+#: useraccounts/admin.py:79
+msgid "User account"
+msgstr "حساب کاربری"
+
+#: useraccounts/admin.py:80
+msgid "User accounts"
+msgstr "حساب‌های کاربری"
+
+#: useraccounts/admin.py:150 useraccounts/models.py:68
+msgid "Deleted user account"
+msgstr "حساب کاربری حذف شده"
+
+#: useraccounts/admin.py:151 useraccounts/models.py:69
+msgid "Deleted user accounts"
+msgstr "حساب‌های کاربری حذف شده"
+
+#: useraccounts/admin.py:169 useraccounts/models.py:92
+msgid "Relation"
+msgstr "ارتباط"
+
+#: useraccounts/admin.py:170 useraccounts/models.py:93
+msgid "Relations"
+msgstr "ارتباطات"
+
+#: useraccounts/admin.py:188 useraccounts/models.py:101
+msgid "Deleted relation"
+msgstr "ارتباط حذف شده"
+
+#: useraccounts/admin.py:189 useraccounts/models.py:102
+msgid "Deleted relations"
+msgstr "ارتباطات حذف شده"
+
+#: useraccounts/apps.py:9
+msgid "useraccounts"
+msgstr "حساب‌های کاربری"
+
+#: useraccounts/forms.py:18
+msgid "Username"
+msgstr "نام کاربری"
+
+#: useraccounts/forms.py:23
+msgid "Password"
+msgstr "رمز عبور"
+
+#: useraccounts/models.py:33
+msgid "Bio"
+msgstr "بایو"
+
+#: useraccounts/models.py:40
+msgid "slug"
+msgstr "اسلاگ"
+
+#: useraccounts/models.py:59
+msgid "User Account"
+msgstr "حساب کاربری"
+
+#: useraccounts/models.py:60
+msgid "User Accounts"
+msgstr "حساب‌های کاربری"
+
+#: useraccounts/models.py:75
+msgid "from_user"
+msgstr "از"
+
+#: useraccounts/models.py:82
+msgid "to_user"
+msgstr "به"
+
+#: useraccounts/views.py:27
+msgid "A user with that username already exists"
+msgstr "کاربری با این نام کاربری موجود است"
+
+#: useraccounts/views.py:76
+msgid "Incorrect username or password, try again."
+msgstr "نام کاربری یا رمز عبور اشتباه، مجدد تلاش کنید."
+
+#: venv-social/lib/python3.11/site-packages/django/contrib/messages/apps.py:15
+msgid "Messages"
+msgstr "پیام‌ها"
+
+#: venv-social/lib/python3.11/site-packages/django/contrib/sitemaps/apps.py:8
+msgid "Site Maps"
+msgstr "نقشه‌های سایت"
+
+#: venv-social/lib/python3.11/site-packages/django/contrib/staticfiles/apps.py:9
+msgid "Static Files"
+msgstr "فایل‌های استاتیک"
+
+#: venv-social/lib/python3.11/site-packages/django/contrib/syndication/apps.py:7
+msgid "Syndication"
+msgstr "سیندیکیشن"
+
+#. Translators: String used to replace omitted page numbers in elided page
+#. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
+#: venv-social/lib/python3.11/site-packages/django/core/paginator.py:30
+msgid "…"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/core/paginator.py:50
+msgid "That page number is not an integer"
+msgstr "شماره صفحه صحیح نیست"
+
+#: venv-social/lib/python3.11/site-packages/django/core/paginator.py:52
+msgid "That page number is less than 1"
+msgstr "شماره صفحه کمتر از ۱ است"
+
+#: venv-social/lib/python3.11/site-packages/django/core/paginator.py:54
+msgid "That page contains no results"
+msgstr "این صفحه هیچ نتیجه‌ای ندارد"
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:22
+msgid "Enter a valid value."
+msgstr "مقداری معتبر وارد کنید"
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:104
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:752
+msgid "Enter a valid URL."
+msgstr "آدرس درستی را وارد کنید"
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:165
+msgid "Enter a valid integer."
+msgstr "عدد صحیح درستی را وارد کنید"
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:176
+msgid "Enter a valid email address."
+msgstr "آدرس ایمیل درستی را وارد کنید"
+
+#. Translators: "letters" means latin letters: a-z and A-Z.
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:259
+msgid ""
+"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
+msgstr "اسلاگ درستی شامل حروف اعداد و حروف کوچیک وارد کنید"
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:267
+msgid ""
+"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
+"hyphens."
+msgstr "اسلاگی درست شامل حروف یونیکد اعداد و خط تیره وارد کنید"
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:279
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:287
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:316
+msgid "Enter a valid IPv4 address."
+msgstr "آدرس آی‌پی۴ درست نیست"
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:296
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:317
+msgid "Enter a valid IPv6 address."
+msgstr "آدرس آی‌پی۶ درست نیست"
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:308
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:315
+msgid "Enter a valid IPv4 or IPv6 address."
+msgstr "آدرس آی‌پی درست نیست"
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:351
+msgid "Enter only digits separated by commas."
+msgstr "فقط اعداد با فاصله ویرگولی وارد کنید"
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:357
+#, python-format
+msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
+msgstr "مقدار برابر %(limit_value)s (it is %(show_value)s)."
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:392
+#, python-format
+msgid "Ensure this value is less than or equal to %(limit_value)s."
+msgstr "مقدار باید برابر با کمتر از باشد %(limit_value)s"
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:401
+#, python-format
+msgid "Ensure this value is greater than or equal to %(limit_value)s."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:410
+#, python-format
+msgid "Ensure this value is a multiple of step size %(limit_value)s."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:420
+#, python-format
+msgid ""
+"Ensure this value has at least %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at least %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:438
+#, python-format
+msgid ""
+"Ensure this value has at most %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at most %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:461
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:347
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:386
+msgid "Enter a number."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:463
+#, python-format
+msgid "Ensure that there are no more than %(max)s digit in total."
+msgid_plural "Ensure that there are no more than %(max)s digits in total."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:468
+#, python-format
+msgid "Ensure that there are no more than %(max)s decimal place."
+msgid_plural "Ensure that there are no more than %(max)s decimal places."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:473
+#, python-format
+msgid ""
+"Ensure that there are no more than %(max)s digit before the decimal point."
+msgid_plural ""
+"Ensure that there are no more than %(max)s digits before the decimal point."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:544
+#, python-format
+msgid ""
+"File extension “%(extension)s” is not allowed. Allowed extensions are: "
+"%(allowed_extensions)s."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/core/validators.py:605
+msgid "Null characters are not allowed."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/base.py:1423
+#: venv-social/lib/python3.11/site-packages/django/forms/models.py:893
+msgid "and"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/base.py:1425
+#, python-format
+msgid "%(model_name)s with this %(field_labels)s already exists."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/constraints.py:17
+#, python-format
+msgid "Constraint “%(name)s” is violated."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:128
+#, python-format
+msgid "Value %(value)r is not a valid choice."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:129
+msgid "This field cannot be null."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:130
+msgid "This field cannot be blank."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:131
+#, python-format
+msgid "%(model_name)s with this %(field_label)s already exists."
+msgstr ""
+
+#. Translators: The 'lookup_type' is one of 'date', 'year' or
+#. 'month'. Eg: "Title must be unique for pub_date year"
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:135
+#, python-format
+msgid ""
+"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:173
+#, python-format
+msgid "Field of type: %(field_type)s"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1094
+#, python-format
+msgid "“%(value)s” value must be either True or False."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1095
+#, python-format
+msgid "“%(value)s” value must be either True, False, or None."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1097
+msgid "Boolean (Either True or False)"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1147
+#, python-format
+msgid "String (up to %(max_length)s)"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1149
+msgid "String (unlimited)"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1253
+msgid "Comma-separated integers"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1354
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
+"format."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1358
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1493
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
+"date."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1362
+msgid "Date (without time)"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1489
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD HH:MM[:ss[."
+"uuuuuu]][TZ] format."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1497
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
+"[TZ]) but it is an invalid date/time."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1502
+msgid "Date (with time)"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1626
+#, python-format
+msgid "“%(value)s” value must be a decimal number."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1628
+msgid "Decimal number"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1789
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in [DD] [[HH:]MM:]ss[."
+"uuuuuu] format."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1793
+msgid "Duration"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1845
+msgid "Email address"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1870
+msgid "File path"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1948
+#, python-format
+msgid "“%(value)s” value must be a float."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1950
+msgid "Floating point number"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1990
+#, python-format
+msgid "“%(value)s” value must be an integer."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:1992
+msgid "Integer"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2088
+msgid "Big (8 byte) integer"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2105
+msgid "Small integer"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2113
+msgid "IPv4 address"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2144
+msgid "IP address"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2237
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2238
+#, python-format
+msgid "“%(value)s” value must be either None, True or False."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2240
+msgid "Boolean (Either True, False or None)"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2291
+msgid "Positive big integer"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2306
+msgid "Positive integer"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2321
+msgid "Positive small integer"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2337
+#, python-format
+msgid "Slug (up to %(max_length)s)"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2373
+msgid "Text"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2448
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
+"format."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2452
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
+"invalid time."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2456
+msgid "Time"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2564
+msgid "URL"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2588
+msgid "Raw binary data"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2653
+#, python-format
+msgid "“%(value)s” is not a valid UUID."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/__init__.py:2655
+msgid "Universally unique identifier"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/files.py:232
+msgid "File"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/json.py:26
+msgid "A JSON object"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/json.py:28
+msgid "Value must be valid JSON."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/related.py:919
+#, python-format
+msgid "%(model)s instance with %(field)s %(value)r does not exist."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/related.py:921
+msgid "Foreign Key (type determined by related field)"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/related.py:1212
+msgid "One-to-one relationship"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/related.py:1269
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/related.py:1271
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/db/models/fields/related.py:1319
+msgid "Many-to-many relationship"
+msgstr ""
+
+#. Translators: If found as last label character, these punctuation
+#. characters will prevent the default label_suffix to be appended to the label
+#: venv-social/lib/python3.11/site-packages/django/forms/boundfield.py:184
+msgid ":?.!"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:91
+msgid "This field is required."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:298
+msgid "Enter a whole number."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:467
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:1241
+msgid "Enter a valid date."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:490
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:1242
+msgid "Enter a valid time."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:517
+msgid "Enter a valid date/time."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:551
+msgid "Enter a valid duration."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:552
+#, python-brace-format
+msgid "The number of days must be between {min_days} and {max_days}."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:621
+msgid "No file was submitted. Check the encoding type on the form."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:622
+msgid "No file was submitted."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:623
+msgid "The submitted file is empty."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:625
+#, python-format
+msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid_plural ""
+"Ensure this filename has at most %(max)d characters (it has %(length)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:630
+msgid "Please either submit a file or check the clear checkbox, not both."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:694
+msgid ""
+"Upload a valid image. The file you uploaded was either not an image or a "
+"corrupted image."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:857
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:949
+#: venv-social/lib/python3.11/site-packages/django/forms/models.py:1566
+#, python-format
+msgid "Select a valid choice. %(value)s is not one of the available choices."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:951
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:1070
+#: venv-social/lib/python3.11/site-packages/django/forms/models.py:1564
+msgid "Enter a list of values."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:1071
+msgid "Enter a complete value."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:1310
+msgid "Enter a valid UUID."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/fields.py:1340
+msgid "Enter a valid JSON."
+msgstr ""
+
+#. Translators: This is the default suffix added to form field labels
+#: venv-social/lib/python3.11/site-packages/django/forms/forms.py:98
+msgid ":"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/forms.py:244
+#: venv-social/lib/python3.11/site-packages/django/forms/forms.py:328
+#, python-format
+msgid "(Hidden field %(name)s) %(error)s"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/formsets.py:63
+#, python-format
+msgid ""
+"ManagementForm data is missing or has been tampered with. Missing fields: "
+"%(field_names)s. You may need to file a bug report if the issue persists."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/formsets.py:67
+#, python-format
+msgid "Please submit at most %(num)d form."
+msgid_plural "Please submit at most %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/formsets.py:72
+#, python-format
+msgid "Please submit at least %(num)d form."
+msgid_plural "Please submit at least %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/formsets.py:484
+#: venv-social/lib/python3.11/site-packages/django/forms/formsets.py:491
+msgid "Order"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/models.py:886
+#, python-format
+msgid "Please correct the duplicate data for %(field)s."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/models.py:891
+#, python-format
+msgid "Please correct the duplicate data for %(field)s, which must be unique."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/models.py:898
+#, python-format
+msgid ""
+"Please correct the duplicate data for %(field_name)s which must be unique "
+"for the %(lookup)s in %(date_field)s."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/models.py:907
+msgid "Please correct the duplicate values below."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/models.py:1338
+msgid "The inline value did not match the parent instance."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/models.py:1429
+msgid "Select a valid choice. That choice is not one of the available choices."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/models.py:1568
+#, python-format
+msgid "“%(pk)s” is not a valid value."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/utils.py:226
+#, python-format
+msgid ""
+"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
+"may be ambiguous or it may not exist."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/widgets.py:463
+msgid "Clear"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/widgets.py:464
+msgid "Currently"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/widgets.py:465
+msgid "Change"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/widgets.py:794
+msgid "Unknown"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/widgets.py:795
+msgid "Yes"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/forms/widgets.py:796
+msgid "No"
+msgstr ""
+
+#. Translators: Please do not add spaces around commas.
+#: venv-social/lib/python3.11/site-packages/django/template/defaultfilters.py:861
+msgid "yes,no,maybe"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/template/defaultfilters.py:891
+#: venv-social/lib/python3.11/site-packages/django/template/defaultfilters.py:908
+#, python-format
+msgid "%(size)d byte"
+msgid_plural "%(size)d bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv-social/lib/python3.11/site-packages/django/template/defaultfilters.py:910
+#, python-format
+msgid "%s KB"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/template/defaultfilters.py:912
+#, python-format
+msgid "%s MB"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/template/defaultfilters.py:914
+#, python-format
+msgid "%s GB"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/template/defaultfilters.py:916
+#, python-format
+msgid "%s TB"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/template/defaultfilters.py:918
+#, python-format
+msgid "%s PB"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dateformat.py:73
+msgid "p.m."
+msgstr "عصر"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dateformat.py:74
+msgid "a.m."
+msgstr "صبح"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dateformat.py:79
+msgid "PM"
+msgstr "عصر"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dateformat.py:80
+msgid "AM"
+msgstr "صبح"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dateformat.py:152
+msgid "midnight"
+msgstr "نیمه‌شب"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dateformat.py:154
+msgid "noon"
+msgstr "ظهر"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:7
+msgid "Monday"
+msgstr "دوشنبه"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:8
+msgid "Tuesday"
+msgstr "سه‌شنبه"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:9
+msgid "Wednesday"
+msgstr "چهارشنبه"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:10
+msgid "Thursday"
+msgstr "پنج‌شنبه"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:11
+msgid "Friday"
+msgstr "جمعه"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:12
+msgid "Saturday"
+msgstr "شنبه"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:13
+msgid "Sunday"
+msgstr "یکشنبه"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:16
+msgid "Mon"
+msgstr "د"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:17
+msgid "Tue"
+msgstr "س"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:18
+msgid "Wed"
+msgstr "چ"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:19
+msgid "Thu"
+msgstr "پ"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:20
+msgid "Fri"
+msgstr "ج"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:21
+msgid "Sat"
+msgstr "ش"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:22
+msgid "Sun"
+msgstr "ی"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:25
+msgid "January"
+msgstr "ژانویه"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:26
+msgid "February"
+msgstr "فوریه"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:27
+msgid "March"
+msgstr "مارس"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:28
+msgid "April"
+msgstr "آوریل"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:29
+msgid "May"
+msgstr "می"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:30
+msgid "June"
+msgstr "ژوئن"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:31
+msgid "July"
+msgstr "جولای"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:32
+msgid "August"
+msgstr "آگوست"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:33
+msgid "September"
+msgstr "سپتامبر"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:34
+msgid "October"
+msgstr "اکتبر"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:35
+msgid "November"
+msgstr "نوامبر"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:36
+msgid "December"
+msgstr "دسامبر"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:39
+msgid "jan"
+msgstr "ژ"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:40
+msgid "feb"
+msgstr "ف"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:41
+msgid "mar"
+msgstr "م"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:42
+msgid "apr"
+msgstr "آ"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:43
+msgid "may"
+msgstr "م"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:44
+msgid "jun"
+msgstr "ژ"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:45
+msgid "jul"
+msgstr "ج"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:46
+msgid "aug"
+msgstr "آ"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:47
+msgid "sep"
+msgstr "س"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:48
+msgid "oct"
+msgstr "ا"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:49
+msgid "nov"
+msgstr "ن"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:50
+msgid "dec"
+msgstr "د"
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:53
+msgctxt "abbrev. month"
+msgid "Jan."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:54
+msgctxt "abbrev. month"
+msgid "Feb."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:55
+msgctxt "abbrev. month"
+msgid "March"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:56
+msgctxt "abbrev. month"
+msgid "April"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:57
+msgctxt "abbrev. month"
+msgid "May"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:58
+msgctxt "abbrev. month"
+msgid "June"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:59
+msgctxt "abbrev. month"
+msgid "July"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:60
+msgctxt "abbrev. month"
+msgid "Aug."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:61
+msgctxt "abbrev. month"
+msgid "Sept."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:62
+msgctxt "abbrev. month"
+msgid "Oct."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:63
+msgctxt "abbrev. month"
+msgid "Nov."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:64
+msgctxt "abbrev. month"
+msgid "Dec."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:67
+msgctxt "alt. month"
+msgid "January"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:68
+msgctxt "alt. month"
+msgid "February"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:69
+msgctxt "alt. month"
+msgid "March"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:70
+msgctxt "alt. month"
+msgid "April"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:71
+msgctxt "alt. month"
+msgid "May"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:72
+msgctxt "alt. month"
+msgid "June"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:73
+msgctxt "alt. month"
+msgid "July"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:74
+msgctxt "alt. month"
+msgid "August"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:75
+msgctxt "alt. month"
+msgid "September"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:76
+msgctxt "alt. month"
+msgid "October"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:77
+msgctxt "alt. month"
+msgid "November"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/dates.py:78
+msgctxt "alt. month"
+msgid "December"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/ipv6.py:8
+msgid "This is not a valid IPv6 address."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/text.py:78
+#, python-format
+msgctxt "String to return when truncating text"
+msgid "%(truncated_text)s…"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/text.py:254
+msgid "or"
+msgstr ""
+
+#. Translators: This string is used as a separator between list elements
+#: venv-social/lib/python3.11/site-packages/django/utils/text.py:273
+#: venv-social/lib/python3.11/site-packages/django/utils/timesince.py:135
+msgid ", "
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/timesince.py:8
+#, python-format
+msgid "%(num)d year"
+msgid_plural "%(num)d years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/timesince.py:9
+#, python-format
+msgid "%(num)d month"
+msgid_plural "%(num)d months"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/timesince.py:10
+#, python-format
+msgid "%(num)d week"
+msgid_plural "%(num)d weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/timesince.py:11
+#, python-format
+msgid "%(num)d day"
+msgid_plural "%(num)d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/timesince.py:12
+#, python-format
+msgid "%(num)d hour"
+msgid_plural "%(num)d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv-social/lib/python3.11/site-packages/django/utils/timesince.py:13
+#, python-format
+msgid "%(num)d minute"
+msgid_plural "%(num)d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/csrf.py:111
+msgid "Forbidden"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/csrf.py:112
+msgid "CSRF verification failed. Request aborted."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/csrf.py:116
+msgid ""
+"You are seeing this message because this HTTPS site requires a “Referer "
+"header” to be sent by your web browser, but none was sent. This header is "
+"required for security reasons, to ensure that your browser is not being "
+"hijacked by third parties."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/csrf.py:122
+msgid ""
+"If you have configured your browser to disable “Referer” headers, please re-"
+"enable them, at least for this site, or for HTTPS connections, or for “same-"
+"origin” requests."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/csrf.py:127
+msgid ""
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
+"including the “Referrer-Policy: no-referrer” header, please remove them. The "
+"CSRF protection requires the “Referer” header to do strict referer checking. "
+"If you’re concerned about privacy, use alternatives like <a "
+"rel=\"noreferrer\" …> for links to third-party sites."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/csrf.py:136
+msgid ""
+"You are seeing this message because this site requires a CSRF cookie when "
+"submitting forms. This cookie is required for security reasons, to ensure "
+"that your browser is not being hijacked by third parties."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/csrf.py:142
+msgid ""
+"If you have configured your browser to disable cookies, please re-enable "
+"them, at least for this site, or for “same-origin” requests."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/csrf.py:148
+msgid "More information is available with DEBUG=True."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/generic/dates.py:44
+msgid "No year specified"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/generic/dates.py:64
+#: venv-social/lib/python3.11/site-packages/django/views/generic/dates.py:115
+#: venv-social/lib/python3.11/site-packages/django/views/generic/dates.py:214
+msgid "Date out of range"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/generic/dates.py:94
+msgid "No month specified"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/generic/dates.py:147
+msgid "No day specified"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/generic/dates.py:194
+msgid "No week specified"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/generic/dates.py:349
+#: venv-social/lib/python3.11/site-packages/django/views/generic/dates.py:380
+#, python-format
+msgid "No %(verbose_name_plural)s available"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/generic/dates.py:652
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because %(class_name)s."
+"allow_future is False."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/generic/dates.py:692
+#, python-format
+msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/generic/detail.py:56
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/generic/list.py:70
+msgid "Page is not “last”, nor can it be converted to an int."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/generic/list.py:77
+#, python-format
+msgid "Invalid page (%(page_number)s): %(message)s"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/generic/list.py:169
+#, python-format
+msgid "Empty list and “%(class_name)s.allow_empty” is False."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/static.py:38
+msgid "Directory indexes are not allowed here."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/static.py:40
+#, python-format
+msgid "“%(path)s” does not exist"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/static.py:79
+#, python-format
+msgid "Index of %(directory)s"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/templates/default_urlconf.html:7
+#: venv-social/lib/python3.11/site-packages/django/views/templates/default_urlconf.html:220
+msgid "The install worked successfully! Congratulations!"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/templates/default_urlconf.html:206
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/templates/default_urlconf.html:221
+#, python-format
+msgid ""
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" "
+"rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not "
+"configured any URLs."
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/templates/default_urlconf.html:229
+msgid "Django Documentation"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/templates/default_urlconf.html:230
+msgid "Topics, references, &amp; how-to’s"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/templates/default_urlconf.html:238
+msgid "Tutorial: A Polling App"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/templates/default_urlconf.html:239
+msgid "Get started with Django"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/templates/default_urlconf.html:247
+msgid "Django Community"
+msgstr ""
+
+#: venv-social/lib/python3.11/site-packages/django/views/templates/default_urlconf.html:248
+msgid "Connect, get help, or contribute"
+msgstr ""

@@ -37,7 +37,7 @@ class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
         )
 
     user_slug = models.SlugField(
-        verbose_name=_("User slug"),
+        verbose_name=_("slug"),
         default=uuid4().hex,
         )
 
@@ -56,6 +56,8 @@ class UserAccount(BaseModel, AbstractUser, CreateTimeMixin, UpdateTimeMixin):
 
     class Meta:
         ordering = ['-created_at', '-updated_at']
+        verbose_name = _('User Account')
+        verbose_name_plural = _('User Accounts')
 
 
 class DeletedUserAccount(UserAccount):
@@ -63,6 +65,8 @@ class DeletedUserAccount(UserAccount):
 
     class Meta:
         proxy = True
+        verbose_name = _('Deleted user account')
+        verbose_name_plural = _('Deleted user accounts')
 
 
 class Relation(BaseModel, CreateTimeMixin):
@@ -85,6 +89,8 @@ class Relation(BaseModel, CreateTimeMixin):
 
     class Meta:
         ordering = ['-created_at']
+        verbose_name = _('Relation')
+        verbose_name_plural = _('Relations')
 
 
 class DeletedRelation(Relation):
@@ -92,3 +98,5 @@ class DeletedRelation(Relation):
 
     class Meta:
         proxy = True
+        verbose_name = _('Deleted relation')
+        verbose_name_plural = _('Deleted relations')

@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.utils.translation import gettext_lazy as _
 
 from .models import UserAccount
 
@@ -14,10 +15,12 @@ class SignInForm(forms.Form):
 
     username = forms.CharField(
         required=True,
+        label=_("Username")
         )
     password = forms.CharField(
         widget=forms.PasswordInput,
-        required=True
+        required=True,
+        label=_("Password")
         )
 
 

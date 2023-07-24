@@ -144,3 +144,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'useraccounts.UserAccount'
 LOGIN_URL = "/useraccounts/signin/"
+LOCALE_PATHS = [BASE_DIR / "locale/"]
