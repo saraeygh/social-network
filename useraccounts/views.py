@@ -1,13 +1,19 @@
-from django.shortcuts import render, redirect, HttpResponse
+from typing import Any
+from django import http
+from django.http.response import HttpResponse
+from django.shortcuts import render, redirect
+
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import UserAccount, Relation
+
 from posts.models import Post
+from .models import UserAccount, Relation
 from .forms import SignUpForm, SignInForm, EditProfileForm
 
 
 class SignUp(View):
+
     def get(self, request):
         form = SignUpForm()
         context = {'form': form}
@@ -24,7 +30,11 @@ class SignUp(View):
             username = new_user['username']
             password = new_user['password1']
 
-            new_user = authenticate(request=request, username=username, password=password)
+            new_user = authenticate(
+                request=request,
+                username=username,
+                password=password)
+
             login(request, new_user)
             return redirect('useraccounts:userprofile', username)
 
@@ -64,7 +74,7 @@ class SignIn(View):
                 login(request=request, user=user)
                 return redirect('useraccounts:userprofile', username)
             
-            errors = form.errors
+            errors = Exception('Incorrect username or password, try again.')
             form = SignInForm()
             context = {
                 'form': form,
@@ -87,49 +97,66 @@ class UserProfile(View):
     def get(self, request, username):
         user = UserAccount.objects.get(username=username)
         user_posts = Post.objects.filter(user=user.id)
-        
-        return render(
-            request,
-            'userprofile.html',
-            {
-                'user': user,
-                'user_posts': user_posts,
-                }
-            )
-    
+
+        context = {
+            'user': user,
+            'user_posts': user_posts
+        }
+
+        return render(request, 'userprofile.html', context)
+
 
 class EditUserProfile(LoginRequiredMixin, View):
+
+    def setup(self, request, *args, **kwargs):
+        self.user = UserAccount.objects.get(username=kwargs['username'])
+        return super().setup(request, *args, **kwargs)
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.id is self.user.id:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return render(request, 'userprofile.html', {'user': request.user})
+
     def get(self, request, username):
-        user = UserAccount.objects.get(username=username)
         form = EditProfileForm(
             initial={
-                'username': user.username,
-                'email': user.email,
-                'first_name': user.first_name,
-                'last_name': user.last_name,
-                'bio': user.bio,
-                'image': user.image,
+                'username': self.user.username,
+                'email': self.user.email,
+                'first_name': self.user.first_name,
+                'last_name': self.user.last_name,
+                'bio': self.user.bio,
+                'image': self.user.image,
             }
             )
 
-        context = {'form': form, 'user': user, 'host': request.get_host()}
+        context = {'form': form, 'user': self.user, 'host': request.get_host()}
 
         return render(request, 'editprofile.html', context)
 
     def post(self, request, username):
-        user = UserAccount.objects.get(username=username)
-        changes = EditProfileForm(request.POST, request.FILES, instance=user)
+        changes = EditProfileForm(request.POST, request.FILES, instance=self.user)
 
         if changes.is_valid():
-            changes.save()         
-            return redirect('useraccounts:userprofile', user)
+            changes.save()
+            return redirect('useraccounts:userprofile', self.user)
 
 
 class DeleteAccount(LoginRequiredMixin, View):
+
+    def setup(self, request, *args, **kwargs):
+        self.user = UserAccount.objects.get(username=kwargs['username'])
+        return super().setup(request, *args, **kwargs)
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.id is self.user.id:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return render(request, 'userprofile.html', {'user': request.user})
+
     def get(self, request, username):
-        user = UserAccount.objects.get(username=username)
-        user.soft_delete = True
-        user.save()
+        self.user.soft_delete = True
+        self.user.save()
 
         return redirect('core:landing')
 
@@ -141,37 +168,43 @@ class SignOut(LoginRequiredMixin, View):
 
 
 class Follow(LoginRequiredMixin, View):
+
+    def setup(self, request, *args, **kwargs):
+        self.from_user = request.user
+        self.to_user = UserAccount.objects.get(username=kwargs['username'])
+        return super().setup(request, *args, **kwargs)
+
     def get(self, request, username):
 
-        from_user = request.user
-        to_user = UserAccount.objects.get(username=username)
+        if self.from_user == self.to_user:
+            return redirect('useraccounts:userprofile', self.to_user.username)
 
-        if from_user == to_user:
-            return redirect('useraccounts:userprofile', to_user.username)
-
-        is_following = Relation.objects.filter(from_user=from_user, to_user=to_user).exists()
+        is_following = Relation.objects.filter(from_user=self.from_user, to_user=self.to_user).exists()
         if is_following:
-            return redirect('useraccounts:userprofile', to_user.username)
+            return redirect('useraccounts:userprofile', self.to_user.username)
         
-        Relation(from_user=from_user, to_user=to_user).save()
-        return redirect('useraccounts:userprofile', to_user.username)
+        Relation(from_user=self.from_user, to_user=self.to_user).save()
+        return redirect('useraccounts:userprofile', self.to_user.username)
 
 
 class Unfollow(LoginRequiredMixin, View):
+
+    def setup(self, request, *args, **kwargs):
+        self.from_user = request.user
+        self.to_user = UserAccount.objects.get(username=kwargs['username'])
+        return super().setup(request, *args, **kwargs)
+
     def get(self, request, username):
 
-        from_user = request.user
-        to_user = UserAccount.objects.get(username=username)
+        if self.from_user == self.to_user:
+            return redirect('useraccounts:userprofile', self.to_user.username)
 
-        if from_user == to_user:
-            return redirect('useraccounts:userprofile', to_user.username)
-
-        is_following = Relation.objects.filter(from_user=from_user, to_user=to_user).exists()
+        is_following = Relation.objects.filter(from_user=self.from_user, to_user=self.to_user).exists()
         if is_following:
-            Relation.objects.filter(from_user=from_user, to_user=to_user).delete()
-            return redirect('useraccounts:userprofile', to_user.username)
+            Relation.objects.filter(from_user=self.from_user, to_user=self.to_user).delete()
+            return redirect('useraccounts:userprofile', self.to_user.username)
 
-        return redirect('useraccounts:userprofile', to_user.username)
+        return redirect('useraccounts:userprofile', self.to_user.username)
 
 
 class Search(View):
