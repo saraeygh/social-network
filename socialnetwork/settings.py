@@ -32,7 +32,11 @@ ALLOWED_HOSTS = [
     "mysocial.darkube.app",
     "https://mysocial.darkube.app",
 ]
-
+CSRF_TRUSTED_ORIGINS = [
+    "darkube.app",
+    "mysocial.darkube.app",
+    "https://mysocial.darkube.app",
+]
 
 # Application definition
 
